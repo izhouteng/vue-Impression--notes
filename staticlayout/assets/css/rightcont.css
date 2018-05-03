@@ -1,0 +1,498 @@
+.yinxDet {
+    float: left;
+    position: relative;
+    height: 100%;
+    /*overflow: hidden;  这个不能设置overflow hidden  会隐藏掉设置提醒弹窗 */
+    cursor: pointer;
+}
+.dethead {
+    height: 53px;
+    /*border-bottom: solid 1px #cccccc;*/
+    padding: 12px 0;
+    box-sizing: border-box;
+}
+.yinxDet .main {
+    float: left;
+    margin: 4px 0 0 18px;
+}
+.yinxDet .mains {
+    float: left;
+    margin-right:10px;
+}
+.yinxDet .defmore {
+    position: relative;
+}
+
+/*闹钟提醒*/
+.dethead .deftimes {
+    position: relative;
+}
+/*提醒已添加 通知我弹窗 --------------------- 1*/
+.dethead .deftimes .reminderAdded {
+    position: absolute;
+    left: -120px;
+    top: 31px;
+    width: 262px;
+    height: 114px;
+    border: solid 1px #ececec;
+    z-index: 888;
+    background: #ffffff;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.04), -6px 8px 15px rgba(0, 0, 0, 0.04), 6px 8px 15px rgba(0, 0, 0, 0.04);
+    display: none;
+}
+.dethead .reminderAdded .target,
+.dethead .changeTixing .target,
+.dethead .undo .target
+{
+    position: absolute;
+    left: 125px;
+    top: -7px;
+}
+.dethead .reminderAdded .tixingok {
+    text-align: center;
+    color: #2dbe60;
+    margin-top: 27px;
+    background: url("../images/tianjiatixing.png") no-repeat 79px 7px;
+}
+.dethead .reminderAdded .notice {
+    width: 212px;
+    height: 26px;
+    border: solid 1px #2dbe60;
+    border-radius: 2px;
+    text-align: center;
+    line-height: 26px;
+    color: #2dbe60;
+    margin-top: 17px;
+    margin-left: 22px;
+}
+.dethead .reminderAdded .notice:hover{
+    background: #2dbe60;
+    color: #ffffff;
+}
+
+/*修改弹窗提醒 --------------- 3*/
+.dethead .changeTixing {
+    width: 262px;
+    height: 150px;
+    position: absolute;
+    left: -120px;
+    top: 31px;
+    border: solid 1px #ececec;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.04), -6px 8px 15px rgba(0, 0, 0, 0.04), 6px 8px 15px rgba(0, 0, 0, 0.04);
+    z-index: 999;
+    background: #ffffff;
+    display: none;
+}
+.dethead .complete {
+    margin-top: 24px;
+}
+.dethead .changeTixing .main {
+    width: 212px;
+    height: 26px;
+    border: solid 1px #2dbe60;
+    text-align: center;
+    line-height: 26px;
+    border-radius: 2px;
+    color: #2dbe60;
+    margin-bottom: 5px;
+}
+.dethead .changeTixing .main:hover{
+    background: #2dbe60;
+    color: #ffffff;
+}
+
+
+/*撤销 修改提醒 清除日期-------------------------------------------------------4*/
+.dethead .undo {
+    width: 262px;
+    height: 150px;
+    position: absolute;
+    left: -120px;
+    top: 31px;
+    border: solid 1px #ececec;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.04), -6px 8px 15px rgba(0, 0, 0, 0.04), 6px 8px 15px rgba(0, 0, 0, 0.04);
+    z-index: 999;
+    background: #ffffff;
+    display: none;
+}
+.dethead .complete {
+    margin-top: 24px;
+}
+.dethead .undo .main {
+    width: 212px;
+    height: 26px;
+    border: solid 1px #2dbe60;
+    text-align: center;
+    line-height: 26px;
+    border-radius: 2px;
+    color: #2dbe60;
+    margin-bottom: 5px;
+}
+.dethead .undo .main:hover{
+    background: #2dbe60;
+    color: #ffffff;
+}
+
+
+
+
+/*复制笔记链接弹窗*/
+.yinxDet .copynoteUrl {
+    width: 134px;
+    height: 56px;
+    position: absolute;
+    left: -4px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.04), -6px 8px 15px rgba(0, 0, 0, 0.04), 6px 8px 15px rgba(0, 0, 0, 0.04);
+    background: #ffffff;
+    z-index: 110;
+    border: 3px solid rgba(217, 217, 217, 0.4);
+    border-top: 1px solid rgba(217, 217, 217, 0.4);
+    display: none;
+}
+.yinxDet .copytxt {
+    height: 32px;
+    width: 100%;
+    background: #2dbe60;
+    color: #ffffff;
+    text-align: center;
+    line-height: 32px;
+    margin-top: 12px;
+}
+
+.yinxDet .upgrade {
+    float: right;
+    font-size: 11px;
+}
+.detup {
+    width: 62px;
+    height: 28px;
+    border-radius: 4px;
+    background: #ff8001;
+    text-align: center;
+    line-height: 28px;
+    color: #ffffff;
+}
+/*共享 发送消息 发送邮件*/
+.defshared {
+    position: relative;
+}
+.defshared .gongx {
+    float: left;
+    width: 56px;
+    border: solid 1px #c4c4c4;
+    height: 26px;
+    text-align: center;
+    line-height: 26px;
+    border-radius: 4px 0 0 4px;
+    color: #000000;
+}
+.defshared .target{
+    width: 21px;
+    height: 26px;
+    float: left;
+    background: url("../images/gongxiangxiajiantou.png") no-repeat center center;
+    border: solid 1px #c4c4c4;
+    border-left: none;
+    border-radius: 0 4px 4px 0;
+}
+
+/*展开 全屏 和写笔记*/
+.yinxDet .defscreen {
+    float: left;
+    width: 30px;
+    height: 28px;
+    background: url("../images/defquanping1.png") no-repeat center center;
+    border: solid 1px #2dbe60;
+    border-radius: 4px;
+    box-sizing: border-box;
+    /*display: none;*/
+}
+
+/*写笔记完成*/
+.yinxDet .writeNotesOk {
+    width: 58px;
+    height: 28px;
+    color: #ffffff;
+    text-align: center;
+    line-height: 28px;
+    float: left;
+    background: #2dbe60;
+    border-radius: 4px;
+    margin-right: 4px;
+    display: none;
+}
+
+/*发送邮件 发送消息弹窗*/
+.shakeDown {
+    width: 107px;
+    height: 88px;
+    position: absolute;
+    left: 4px;
+    top: 32px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.04), -6px 8px 15px rgba(0, 0, 0, 0.04), 6px 8px 15px rgba(0, 0, 0, 0.04);
+    z-index: 600;
+    background: #ffffff;
+    padding: 12px 0px;
+    box-sizing: border-box;
+    /*border: solid 1px #cccccc;*/
+    border: 3px solid rgba(217, 217, 217, 0.4);
+    border-top: 1px solid rgba(217, 217, 217, 0.4);
+    display: none;
+}
+.shakeDown .s-notes {
+    background: #2dbe60;
+    color: #ffffff;
+}
+.shakeDown div {
+    height: 32px;
+    width: 100%;
+    text-align: center;
+    line-height: 32px;
+    font-family: gotham, helvetica, arial, sans-serif;
+    font-size: 13px;
+}
+
+/*第几阶段*/
+.stages {
+    max-width: 960px;
+    height: 30px;
+    position: relative;
+    margin: 0 auto 14px;
+    border-bottom: solid 1px #ececec;
+}
+/*控制运动*/
+.stages .liangge {
+    position: relative;
+    display: none;
+}
+.stages .movenotes {
+    margin-top: 6px;
+    display: inline-block;
+    padding-right: 16px;
+    box-sizing: border-box;
+    border-right: solid 1px #e1e1e1;
+}
+.stages .caonima {
+    position: absolute;
+    left: 14px;
+    top: 6px;
+    display: none;
+}
+.stages .biaoqian {
+    display: inline-block;
+    margin-left: 10px;
+}
+
+/*移动笔记本 前往笔记 标签*/
+.dijijieduanBJ .yidong {
+    position: relative;
+    float: left;
+    font-family: gotham, helvetica, arial, sans-serif;
+    /*display: none;*/
+}
+
+/*移动笔记本弹窗*/
+.dijijieduanBJ .yidong .yidongBJB {
+    width: 360px;
+    /*height: 332px; 不能固定死高度,应该根据笔记本的个数*/
+    position: absolute;
+    left: 0px;
+    top: 30px;
+    z-index: 99;
+    background: #ffffff;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.04), -6px 8px 15px rgba(0, 0, 0, 0.04), 6px 8px 15px rgba(0, 0, 0, 0.04);
+    display: none;
+}
+.yidongBJB .findnotes {
+    height: 68px;
+    border-bottom: solid 1px #ececec;
+}
+.yidongBJB .findValue {
+    width: 324px;
+    height: 34px;
+    left: 16px;
+    top: 16px;
+    border: solid 1px #c4c4c4;
+    position: absolute;
+    outline: none;
+    font-size: 13px;
+    padding-left: 6px;
+    box-sizing: border-box;
+    border-radius: 2px;
+}
+ /*创建笔记本*/
+.yidongBJB .chuanjian {
+    height: 50px;
+    border-bottom: solid 1px #ececec;
+    margin: 0 16px;
+}
+.yidongBJB .chuanjian img {
+    float: left;
+    margin: 16px 6px 0 11px;
+}
+.yidongBJB .chuanjian span {
+    float: left;
+    margin-top: 18px;
+    margin-left: -2px;
+}
+/*笔记本的具体条目信息*/
+.yidongBJB .mynotesbook {
+    height: 50px;
+    border-bottom: solid 1px #ececec;
+    margin: 0 16px;
+    font-size: 100%;
+    line-height: 50px;
+    padding-left: 11px;
+}
+.yidongBJB .mynotesbook.active {
+    background: url("../images/bijibenxuanzhongdebiaoshi.png") no-repeat 300px 14px;
+    color: #2dbe60;
+}
+
+
+
+
+
+
+
+
+.dijijieduanBJ .tubiao {
+    float: left;
+    margin-top: 4px;
+}
+
+.dijijieduanBJ .notecont {
+    float: left;
+    padding: 0 18px 0 8px;
+    background: url("../images/xiabiao.png") no-repeat right 7px;
+}
+
+.dijijieduanBJ .qianwangBJB {
+    float: left;
+    margin-top: 4px;
+    margin-left: 4px;
+}
+
+.addtag {
+    float: left;
+    /*display: none;*/
+}
+.addtag .tianjiaBQ {
+    margin-left: 14px;
+}
+
+/*编辑*/
+.editCount {
+    width: 100%;
+    height: 100%;
+    /*border: solid 1px #c4c4c4;*/
+    position: relative;
+    overflow-y: auto;
+}
+.root {
+    width: 960px;
+    /*border: solid 1px red;*/
+    margin: 0 auto;
+}
+.root .editTitle {
+    overflow: hidden;
+}
+.root .editValue {
+    border: none;
+    outline: none;
+    width: 100%;
+    font-size: 28px;
+    color: #2dbe60;
+    line-height: 35px;
+    font-weight: normal;
+    font-family: caecilia, times, serif;
+    text-overflow:ellipsis;
+    white-space:normal;
+}
+
+.textArea {
+    /*border: solid 1px green;*/
+    margin-top: 8px;
+    position: relative;
+}
+.textArea textarea {
+    position: relative;
+    border: none;
+    outline: none;
+    width: 960px;
+    /*怎么和内容自适应高度*/
+    height: 1200px;
+
+    text-align: left;
+    resize: none;
+    color: #383838;
+    font-size:18px;
+    font-family: gotham, helvetica, arial, sans-serif;
+    margin: 0;
+    word-wrap:break-word;
+    overflow-wrap:break-word;
+    padding-right:1px;
+    box-sizing:border-box;
+}
+
+.textArea textarea::selection {
+    background:#c9f2d0;
+    color: #000000;
+}
+.textArea textarea::-moz-selection {
+    background:#c9f2d0;
+    color: #000000;
+}
+
+/*搜索笔记---------------------------------------------------------------------------*/
+.youbian {
+    float: left;
+}
+.youbian .searchNote {
+    height: 228px;
+    position: relative;
+    padding: 0 64px;
+    box-sizing: border-box;
+    cursor: pointer;
+    display: none;
+}
+.youbian .searchChild {
+    border-bottom: solid 1px #ececec;
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+.youbian .searchChild .searchValue {
+    height: 52px;
+    outline: none;
+    color: #606060;
+    width: 100%;
+    font-size: 44px;
+    font-family: gotham, helvetica, arial, sans-serif;
+    font-weight: 500;
+    letter-spacing:-0.3px;
+    border: none;
+    margin-top: 125px;
+}
+.youbian .searchChild .tishixinxi {
+    margin-top: 21px;
+}
+.youbian .searchChild .tishixinxi span{
+    color: #2dbe60;
+}
+
+/*清空搜索笔记的内容,当输入框不为空的时候显示*/
+.youbian .searchChild .clearSearch {
+    position: absolute;
+    right: 12px;
+    top: 136px;
+    display: none;
+}
+/*修改placehodle样式*/
+.youbian .searchChild .searchValue::placeholder{
+    color: #ececec;
+    font-weight: normal;
+}
+
+
+
