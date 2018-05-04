@@ -530,10 +530,14 @@
     right: 20px;
     top: 25px;
 }
-.youbian .worktoking .message {
+.youbian .worktoking .message ,
+.youbian .bijibenHDC .bijibenInfo .message
+{
     margin-top: 22px;
 }
-.youbian .worktoking .messageValue {
+.youbian .worktoking .messageValue,
+.youbian .bijibenHDC .bijibenInfo .messageValue
+{
     height: 34px;
     border: solid 1px #c4c4c4;
     outline: none;
@@ -684,3 +688,95 @@
     bottom: 0px;
     margin: auto;
 }
+
+/*笔记本滑动窗-----------------------------------*/
+.youbian .bijibenHDC {
+    position: absolute;
+    left: -462px;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    width: 456px;
+    height: 100%;
+    background: #ffffff;
+    z-index: 999;
+    border-right: 3px solid rgba(236, 236, 236, 0.7);
+    cursor: pointer;
+}
+.youbian .bijibenHDC .bijibenInfo {
+    height: 122px;
+    border-bottom: solid 1px #ececec;
+    padding: 22px 24px 12px 24px;
+    box-sizing: border-box;
+    position: relative;
+    font-size: 21px;
+    font-family: gotham, helvetica, arial, sans-serif;
+    letter-spacing:0.5px;
+    color: #878787;
+}
+.youbian .bijibenHDC .xinjian {
+    position: absolute;
+    right: 22px;
+    top: 24px;
+}
+/*.youbian .bijibenHDC .bijibenInfo .message {*/
+
+/*}  和上面的 工作群聊message合并在一起了*/
+/*笔记本列表为空*/
+.youbian .bijibenList {
+    height: 100%;
+    color: #878787;
+    font-weight: normal;
+    letter-spacing: 0.5px;
+    position: relative;
+}
+.youbian .bijibenList .notList {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-700%);
+    display: none;
+    font-size: 22px;
+}
+/*有笔记本信息显示*/
+.youbian .liebiao {
+    /*display: none;*/
+}
+.youbian .liebiao .list_main {
+    height: 60px;
+    width: 100%;
+    padding: 0 12px;
+    box-sizing: border-box;
+    background: rgb(64,188,108);
+    /*鼠标移入笔记 这里添加背景颜色为 64 188 108*/
+}
+.youbian .liebiao .list_main .bijixinxi {
+    height: 100%;
+    border-bottom: solid 1px #ececec;
+    font-family: caecilia, times, serif;
+    font-size: 16px;
+    position: relative;
+}
+.youbian .liebiao .list_main .noteTitle {
+    white-space:normal;
+    /*color: #4a4a4a;*/
+    color: #fff;
+    overflow: hidden;
+    text-overflow:ellipsis;
+    height: 18px;
+    padding-top: 10px;
+}
+.youbian .liebiao .list_main .number {
+    font-family: gotham, helvetica, arial, sans-serif;
+    font-size: 11px;
+    font-weight: 500;
+    padding-top: 6px;
+    color: #c9f2d0;
+}
+.youbian .liebiao .list_main .delnotes {
+    position: absolute;
+    right: 16px;
+    top: 14px;
+}
+
+
