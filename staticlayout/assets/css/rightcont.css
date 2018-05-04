@@ -581,7 +581,7 @@
 /*<!--快捷方式滑窗口--------------------------------------------------------------->*/
 .youbian .quick {
     position: absolute;
-    left: 0px;
+    left: -465px;
     top: 0px;
     height: 100%;
     width: 456px;
@@ -608,7 +608,6 @@
     margin-top: 183px;
     position: relative;
     font-family: caecilia, times, serif;
-    display: none;
 }
 .youbian .nokuaijie .logo {
     margin-left: 195px;
@@ -628,11 +627,12 @@
     color: #878787;
 }
 
-/*<!--有收藏列表内容-->*/
+/*<!--有收藏列表内容 ----------------has notes it show list for window---------------------->*/
 .quick .quickList {
     overflow-y: auto;
     width: 100%;
     height: 100%;
+    display: none;
 }
 .quick .quickList .item {
     padding: 9px 0px;
