@@ -447,6 +447,9 @@
 /*搜索笔记---------------------------------------------------------------------------*/
 .youbian {
     float: left;
+    position: relative;
+    overflow: hidden;
+    /*群聊 等等滑窗移出需要隐藏*/
 }
 .youbian .searchNote {
     height: 228px;
@@ -494,5 +497,190 @@
     font-weight: normal;
 }
 
+/*工作群聊滑窗-------------- left -460px -------------------------------- z-index 888+*/
+.youbian .worktoking {
+    position: absolute;
+    left: -460px;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    width: 456px;
+    height: 100%;
+    border-right: 3px solid rgba(236, 236, 236, 0.7);
+    background: #ffffff;
+    z-index: 888;
+    cursor: pointer;
+}
+.youbian .header {
+    height: 110px;
+    border-bottom: 1px solid #ececec;
+    padding: 22px 24px 12px 24px;
+    color: #878787;
+    position: relative;
+}
+.youbian .title {
+    font-family: gotham, helvetica, arial, sans-serif;
+    font-size: 21px;
+    text-transform: uppercase;
+    letter-spacing:0.5px;
+    font-weight: normal;
+}
+.youbian .worktoking .righttPic {
+    position: absolute;
+    right: 20px;
+    top: 25px;
+}
+.youbian .worktoking .message {
+    margin-top: 22px;
+}
+.youbian .worktoking .messageValue {
+    height: 34px;
+    border: solid 1px #c4c4c4;
+    outline: none;
+    width: 100%;
+    border-radius: 2px;
+    font-family: gotham, helvetica, arial, sans-serif;
+    font-size: 13px;
+    padding-left: 6px;
+    box-sizing: border-box;
+    color: #c4c4c4;
+}
+.youbian .messageValue::placeholder{
+    color: #c4c4c4;
+    text-align: center;
+}
 
+/*需要动态计算高度*/
+.youbian .worktoking .workWrap {
+    height: 100%;
+   position: relative;
+}
+.youbian .workWrap .tishineirong {
+    height: 100%;
+    margin-top: 224px;
+    background: url("../images/kaishiqunliaozhongjiantubiao.png") no-repeat center 0px;
+}
+.youbian .workWrap .text {
+    width: 324px;
+    position: absolute;
+    top: 84px;
+    left: 64px;
+}
+.youbian .workWrap .text p {
+    text-align: center;
+}
+.youbian .workWrap .text p:nth-child(1) {
+    color: #000000;
+}
+.youbian .workWrap .text p:nth-child(2) {
+    font-size: 12px;
+    word-spacing: 0.5px;
+    color: rgba(126, 126, 126, 0.95);
+}
 
+/*<!--快捷方式滑窗口--------------------------------------------------------------->*/
+.youbian .quick {
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    height: 100%;
+    width: 456px;
+    background: #ffffff;
+    border-right: 3px solid rgba(236, 236, 236, 0.7);
+    z-index: 995;
+    cursor: pointer;
+}
+.youbian .q_biaoti {
+    height: 72px;
+    padding: 0 24px;
+    line-height: 72px;
+    color: #878787;
+    border-bottom: 1px solid #ececec;
+    font-size: 21px;
+    font-family: gotham, helvetica, arial, sans-serif;
+    font-weight: normal;
+}
+.youbian .kuaijieInfo {
+    height: 100%;
+}
+/*没有收藏的信息 显示这个----------show is not notes */
+.youbian .nokuaijie {
+    margin-top: 183px;
+    position: relative;
+    font-family: caecilia, times, serif;
+    display: none;
+}
+.youbian .nokuaijie .logo {
+    margin-left: 195px;
+    display: block;
+}
+.youbian .nokuaijie p {
+    padding: 0 50px;
+    text-align: center;
+    line-height: 20px;
+}
+.youbian .nokuaijie p:nth-child(1) {
+    color: #000;
+    margin-top: 20px;
+}
+.youbian .nokuaijie p:nth-child(2) {
+    font-size: 13px;
+    color: #878787;
+}
+
+/*<!--有收藏列表内容-->*/
+.quick .quickList {
+    overflow-y: auto;
+    width: 100%;
+    height: 100%;
+}
+.quick .quickList .item {
+    padding: 9px 0px;
+    color: #4a4a4a;
+    font-family: caecilia, times, serif;
+    font-size: 16px;
+    position: relative;
+}
+/*鼠标移入*/
+/*.quick .quickList .item:hover{*/
+    /*background: rgb(66,197,112);*/
+
+/*}*/
+.quick .item .beforeicon {
+    width: 16px;
+    height: 16px;
+    background: url("../images/kuaijiefangshiyouneirongdetubiao.png") no-repeat 0px 0px;
+    float: left;
+    margin-left: 33px;
+}
+.quick .item .q_t {
+    float: left;
+    white-space:normal;
+    overflow: hidden;
+    color: #4a4a4a;
+    margin-left: 5px;
+}
+
+.quick .item .delete {
+    width: 18px;
+    height: 18px;
+    border-radius: 100%;
+    position: absolute;
+    right: 16px;
+    top: 9px;
+    border: solid 2px #ffffff;
+    box-sizing: border-box;
+}
+.quick .item .delete:after {
+    content: "";
+    display: block;
+    width: 8px;
+    height: 2px;
+    background: #ffffff;
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    margin: auto;
+}

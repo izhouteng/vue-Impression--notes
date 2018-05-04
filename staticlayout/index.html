@@ -66,7 +66,64 @@
                 和笔记本内容具体信息
         -->
         <div class="youbian clearfix">
-            <!--搜索笔记-->
+
+            <!--工作群聊滑窗--------------------------------------------------------------->
+            <div class="worktoking">
+                <div class="header">
+                   <h2 class="title">工作群聊</h2>
+                    <img src="./assets/images/gongzuoqunliaoyousahngjiaotubiao.png" alt="" class="righttPic" title="开始群聊">
+                    <div class="message">
+                        <input type="text" class="messageValue" placeholder="搜索联系人或群聊消息">
+                    </div>
+                </div>
+                <div class="workWrap">
+                    <div class="tishineirong">
+                        <div class="text">
+                            <p>开始群聊</p>
+                            <p>在笔记或笔记本中点击"共享",与任何人共享并讨论。或者点击右上角的群聊图标,立即开始聊天</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!--快捷方式滑窗口--------------------------------------------------------------->
+            <div class="quick">
+                <div class="q_biaoti">
+                    <h2>快捷方式</h2>
+                </div>
+                <!--快捷信息 收藏的列表-->
+                <div class="kuaijieInfo">
+                    <div class="nokuaijie">
+                        <img src="./assets/images/kuaijiefangshiwuneirong.png" alt="" class="logo">
+                        <div class="quickxinxi">
+                            <p>工作更高效</p>
+                            <p>移动鼠标至列表中的某个笔记或笔记本,并点击☆创建快捷方式(这个五角星我是真没图片)</p>
+                        </div>
+                    </div>
+
+                    <!--有收藏列表内容-->
+                    <div class="quickList">
+                        <div class="item clearfix" style="background: #2dbe60">
+                            <div class="beforeicon"></div>
+                            <div class="q_t">
+                                2018-5-2 jquery extend
+                            </div>
+                            <!--移出收藏-->
+                            <div class="delete" title="删除快捷方式"></div>
+                        </div>
+                        <div class="item clearfix">
+                            <div class="beforeicon"></div>
+                            <div class="q_t">
+                                2018-5-2 jquery extend
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+
+            <!--搜索笔记-------------------------------------------------------------------->
             <div class="searchNote">
                 <div class="searchChild">
                     <input type="text" class="searchValue" placeholder="搜索笔记">
@@ -76,7 +133,7 @@
                     </div>
                 </div>
             </div>
-            <!-- 笔记列表区域 -->
+            <!-- 笔记列表区域 ------------------------------------------------------->
             <div class="yinxList">
                 <div class="yinxTitle">
 
@@ -124,7 +181,7 @@
                     </div>
                 </div>
 
-                <!-- 笔记内容列表区域 -->
+                <!-- 笔记内容列表区域----------------------------------- -->
                 <div class="NodesTwoList">
                     <div class="nodescroll" id="nodescroll">
 
@@ -152,7 +209,7 @@
                             </div>
                         </div>
 
-                        <!--未找到搜索的笔记  动态计算高度-->
+                        <!--未找到搜索的笔记  动态计算高度----------------->
                         <div class="notFound">
                             <div class="count">
                                 <img src="./assets/images/drawers_empty_state_search_icon.png" alt="">
