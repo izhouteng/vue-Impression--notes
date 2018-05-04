@@ -16,7 +16,6 @@ export function clientAuto(){
     const searchNote = document.querySelector('.searchNote'); //搜索 的高度
 
     const notFound = document.querySelector('.notFound'); // 未找到搜索笔记,提示内容高度计算
-    console.log(notFound);
 
     function resize(){
       let clientH = document.documentElement.clientHeight;
@@ -68,12 +67,4 @@ export function clientAuto(){
       searchValue.focus();
       resize();
     };
-}
-
-export default {
-  install(Vue){
-    Vue.prototype._licnet = {
-      clientAuto,
-    }
-  }
 }
