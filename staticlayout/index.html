@@ -150,10 +150,11 @@
                 </div>
             </div>
 
+            <!--标签滑窗开始----------------------------------->
 
 
 
-
+            <!--标签滑窗结束----------------------------------->
 
             <!--搜索笔记-------------------------------------------------------------------->
             <div class="searchNote">
@@ -253,6 +254,8 @@
                 </div>
             </div>
 
+
+            <!--最右侧笔记本内容信息区域-------------------------------->
             <!--左侧区域-->
             <div class="yinxDet clearfix" id="yinxdet">
                 <!--标题功能栏-->
@@ -456,8 +459,9 @@ window.scrollBy(x,y) 可累加的
                     </div>
 
                 </div>
-
             </div>
+
+
         </div>
         </div>
     </div>
@@ -479,7 +483,7 @@ window.scrollBy(x,y) 可累加的
         const searchNote = document.querySelector('.searchNote'); //搜索 的高度
 
         const notFound = document.querySelector('.notFound'); // 未找到搜索笔记,提示内容高度计算
-        console.log(notFound)
+        console.log(notFound);
 
         function resize(){
             let clientH = document.documentElement.clientHeight;
@@ -511,17 +515,17 @@ window.scrollBy(x,y) 可累加的
         const searchValue = searchNote.querySelector('.searchValue'); //搜索 input框
 
         newnotesImg[0].onclick = function(){
-            yinxleft.style.display = 'none'
-            yinxList.style.display = 'none'
+            yinxleft.style.display = 'none';
+            yinxList.style.display = 'none';
             searchNote.style.display = 'none';
             yinxDet.style.display = 'block';
 
             editValue.value = '写下笔记标题';
             editValue.focus();
-            textArea.value = ''
-            textArea.placeholder = '详细笔记信息...'
+            textArea.value = '';
+            textArea.placeholder = '详细笔记信息...';
             resize();
-        }
+        };
 
 
 

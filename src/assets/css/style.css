@@ -1,0 +1,80 @@
+.content {
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    overflow: hidden;
+    min-width:1000px;
+}
+.yinxleft {
+    width: 72px;
+    border-right: solid 1px #ececec;
+    height: 100%;
+    background: #f8f8f8;
+    position: relative;
+    float: left;
+}
+.yinxt {
+    padding: 15px 0 0 20px;
+    box-sizing: border-box;
+}
+.yinxfcn {
+    padding: 39px 0 0 17px;
+    box-sizing: border-box;
+    cursor: pointer;
+}
+.newSearch {
+    padding-top: 12px;
+}
+.newshare {
+    padding-top: 12px;
+}
+
+.yinxlb{
+    padding: 68px 0 0 15px;
+    box-sizing: border-box;
+    cursor: pointer;
+}
+.stars{
+    width: 36px;
+    height: 36px;
+    /* border: solid 1px red; */
+}
+.notesbook {
+    width: 36px;
+    height: 36px;
+    margin-top:14px;
+    /* border: solid 1px blue; */
+}
+.notethis {
+    width: 36px;
+    height: 36px;
+    margin-top: 14px;
+}
+.yinxltag {
+    width: 36px;
+    height: 36px;
+    margin-top: 14px;
+}
+.yinxbotpic {
+    height: 72px;
+    border-top: solid 1px #e1e1e1;
+    position: absolute;
+    width: 100%;
+    left: 0;
+    bottom: 0;
+}
+.botpic img{
+    width: 40px;
+    position: absolute;
+    left: 0px;
+    top: 14px;
+    bottom: 0px;
+    right: 0px;
+    margin: 0 auto;
+    border-radius: 50%;
+    overflow: hidden;
+    padding-top: 0px;
+}
+

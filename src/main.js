@@ -3,11 +3,15 @@
 import Vue from 'vue'
 import App from './App'
 
-Vue.config.productionTip = false
+import '@/assets/css/index.css'
+import cl from '@/assets/js/client.js'
+Vue.use(cl);
+
+Vue.config.productionTip = false;
 
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
   components: { App },
   template: '<App/>'
-})
+});

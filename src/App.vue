@@ -1,28 +1,38 @@
 <template>
-  <div id="app">
-    <img src="./assets/logo.png">
-    <HelloWorld/>
+  <div id="app" v-cloak>
+    <!--大容器-->
+    <div class="content clearfix">
+      <my-nav></my-nav>
+      <div class="youbian clearfix">
+        <list></list>
+        <my-content></my-content>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld'
+
+  import nav from './components/nav'
+  import list from './components/list'
+  import content from './components/content'
+
+  import {clientAuto} from './assets/js/client'
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+      'my-nav':nav,
+       list:list,
+       'my-content':content,
+  },
+  mounted(){
+    clientAuto()
   }
 }
 </script>
-
 <style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+  [v-cloak]{
+    display: none;
+  }
 </style>

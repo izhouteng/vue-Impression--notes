@@ -1,0 +1,210 @@
+/* 笔记列表 */
+.yinxList {
+    float: left;
+    position: relative;
+    width: 350px;
+    height: 100%;
+    border-right: solid 1px #ececec;
+    box-sizing: border-box;
+    cursor: pointer;
+    /*display: none;  搜索笔记的时候,默认为隐藏*/
+}
+/*默认首页显示*/
+.cuthide {
+    padding: 27px 24px;
+    box-sizing: border-box;
+    /*display: none;*/
+}
+.yinxList .notTitle {
+    font-size: 21px;
+    color: #878787;
+    vertical-align: top;
+    float: left;
+    letter-spacing: 0.5px;
+}
+.yinxList .yinxcut {
+    float: right;
+    width: 91px;
+    height: 29px;
+    border-radius: 4px;
+    background: #2dbe60;
+    color: #fff;
+    text-align: center;
+    line-height: 29px;
+    font-weight: normal;
+    border: 0;
+}
+.noteNumbers {
+    margin-top: 21px;
+    padding: 0 24px;
+    padding-bottom: 10px;
+    position: relative;
+    font-size: 13px;
+    color: #ababab;
+    position: relative;
+    box-sizing: border-box
+}
+.yinxnum {
+    float: left;
+}
+.select {
+   float: right;
+   padding-right: 12px;
+   background: url('../images/xiabiao.png') no-repeat right 5px;
+   box-sizing: border-box;
+   position: relative;
+}
+
+/*进入笔记本的时候 显示的笔记本名称*/
+.noteNames {
+    width: 350px;
+    height: 150px;
+    background: #393d41;
+    position: relative;
+    display: none;
+}
+.noteNames .noteinfoPic {
+    position: absolute;
+    right: 12px;
+    top: 12px;
+}
+.noteNames .title {
+    color: #ffffff;
+    font-size: 18px;
+    line-height: 30px;
+    font-family: caecilia, times, serif;
+    text-align: center;
+    padding-top: 48px;
+    box-sizing: border-box;
+}
+
+
+/* 选项列表 */
+.selList {
+    width: 205px;
+    /* height: 374px; */
+    box-shadow: 0px 6px 20px rgba(0, 0, 0, 0.04), -6px 8px 15px rgba(0, 0, 0, 0.04), 6px 8px 15px rgba(0, 0, 0, 0.04);
+    position: absolute;
+    right: -138px;
+    top: 24px;
+    z-index: 50;
+    background: #ffffff;
+    display: none;
+}
+.sortingWay {
+    font-size: 11px;
+    color: #ababab;
+    margin: 19px 0 12px 20px;
+}
+.sortlist {
+    box-sizing: border-box;
+}
+.sortlist li{
+    padding: 9px 54px 10px 20px; 
+    color: #606060;
+    /* background: url('../images/duigou.png') no-repeat 162px 11px; */
+}
+.MenuDivider {
+    border-top: 1px solid #ececec;
+    margin: 15px 15px 23px;
+}
+.viewsel legend {
+    margin: 0 0 12px 20px; 
+    font-size: 11px;
+    color: #ababab; 
+}
+.viewsel div {
+    color: #606060;
+    padding: 8px 54px 10px 20px;
+    background: url('../images/box_checked_green_24x24.png') no-repeat 162px 4px;
+}
+
+/* 笔记本列表区域 */
+.NodesTwoList {
+    overflow-x: hidden;
+    overflow-y: hidden;
+}
+.nodescroll {
+    overflow: auto;
+    border-top: solid 1px #ccc;
+    vertical-align:baseline;
+}
+
+/* 主题内容----------------------------------- */
+.nodescroll .n-conts {
+    padding: 12px 26px;
+    height: 120px;
+    overflow-y: hidden;
+    border-bottom: solid 1px #ececec; 
+    box-sizing: border-box;
+    position: relative;
+    line-height: 17px;
+    /*display: none;*/
+    /* background: #40bc6c; */
+}
+.nodescroll .n-title {
+   font-size: 16px;
+   color: #000;
+   overflow: hidden;
+    text-overflow:ellipsis;
+    white-space: nowrap;
+}
+.nodescroll .n-times {
+    font-size: 11px;
+    color: #878787;
+    padding: 4px 0;
+}
+.nodescroll .n-wrap {
+    font-size: 12px;
+    color: #878787;
+    font-family: gotham, helvetica, arial, sans-serif;
+    padding-right: 6px;
+    height: 48px;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    overflow: hidden;
+}
+
+/* 鼠标移入笔记列表显示出来 */
+.nodescroll .n-fnc {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    z-index: 51;
+    display: block;
+}
+.nodescroll .n-fnc .cont-icon {
+    float: left;
+    margin: 6px 6px 0 0;
+}
+
+/*未找到搜索的笔记提示内容*/
+.nodescroll .notFound {
+    width: 100%;
+    height: 100%;
+    overflow-y: scroll;
+    overflow-x:hidden;
+    font-family: caecilia, times, serif;
+    word-wrap:break-word;
+    font-size: 16px;
+    font-weight: 400;
+    display: none;
+    /**隐藏**/
+}
+.nodescroll .notFound .count{
+    box-sizing: border-box;
+    padding: 0 45px;
+    position: static;
+    text-align: center;
+    margin-top: 140px;
+}
+.nodescroll .notFound .count img {
+    width: 50px;
+    height: 50px;
+}
+.nodescroll .notFound .tip {
+    margin-top: 17px;
+    color: #ababab;
+    line-height: 26px;
+}
