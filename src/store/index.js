@@ -36,8 +36,20 @@ let store = new Vuex.Store({
        if(arr.length > 0){
           return arr;
        }
-      }
+      },
 
+    /**
+     *
+     * @param Store
+     * @param getter
+     * @returns {function(*)}
+     * @id  string
+     * @item.id  number
+     * 根据 动态id 过滤textarea内容对象
+     */
+      getNoteinfo:(Store,getter) => (id) => {
+         return getter.allList.filter(item => item.id == id)
+      }
   }
 });
 
