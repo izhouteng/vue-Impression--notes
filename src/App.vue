@@ -26,6 +26,12 @@ export default {
        list:list,
        'my-content':content,
   },
+  // 测试请求数据接口
+  created(){
+   this.https.noteList().then(({data}) => {
+      console.log(data)
+   })
+  },
   mounted(){
     clientAuto()
   }

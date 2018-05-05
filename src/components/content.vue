@@ -165,8 +165,8 @@
               <input type="text" value="2018-02-08 dom可视区操作" class="editValue">
             </div>
             <div class="textArea">
-                            <textarea>
-                                知识点: offsetPatent, offsetWidht,offsetHeight,clinetWidth,clinetHeight,offsetTop,offsetLeft, document.documentElement.clinetWidth/Height
+              <textarea>
+                知识点: offsetPatent, offsetWidht,offsetHeight,clinetWidth,clinetHeight,offsetTop,offsetLeft, document.documentElement.clinetWidth/Height
 
     elem.offsetParent: 获取距离当前元素最近的有定位属性的父级
     elem.offsetLeft/offsetTop: 当前元﻿﻿素距离有定位属性的父级元素的距离，不管自身有没有定位
@@ -201,8 +201,8 @@
 
             </div>
           </div>
-
         </div>
+
       </div>
 </template>
 

@@ -4,6 +4,8 @@ import Vue from 'vue'
 import App from './App'
 
 import '@/assets/css/index.css'
+import https from '@/server'
+Vue.use(https);
 
 Vue.config.productionTip = false;
 
