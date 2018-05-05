@@ -122,7 +122,7 @@
 
             <!-- 笔记条数和选项 -->
             <div class="noteNumbers clearfix">
-              <div class="yinxnum">52条笔记</div>
+              <div class="yinxnum">{{allList.length}}条笔记</div>
               <div class="select">
                 <span>选项</span>
               </div>
@@ -150,7 +150,7 @@
           <!-- 笔记内容列表区域----------------------------------- -->
           <div class="NodesTwoList">
             <div class="nodescroll" id="nodescroll">
-
+              <!--
               <div class="n-conts">
                 <h2 class="n-title">2018-02-08 dom可视区操作</h2>
                 <div class="n-times">2 天前</div>
@@ -158,6 +158,33 @@
                   这是我的一段文字这是我的一段文字这是我的一段文字这是我的一段文字这是我的一段文字,这是我的一段文字这是这是我的一段文字,这是我的一段一段文字这是我的一段文字这是我的一段文字这是我的一段文字这是这是我的一段文字,这是我的一段一段文字这是我的一段文字这是我的一段文字这是我的一段文字这是这是我的一段文字,这是我的一段一段文字这是我的一段文字这是我的一段文字这是我的一段文字这是我的一段文字这是我的一段文字这是我的一段文字这是我的一段文字这是我的一段文字,这是我的一段一段文字这是我的一段文字这是我的一段文字这是我的一段文字这是我的一段文字,这是我的一段
                 </div>
 
+                笔记列表 分享 闹钟 收藏 删除
+                <div class="n-fnc">
+                  <div class="n-shake cont-icon">
+                    <img src="@/assets/images/cont_fenxiang1.png" alt="" title="分享">
+                  </div>
+                  <div class="n-remind cont-icon">
+                    <img src="@/assets/images/tixing24x24.png" alt="" title="设置提醒">
+                  </div>
+                  <div class="n-collection cont-icon">
+                    <img src="@/assets/images/shoucang_white_24x24.png" alt="" title="收藏">
+                  </div>
+                  <div class="n-delete cont-icon">
+                    <img src="@/assets/images/delete_white_24x24.png" alt="" title="删除">
+                  </div>
+                </div>
+              </div>
+              -->
+
+              <div class="n-conts"
+                   v-for="item in allList"
+                   :key="item.id"
+              >
+                <h2 class="n-title">{{item.title}}</h2>
+                <div class="n-times">{{item.createTime}}</div>
+                <div class="n-wrap">
+                  {{item.content}}
+                </div>
                 <!-- 笔记列表 分享 闹钟 收藏 删除 -->
                 <div class="n-fnc">
                   <div class="n-shake cont-icon">
@@ -182,7 +209,6 @@
                   <p class="tip">未找到"好吧"笔记。</p>
                 </div>
               </div>
-
             </div>
           </div>
         </div>
@@ -195,8 +221,21 @@
         data(){
           return {
              listdata:[], //列表数据
+             allList:[],  //所有的笔记列表
           }
         },
+      methods:{
+          // Vuex数据发生变化就重新获取一次
+        watchNotes(){
+            this.https.noteList().then(() => {
+              this.allList = this.$store.getters.allList;
+            })
+        }
+      },
+       // 需要异步同步数据
+        created(){
+           this.watchNotes();
+        }
     }
 </script>
 

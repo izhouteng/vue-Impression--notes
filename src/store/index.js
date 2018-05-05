@@ -22,7 +22,21 @@ let store = new Vuex.Store({
   },
 
   // 计算state
-  getters(){
+  getters:{
+      // 所有的笔记列表
+      allList(Store){
+        let arr = [];
+        Store.noteList.forEach((item) => {
+            item.children.forEach((el) => {
+              if(el){
+                 arr.push(el)
+              }
+            })
+        });
+       if(arr.length > 0){
+          return arr;
+       }
+      }
 
   }
 });

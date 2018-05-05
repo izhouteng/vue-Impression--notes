@@ -100,7 +100,7 @@
     box-sizing: border-box;
 }
 .sortlist li{
-    padding: 9px 54px 10px 20px; 
+    padding: 9px 54px 10px 20px;
     color: #606060;
     /* background: url('../images/duigou.png') no-repeat 162px 11px; */
 }
@@ -109,9 +109,9 @@
     margin: 15px 15px 23px;
 }
 .viewsel legend {
-    margin: 0 0 12px 20px; 
+    margin: 0 0 12px 20px;
     font-size: 11px;
-    color: #ababab; 
+    color: #ababab;
 }
 .viewsel div {
     color: #606060;
@@ -135,19 +135,33 @@
     padding: 12px 26px;
     height: 120px;
     overflow-y: hidden;
-    border-bottom: solid 1px #ececec; 
+    border-bottom: solid 1px #ececec;
     box-sizing: border-box;
     position: relative;
     line-height: 17px;
     /*display: none;*/
     /* background: #40bc6c; */
 }
+.nodescroll .n-conts.sel {
+   border: 2px solid #d9d9d9;
+}
+.nodescroll .n-conts:hover {
+    background: #40bc6c;
+}
+.n-conts:hover .n-title {
+   color: #fffdf1;
+}
+.n-conts:hover .n-wrap ,.n-conts:hover .n-times {
+  color: #ffffff;
+}
+
 .nodescroll .n-title {
-   font-size: 16px;
-   color: #000;
-   overflow: hidden;
+    font-size: 16px;
+    color: #000;
+    overflow: hidden;
     text-overflow:ellipsis;
     white-space: nowrap;
+    width: 60%;
 }
 .nodescroll .n-times {
     font-size: 11px;
