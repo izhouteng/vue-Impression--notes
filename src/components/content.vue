@@ -7,7 +7,7 @@
           <div class="detfunc">
             <div class="deftimes main">
               <img src="@/assets/images/defshizhong.png" alt="" title="设置提醒">
-
+              <span class="tixingshijian">18/5/5</span>
               <!--提醒已添加 通知我弹窗-->
               <div class="reminderAdded">
                 <img src="@/assets/images/shangjianjiaohao.png" alt="" class="target">

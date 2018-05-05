@@ -29,7 +29,7 @@ export default {
   // 测试请求数据接口
   created(){
    this.https.noteList().then(({data}) => {
-      console.log(data)
+      this.$store.dispatch('requestSuccess',data)
    })
   },
   mounted(){

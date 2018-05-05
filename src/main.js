@@ -7,11 +7,14 @@ import '@/assets/css/index.css'
 import https from '@/server'
 Vue.use(https);
 
+import store from '@/store'
+
 Vue.config.productionTip = false;
 
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
+  store,
   components: { App },
   template: '<App/>'
 });

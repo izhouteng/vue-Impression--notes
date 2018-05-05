@@ -191,7 +191,12 @@
 
 <script>
     export default {
-        name: "list"
+        name: "list",
+        data(){
+          return {
+             listdata:[], //列表数据
+          }
+        },
     }
 </script>
 

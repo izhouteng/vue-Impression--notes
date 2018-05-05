@@ -28,18 +28,18 @@
     position: relative;
 }
 .dethead .deftimes .tixingshijian {
-  position: relative;
-  color: #2dbe60;
-  font-family: gotham, helvetica, arial, sans-serif;
-  font-size: 12px;
-  letter-spacing: 1px;
-  top: 5px;
-  left: 0px;
-  display: none;
+    position: relative;
+    color: #2dbe60;
+    font-family: gotham, helvetica, arial, sans-serif;
+    font-size: 11px;
+    letter-spacing: 1px;
+    top: 5px;
+    left: 0px;
+    display: none;
 }
 .dethead .deftimes .wancheng {
-  color: #d9d9d9;
-  text-decoration:line-through
+    color: #d9d9d9;
+    text-decoration:line-through
 }
 /*提醒已添加 通知我弹窗 --------------------- 1*/
 .dethead .deftimes .reminderAdded {
@@ -464,10 +464,6 @@
     position: relative;
     overflow: hidden;
     /*群聊 等等滑窗移出需要隐藏*/
-}
-/*组件根容器div,需要浮动*/
-.youbian_2 {
-  float: left;
 }
 .youbian .searchNote {
     height: 228px;
