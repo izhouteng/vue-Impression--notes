@@ -177,8 +177,10 @@
               -->
 
               <div class="n-conts"
-                   v-for="item in allList"
+                   v-for="(item,index) in allList"
                    :key="item.id"
+                   @click="selectNote(item,index)"
+                   :class="{sel:index === state}"
               >
                 <h2 class="n-title">{{item.title}}</h2>
                 <div class="n-times">{{item.createTime}}</div>
@@ -222,6 +224,7 @@
           return {
              listdata:[], //列表数据
              allList:[],  //所有的笔记列表
+             state:0,    // 点击那个笔记,state保存这个笔记的状态值
           }
         },
       methods:{
@@ -229,7 +232,20 @@
         watchNotes(){
             this.https.noteList().then(() => {
               this.allList = this.$store.getters.allList;
+              // 获取列表中第一个笔记的id,作为路由信息对象的动态id
+              let firstId = this.allList[0].id;
+              this.$router.push({
+                path:'/home/' + firstId,
+              })
             })
+        },
+
+        selectNote(obj,index){
+          this.state = index;
+          let id = obj.id;
+          this.$router.push({
+            path:'/home/' + id
+          })
         }
       },
        // 需要异步同步数据

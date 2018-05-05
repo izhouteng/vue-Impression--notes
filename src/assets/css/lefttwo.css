@@ -128,6 +128,7 @@
     overflow: auto;
     border-top: solid 1px #ccc;
     vertical-align:baseline;
+    overflow-y: scroll;
 }
 
 /* 主题内容----------------------------------- */
@@ -139,11 +140,11 @@
     box-sizing: border-box;
     position: relative;
     line-height: 17px;
-    /*display: none;*/
-    /* background: #40bc6c; */
+    transition: 0.1s;
 }
 .nodescroll .n-conts.sel {
-   border: 2px solid #d9d9d9;
+  border: solid 1px rgb(217,217,217);
+  box-sizing: border-box;
 }
 .nodescroll .n-conts:hover {
     background: #40bc6c;

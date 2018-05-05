@@ -8,6 +8,7 @@ import https from '@/server'
 Vue.use(https);
 
 import store from '@/store'
+import router from '@/router'
 
 Vue.config.productionTip = false;
 
@@ -15,6 +16,7 @@ Vue.config.productionTip = false;
 new Vue({
   el: '#app',
   store,
+  router,
   components: { App },
   template: '<App/>'
 });
