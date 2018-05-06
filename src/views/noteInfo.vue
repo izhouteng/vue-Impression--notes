@@ -3,7 +3,7 @@
     <!--左侧区域-->
     <div class="yinxDet clearfix" id="yinxdet">
       <!--标题功能栏-->
-      <div class="dethead">
+      <div class="dethead" @mousedown.prevent>
         <div class="detfunc">
           <div class="deftimes main">
             <img src="@/assets/images/defshizhong.png" alt="" title="设置提醒">
@@ -104,12 +104,12 @@
       </div>
 
       <!--具体操作交互栏-->
-      <div class="stages">
+      <div class="stages" @mousedown.prevent>
 
         <!--移动笔记和标签-->
         <div class="liangge">
           <div class="movenotes">
-            <img src="@/assets/images/dijijieduanbiji.png" alt="" title="移动笔记本">
+            <img src="@/assets/images/dijijieduanbiji.png" alt="" title="移动笔记本" >
             <div class="caonima">
               <img src="@/assets/images/qianwangbijiben.png" alt="" title="前往笔记本">
             </div>

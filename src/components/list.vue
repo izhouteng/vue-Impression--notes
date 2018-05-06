@@ -1,5 +1,5 @@
 <template>
-    <div class="youbian_2">
+    <div class="youbian_2" @mousedown.prevent>
         <!--工作群聊滑窗--------------------------------------------------------------->
         <div class="worktoking">
           <div class="header">

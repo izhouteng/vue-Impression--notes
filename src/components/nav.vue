@@ -1,6 +1,6 @@
 <template>
     <!-- 左侧操作栏  id nav1 显示隐藏由vuex控制 -->
-    <div class="yinxleft" id="navl" v-if="$store.state.navl">
+    <div class="yinxleft" id="navl" v-if="$store.state.navl" @mousedown.prevent>
       <div class="yinxt">
         <img src="@/assets/images/leftToppic.png" alt="">
       </div>
