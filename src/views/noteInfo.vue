@@ -28,11 +28,14 @@
              tranId:'', //记录修改的内容id
           }
         },
+        methods:{
+
+        },
         created(){
            let userId = this.$route.params.id;
            this.routeId = userId
         },
-      watch:{
+       watch:{
           // 监听路由信息对象变化
           $route(){
             let userId = this.$route.params.id;
@@ -47,8 +50,12 @@
             // 在这里将修改的内容提交vuex 修改数据
             // 第一次 this.tranTitle内容为空,是不能提交的
             // this.routeId 是实时的
-            if(this.tranTitle && this.tranTextarea){
-              
+            // 如果不输入标题,默认为无标题内容
+            if(this.tranTitle === ''){
+                this.tranTitle = '无标题内容'
+            }
+            if(this.tranTitle || this.tranTextarea){
+
               this.$store.commit('changeTitle',{
                 id:this.tranId,
                 title:this.tranTitle,
