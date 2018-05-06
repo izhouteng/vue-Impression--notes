@@ -26,5 +26,17 @@ export default {
    */
   getNoteinfo:(Store,getter) => (id) => {
     return getter.allList.filter(item => item.id == id)
+  },
+
+  /**
+   *
+   * @param Store
+   * @param getter
+   * @returns {function(*)}
+   * @id 计算当前id的数据是否收藏,为true还是False
+   */
+  isShade:(Store,getter) => (id) => {
+     let s = getter.allList.filter(item => item.id)
+     console.log(s);
   }
 }

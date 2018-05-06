@@ -1,8 +1,16 @@
 export default {
     // 初始化state中的数据
     success(state,data){
+      let arr = [];
       state.noteList = data;
-      state.noteId = data[0].id;
+      state.noteList.forEach(item => {
+         item.children.forEach(el => {
+            if(el){
+               arr.push(el)
+            }
+         })
+      });
+      state.allList = arr;
     },
 
     /**
@@ -26,5 +34,23 @@ export default {
   WriteNotes(state){
       state.navl = false;
       state.yinxList = false;
+  },
+
+  // 收藏
+    collec(state,obj){
+        state.allList.forEach(item => {
+           if(item === obj){
+              item.Shared = true;
+           }
+        })
+    },
+
+    // 取消收藏
+  delcollec(state,obj){
+    state.allList.forEach(item => {
+      if(item === obj){
+        item.Shared = false;
+      }
+    })
   }
 }

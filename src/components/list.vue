@@ -174,7 +174,15 @@
                       <img src="@/assets/images/tixing24x24.png" alt="" title="设置提醒">
                     </div>
                     <div class="n-collection cont-icon">
-                      <img src="@/assets/images/shoucang_white_24x24.png" alt="" title="收藏">
+                      <img src="@/assets/images/shoucang_white_24x24.png" alt=""
+                           @click.stop="isCollec(item)"
+                           title="添加快捷方式"
+                           v-if="!item.Shared"
+                      >
+                      <img src="@/assets/images/shortcuts_solid_white_24x24.png" alt=""
+                           v-if="item.Shared" title="移除快捷方式"
+                           @click.stop="delCollec(item)"
+                      >
                     </div>
                     <div class="n-delete cont-icon">
                       <img src="@/assets/images/delete_white_24x24.png" alt="" title="删除">
@@ -210,8 +218,17 @@
           //需要加上native修饰符
           selectNote(index){
              this.state = index;
-          }
+          },
+          // 添加收藏 boolean
+         isCollec(obj){
+            this.$store.commit('collec',obj);
+         },
+         // 移出收藏
+         delCollec(obj){
+            this.$store.commit('delcollec',obj)
+         }
       },
+
       // 异步获取vuex state中的函数
       created(){
           this.https.noteList().then(() => {
