@@ -1,14 +1,17 @@
 <template>
-    <!-- 左侧操作栏 -->
-    <div class="yinxleft" id="navl">
+    <!-- 左侧操作栏  id nav1 显示隐藏由vuex控制 -->
+    <div class="yinxleft" id="navl" v-if="$store.state.navl">
       <div class="yinxt">
         <img src="@/assets/images/leftToppic.png" alt="">
       </div>
       <!-- 新建搜索分享 -->
       <div class="yinxfcn">
-        <div class="newnotes">
-          <img src="@/assets/images/xinjian1.png" alt="">
-          <img src="@/assets/images/xinjian.png" alt="" style="display:none" title="新建笔记">
+        <div class="newnotes" >
+          <img src="@/assets/images/xinjian1.png" alt="" v-if="!newNotes" @mouseover="isnewNotes">
+          <img src="@/assets/images/xinjian.png" alt="" title="新建笔记"
+               v-if="newNotes"
+               @mouseout="outNewNotes"
+          >
         </div>
         <div class="newSearch">
           <img src="@/assets/images/sousuo1.png" alt="">
@@ -50,7 +53,25 @@
 
 <script>
     export default {
+        data(){
+          return {
+             newNotes:false,
+          }
+        },
+        methods:{
+          isnewNotes(){
+             this.newNotes = !this.newNotes;
+          },
+          outNewNotes(){
+            this.newNotes = !this.newNotes;
+          },
+          // 新建笔记 提交mutation 隐藏 nav1 yinlist 为false
+          // xJnotes(){
+          //    // this.$store.commit('WriteNotes');
+          //
+          // }
 
+        }
     }
 </script>
 

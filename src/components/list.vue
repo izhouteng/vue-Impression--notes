@@ -99,8 +99,8 @@
             </div>
           </div>
         </div>
-        <!-- 笔记列表区域 ------------------------------------------------------->
-        <div class="yinxList">
+        <!-- 笔记列表区域   yinList的显示隐藏 由vuex控制------------------------------------------------------->
+        <div class="yinxList" v-if="$store.state.yinxList">
           <div class="yinxTitle">
 
             <!--首页显示-->
@@ -122,7 +122,7 @@
 
             <!-- 笔记条数和选项 -->
             <div class="noteNumbers clearfix">
-              <div class="yinxnum">{{allList.length}}条笔记</div>
+              <div class="yinxnum">{{listdata.length}}条笔记</div>
               <div class="select">
                 <span>选项</span>
               </div>
@@ -150,59 +150,38 @@
           <!-- 笔记内容列表区域----------------------------------- -->
           <div class="NodesTwoList">
             <div class="nodescroll" id="nodescroll">
-              <!--
-              <div class="n-conts">
-                <h2 class="n-title">2018-02-08 dom可视区操作</h2>
-                <div class="n-times">2 天前</div>
-                <div class="n-wrap">
-                  这是我的一段文字这是我的一段文字这是我的一段文字这是我的一段文字这是我的一段文字,这是我的一段文字这是这是我的一段文字,这是我的一段一段文字这是我的一段文字这是我的一段文字这是我的一段文字这是这是我的一段文字,这是我的一段一段文字这是我的一段文字这是我的一段文字这是我的一段文字这是这是我的一段文字,这是我的一段一段文字这是我的一段文字这是我的一段文字这是我的一段文字这是我的一段文字这是我的一段文字这是我的一段文字这是我的一段文字这是我的一段文字,这是我的一段一段文字这是我的一段文字这是我的一段文字这是我的一段文字这是我的一段文字,这是我的一段
-                </div>
 
-                笔记列表 分享 闹钟 收藏 删除
-                <div class="n-fnc">
-                  <div class="n-shake cont-icon">
-                    <img src="@/assets/images/cont_fenxiang1.png" alt="" title="分享">
-                  </div>
-                  <div class="n-remind cont-icon">
-                    <img src="@/assets/images/tixing24x24.png" alt="" title="设置提醒">
-                  </div>
-                  <div class="n-collection cont-icon">
-                    <img src="@/assets/images/shoucang_white_24x24.png" alt="" title="收藏">
-                  </div>
-                  <div class="n-delete cont-icon">
-                    <img src="@/assets/images/delete_white_24x24.png" alt="" title="删除">
-                  </div>
-                </div>
-              </div>
-              -->
-
-              <div class="n-conts"
-                   v-for="(item,index) in allList"
-                   :key="item.id"
-                   @click="selectNote(item,index)"
-                   :class="{sel:index === state}"
+              <router-link
+                tag="div"
+                class="n-conts"
+                v-for="(item,index) in listdata"
+                :key="item.id"
+                :to="/home/+item.id"
+                 @click.native="selectNote(index)"
+                 :class="{sel:index === state}"
               >
-                <h2 class="n-title">{{item.title}}</h2>
-                <div class="n-times">{{item.createTime}}</div>
-                <div class="n-wrap">
-                  {{item.content}}
-                </div>
-                <!-- 笔记列表 分享 闹钟 收藏 删除 -->
-                <div class="n-fnc">
-                  <div class="n-shake cont-icon">
-                    <img src="@/assets/images/cont_fenxiang1.png" alt="" title="分享">
+                  <h2 class="n-title">{{item.title}}</h2>
+                  <div class="n-times">{{item.createTime}}</div>
+                  <div class="n-wrap">
+                    {{item.content}}
                   </div>
-                  <div class="n-remind cont-icon">
-                    <img src="@/assets/images/tixing24x24.png" alt="" title="设置提醒">
+                  <!-- 笔记列表 分享 闹钟 收藏 删除 -->
+                  <div class="n-fnc">
+                    <div class="n-shake cont-icon">
+                      <img src="@/assets/images/cont_fenxiang1.png" alt="" title="分享">
+                    </div>
+                    <div class="n-remind cont-icon">
+                      <img src="@/assets/images/tixing24x24.png" alt="" title="设置提醒">
+                    </div>
+                    <div class="n-collection cont-icon">
+                      <img src="@/assets/images/shoucang_white_24x24.png" alt="" title="收藏">
+                    </div>
+                    <div class="n-delete cont-icon">
+                      <img src="@/assets/images/delete_white_24x24.png" alt="" title="删除">
+                    </div>
                   </div>
-                  <div class="n-collection cont-icon">
-                    <img src="@/assets/images/shoucang_white_24x24.png" alt="" title="收藏">
-                  </div>
-                  <div class="n-delete cont-icon">
-                    <img src="@/assets/images/delete_white_24x24.png" alt="" title="删除">
-                  </div>
-                </div>
-              </div>
+
+              </router-link>
 
               <!--未找到搜索的笔记  动态计算高度----------------->
               <div class="notFound">
@@ -227,31 +206,23 @@
              state:0,    // 点击那个笔记,state保存这个笔记的状态值
           }
         },
-      methods:{
-          // Vuex数据发生变化就重新获取一次
-        watchNotes(){
-            this.https.noteList().then(() => {
-              this.allList = this.$store.getters.allList;
-              // 获取列表中第一个笔记的id,作为路由信息对象的动态id
-              let firstId = this.allList[0].id;
-              this.$router.push({
-                path:'/home/' + firstId,
-              })
-            })
-        },
-
-        selectNote(obj,index){
-          this.state = index;
-          let id = obj.id;
-          this.$router.push({
-            path:'/home/' + id
-          })
-        }
+       methods:{
+          //需要加上native修饰符
+          selectNote(index){
+             this.state = index;
+          }
       },
-       // 需要异步同步数据
-        created(){
-           this.watchNotes();
-        }
+      // 异步获取vuex state中的函数
+      created(){
+          this.https.noteList().then(() => {
+            let list = this.$store.getters.allList;
+            this.listdata = list;
+            let n = this.listdata[0];
+            this.$router.push({
+               path:`/home/${n.id}`
+            })
+          })
+      }
     }
 </script>
 

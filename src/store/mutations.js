@@ -20,5 +20,11 @@ export default {
           }
         })
       })
-    }
+    },
+
+   // 写笔记 隐藏nav1 yinlist
+  WriteNotes(state){
+      state.navl = false;
+      state.yinxList = false;
+  }
 }

@@ -29,23 +29,26 @@
           }
         },
         methods:{
-
+            //实时获取route路由信息对象
+            hasRouteId(){
+                let userId = this.$route.params.userId;
+                if(userId){
+                  this.routeId = userId;
+                }
+            }
         },
         created(){
-           let userId = this.$route.params.id;
-           this.routeId = userId
+           this.hasRouteId();
         },
        watch:{
           // 监听路由信息对象变化
           $route(){
-            let userId = this.$route.params.id;
-            this.routeId = userId;
-
-            // 接下来要根据id 过滤不同的数据 显示在noteInfo组件中
-            let n = this.$store.getters.getNoteinfo(this.routeId);
-            this.isDate = n[0];
-            this.editValue = this.isDate.title;
-            this.editTextarea = this.isDate.content;
+            this.hasRouteId();
+            
+            // // 接下来要根据id 过滤不同的数据 显示在noteInfo组件中
+            this.itDate = this.$store.getters.getNoteinfo(this.routeId)[0];
+            this.editValue = this.itDate.title;
+            this.editTextarea = this.itDate.content;
 
             // 在这里将修改的内容提交vuex 修改数据
             // 第一次 this.tranTitle内容为空,是不能提交的
@@ -67,7 +70,7 @@
         // 监听 标题信息
         editValue(){
           this.tranTitle = this.editValue;
-          this.tranId = this.$route.params.id;
+          this.tranId = this.$route.params.userId;
         },
 
         // 监听 textarea用户的修改

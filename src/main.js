@@ -7,6 +7,9 @@ import '@/assets/css/index.css'
 import https from '@/server'
 Vue.use(https);
 
+import _client from '@/assets/js/client'
+Vue.use(_client);
+
 import store from '@/store'
 import router from '@/router'
 

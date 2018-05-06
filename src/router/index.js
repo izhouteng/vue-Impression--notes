@@ -9,13 +9,13 @@ const router = new VueRouter({
    mode:'history',
    routes:[
      {
-       path:'/home/:id',
+       path:'/home/:userId?',
        component:noteinfo
      },
      // 重定向路由信息
      {
        path:'*',
-       redirect:'/home/1'
+       redirect:'/home'
      }
    ]
 });
