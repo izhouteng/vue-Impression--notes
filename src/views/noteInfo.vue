@@ -7,6 +7,7 @@
         </div>
         <div class="textArea">
                 <!--bug  自身内容超过高度,自身产生滚动条-->
+                <!--内容被手动修改应该同步vuex数据-->
                 <textarea v-model="editTextarea"></textarea>
 
         </div>
@@ -22,6 +23,9 @@
              itDate:{},  // 保存要展示content内容的对象
              editValue:'', // 双向数据绑定的Value值  只要在原文上修改之后,切换路由,就同步vuex中的数据
              editTextarea:'',  // 双向绑定textarea中的数据 ?
+             tranTitle:'',  // 保存用户实时输入的标题信息
+             tranTextarea:'', // 保存用户实时输入的内容信息
+             tranId:'', //记录修改的内容id
           }
         },
         created(){
@@ -39,7 +43,23 @@
             this.isDate = n[0];
             this.editValue = this.isDate.title;
             this.editTextarea = this.isDate.content;
-          }
+
+            // 在这里将修改的内容提交vuex 修改数据
+            // 第一次 this.tranTitle内容为空,是不能提交的
+            // this.routeId 是实时的
+            if(this.tranTitle){
+              this.$store.commit('changeTitle',{
+                id:this.tranId,
+                title:this.tranTitle,
+              })
+            }
+
+          },
+        // 监听 标题信息
+        editValue(){
+          this.tranTitle = this.editValue;
+          this.tranId = this.$route.params.id;
+        }
       }
     }
 </script>

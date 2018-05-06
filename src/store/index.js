@@ -13,6 +13,18 @@ let store = new Vuex.Store({
     success(state,data){
        state.noteList = data;
        state.noteId = data[0].id;
+    },
+
+    // 修改内容标题
+    changeTitle(state,params){
+       state.noteList.forEach(item => {
+           item.children.forEach(el => {
+               if(el.id == params.id){
+                  el.title = params.title;
+               }
+           })
+       })
+
     }
   },
   actions:{
