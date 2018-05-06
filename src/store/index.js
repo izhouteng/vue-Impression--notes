@@ -15,16 +15,21 @@ let store = new Vuex.Store({
        state.noteId = data[0].id;
     },
 
-    // 修改内容标题
+    /**
+     * 更新内容标题 和更新textarea
+     * @param state
+     * @param params
+     * @param id title textarea
+     */
     changeTitle(state,params){
        state.noteList.forEach(item => {
            item.children.forEach(el => {
                if(el.id == params.id){
                   el.title = params.title;
+                  el.content = params.textarea;
                }
            })
        })
-
     }
   },
   actions:{

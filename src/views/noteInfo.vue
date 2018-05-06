@@ -47,10 +47,12 @@
             // 在这里将修改的内容提交vuex 修改数据
             // 第一次 this.tranTitle内容为空,是不能提交的
             // this.routeId 是实时的
-            if(this.tranTitle){
+            if(this.tranTitle && this.tranTextarea){
+              
               this.$store.commit('changeTitle',{
                 id:this.tranId,
                 title:this.tranTitle,
+                textarea:this.tranTextarea,
               })
             }
 
@@ -59,6 +61,11 @@
         editValue(){
           this.tranTitle = this.editValue;
           this.tranId = this.$route.params.id;
+        },
+
+        // 监听 textarea用户的修改
+        editTextarea(){
+           this.tranTextarea = this.editTextarea;
         }
       }
     }
