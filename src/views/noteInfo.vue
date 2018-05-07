@@ -163,7 +163,7 @@
           </div>
         </div>
       </div>
-      <div class="editCount">
+      <div class="editCount" ref="scrollinit">
         <div class="root">
           <div class="editTitle">
             <!--<input type="text" value="2018-02-08 dom可视区操作" class="editValue">-->
@@ -226,6 +226,10 @@
             this.editValue = this.itDate.title;
             this.editTextarea = this.itDate.content;
 
+            // 让滚动条的距离每次重置为0
+            let contScroll = this.$refs.scrollinit;
+            contScroll.scrollTo(0,0);
+
             // 在这里将修改的内容提交vuex 修改数据
             // 第一次 this.tranTitle内容为空,是不能提交的
             // this.routeId 是实时的
@@ -253,7 +257,8 @@
          editTextarea(){
            this.tranTextarea = this.editTextarea;
         }
-      }
+      },
+
     }
 </script>
 
