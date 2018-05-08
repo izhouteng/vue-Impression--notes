@@ -418,7 +418,7 @@
        methods:{
           // 初始化noteContent
           inteContent(){
-              let userId = this.$route.params.id || 1;
+              let userId = this.$route.params.id || this.allNoteList[0].id;
               this.state = userId;
               if(userId){
                 let n = this.allNoteList.filter(item => item.id == userId)[0];
@@ -440,7 +440,6 @@
               // vuex的数据同步到Home组件
               this.allNoteList = this.$store.state.allList;  //全部的笔记
               this.allNoteBook = this.$store.state.dataList; // 全部的第几阶段笔记
-              console.log(this.$store.state.allList);
 
               // 根据Pid过滤不同阶段的笔记
               // 在笔记本列表中过滤出与Pid一样的数据,就是当前显示数据的父亲
@@ -508,7 +507,6 @@
          handleClose2 (tag,index) {
            // const index = this.count.indexOf(name);
            // this.count.splice(index, 1);
-             console.log(tag,index);
              this.$store.commit('delTaglabel',{
                 obj:this.noteContent,
                 tag:tag,
@@ -518,7 +516,6 @@
 
          // 失去焦点
          BlurFn(){
-            console.log('blur');
             //保存数据 提交mutations 修改当前对象的标签
             if(this.tagVal.length){
                this.$store.commit('saveLabel',{
@@ -561,6 +558,7 @@
                this.$store.dispatch('success',data)
            }).then(() => {
               // 请求成功之后
+              this.allNoteList = this.$store.state.allList;  //全部的笔记
               this.inteContent();
            });
 
