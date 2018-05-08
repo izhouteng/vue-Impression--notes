@@ -1,5 +1,6 @@
 import Vue from 'vue'
 
+// Home
 export function clientAuto(){
     const nodescroll = document.querySelector('#nodescroll');
     const yinxTitle = document.querySelector('.yinxTitle');
@@ -30,36 +31,23 @@ export function clientAuto(){
     }
     window.onresize = resize;
     resize();
-
-
-  // 测试写笔记
-  // 最左侧导航
-  // const yinxleft = document.querySelector('.yinxleft');
-  // const yinxList = document.querySelector('.yinxList'); //笔记本列表区域
-    const root = document.querySelector('.root'); //编辑容器
-    const editValue = root.querySelector('.editValue'); //编辑列表
-    const textArea = root.querySelector('.textArea textarea'); //编辑内容
-    const newnotesImg = document.querySelectorAll('.newnotes img');
-    const editCount = document.querySelector('.editCount');
-
-  // 测试搜索
-    const newSearch = document.querySelector('.newSearch');
-    const searchValue = searchNote.querySelector('.searchValue'); //搜索 input框
-
-    newSearch.onclick = function(){
-      yinxDet.style.display = 'none';
-      yinxList.style.display = 'none';
-      searchNote.style.display = 'block';
-      searchValue.focus();
-      resize();
-    };
 }
 
+  export function editclient() {
+    const yinxdet = document.getElementById('yinxdet');
+    const yinxleft = document.querySelector('.yinxleft');
+
+    function size() {
+       yinxdet.style.width = document.documentElement.clientWidth + 'px'
+    }
+    window.onresize = size;
+    size();
+}
 
 export default {
   install(Vue){
      Vue.prototype._client = {
-       clientAuto,
+        clientAuto,
      }
   }
 }

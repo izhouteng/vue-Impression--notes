@@ -143,7 +143,7 @@
     transition: 0.1s;
 }
 .nodescroll .n-conts.sel {
-  border: solid 1px rgb(217,217,217);
+  border: solid 3px rgb(217,217,217);
   box-sizing: border-box;
 }
 .nodescroll .n-conts:hover {

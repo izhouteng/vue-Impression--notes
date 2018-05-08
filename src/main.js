@@ -4,22 +4,26 @@ import Vue from 'vue'
 import App from './App'
 
 import '@/assets/css/index.css'
-import https from '@/server'
+import router from '@/router'
+
+import iView from 'iView';
+import 'iview/dist/styles/iview.css';
+Vue.use(iView);
+
+
+import https from '@/server/index'
 Vue.use(https);
 
-import _client from '@/assets/js/client'
-Vue.use(_client);
 
-import store from '@/store'
-import router from '@/router'
+import store from '@/store/index'
 
 Vue.config.productionTip = false;
 
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
-  store,
   router,
+  store,
   components: { App },
   template: '<App/>'
 });

@@ -189,6 +189,7 @@
 /*共享 发送消息 发送邮件*/
 .defshared {
     position: relative;
+
 }
 .defshared .gongx {
     float: left;
@@ -219,6 +220,16 @@
     border: solid 1px #2dbe60;
     border-radius: 4px;
     box-sizing: border-box;
+
+}
+.yinxDet .cancel {
+    width: 58px;
+    height:28px;
+    background: #2dbe60;
+     color: #ffffff;
+    text-align: center;
+    line-height: 28px;
+    border-radius: 4px;
     /*display: none;*/
 }
 
@@ -315,7 +326,6 @@
     z-index: 99;
     background: #ffffff;
     box-shadow: 0 6px 20px rgba(0, 0, 0, 0.04), -6px 8px 15px rgba(0, 0, 0, 0.04), 6px 8px 15px rgba(0, 0, 0, 0.04);
-    display: none;
 }
 .yidongBJB .findnotes {
     height: 68px;
@@ -333,6 +343,9 @@
     padding-left: 6px;
     box-sizing: border-box;
     border-radius: 2px;
+}
+.yidongBJB .findValue::placeholder{
+  text-align: center;
 }
  /*创建笔记本*/
 .yidongBJB .chuanjian {
@@ -362,7 +375,9 @@
     background: url("../images/bijibenxuanzhongdebiaoshi.png") no-repeat 300px 14px;
     color: #2dbe60;
 }
-
+.yidongBJB .mynotesbook:hover{
+  color: rgba(43,181,92,0.9);
+}
 
 
 
@@ -393,6 +408,20 @@
 }
 .addtag .tianjiaBQ {
     margin-left: 14px;
+    margin-top: -4px;
+}
+.addtag .tianjiaBQ .tagValue {
+  outline: 0;
+  border: 1px solid #e9eaec;
+  border-radius: 4px;
+  height: 22px;
+  line-height: 22px;
+  margin: 2px 4px 2px 0;
+  padding: 0 8px;
+  background: #f7f7f7;
+  font-size: 12px;
+  vertical-align:middle;
+  overflow: hidden;
 }
 
 /*编辑*/
@@ -436,7 +465,6 @@
     width: 960px;
     /*怎么和内容自适应高度*/
     height: 1200px;
-
     text-align: left;
     resize: none;
     color: #383838;

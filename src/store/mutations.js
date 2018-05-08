@@ -1,56 +1,60 @@
 export default {
-    // 初始化state中的数据
-    success(state,data){
-      let arr = [];
-      state.noteList = data;
-      state.noteList.forEach(item => {
-         item.children.forEach(el => {
-            if(el){
-               arr.push(el)
-            }
-         })
-      });
-      state.allList = arr;
-    },
-
-    /**
-     * 更新内容标题 和更新textarea
-     * @param state
-     * @param params
-     * @param id title textarea
-     */
-    changeTitle(state,params){
-      state.noteList.forEach(item => {
+  resSuccess(state,data){
+     let arr = [];
+     state.dataList = data;
+     data.forEach(item => {
         item.children.forEach(el => {
-          if(el.id == params.id){
-            el.title = params.title;
-            el.content = params.textarea;
-          }
+           arr.push(el)
         })
-      })
-    },
-
-   // 写笔记 隐藏nav1 yinlist
-  WriteNotes(state){
-      state.navl = false;
-      state.yinxList = false;
+     });
+    state.allList = arr;
   },
 
-  // 收藏
-    collec(state,obj){
-        state.allList.forEach(item => {
-           if(item === obj){
-              item.Shared = true;
-           }
-        })
-    },
+  // 同步 title和textarea内容
+  editChange(state,params){
+      state.allList.forEach(item => {
+         if(item.id == params.id){
+            item.title = params.title
+            item.content = params.content;
+         }
+      })
+  },
 
-    // 取消收藏
-  delcollec(state,obj){
-    state.allList.forEach(item => {
-      if(item === obj){
-        item.Shared = false;
-      }
-    })
+  // 移动笔记
+  moveNotes(state,params){
+      // 从哪个数组中移出的
+      params.obj.pid = params.gid;
+
+      state.dataList.forEach(item => {
+         if(item.id == params.pid){
+            item.children.forEach((el,index) => {
+               if(el === params.obj){
+                 item.children.splice(index,1)
+               }
+            })
+         }
+         // 移动到哪个数组中
+         else if(item.id == params.gid){
+            item.children.push(params.obj)
+         }
+      })
+  },
+
+  // 修改state,保存标签
+  saveLabel(state,params){
+      state.allList.forEach(item => {
+         if(item === params.obj){
+            item.label.push(params.label)
+         }
+      })
+  },
+
+  // 删除tag保存的标签
+  delTaglabel(state,params){
+      state.allList.forEach(item => {
+         if(item === params.obj){
+            item.label.splice(params.index,1);
+         }
+      })
   }
 }
