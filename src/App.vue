@@ -1,6 +1,7 @@
 <template>
       <div id="app" v-cloak>
         <div class="content clearfix">
+          <my-del></my-del>
           <!-- 左侧操作栏 -->
           <div class="yinxleft" id="navl" v-show="navShow" @mousedown.prevent>
             <div class="yinxt">
@@ -57,6 +58,8 @@
 
 <script>
 
+  import del from '@/components/Delete'
+
   export default {
     name: 'App',
     data(){
@@ -64,6 +67,9 @@
         xJ:true,   //新建显隐
         navShow:true, // 导航显隐
       }
+    },
+    components:{
+      'my-del':del,
     },
     methods:{
       // 新建鼠标移入移出事件

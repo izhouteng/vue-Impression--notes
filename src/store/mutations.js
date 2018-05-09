@@ -56,5 +56,14 @@ export default {
             item.label.splice(params.index,1);
          }
       })
+  },
+
+  //添加快捷方式
+  addkJHander(state,{obj}){
+     state.allList.forEach(item => {
+        if(item === obj){
+           item.shortcut = !item.shortcut
+        }
+     })
   }
 }

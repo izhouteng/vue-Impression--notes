@@ -160,7 +160,7 @@
                          :class="state == item.id ? 'sel' : ''"
             >
               <h2 class="n-title">{{item.title}}</h2>
-              <div class="n-times">{{item.timer}}</div>
+              <div class="n-times">{{item.createTime}}</div>
               <div class="n-wrap">
                 {{item.content}}
               </div>
@@ -173,8 +173,16 @@
                 <div class="n-remind cont-icon">
                   <img src="@/assets/images/tixing24x24.png" alt="" title="设置提醒">
                 </div>
-                <div class="n-collection cont-icon">
-                  <img src="@/assets/images/shoucang_white_24x24.png" alt="" title="添加快捷方式">
+                <div class="n-collection cont-icon" :title="!item.shortcut ? '添加快捷方式' : '移除快捷方式'">
+                  <img src="@/assets/images/shoucang_white_24x24.png" alt=""
+                       v-if="!kJshow && !item.shortcut"
+                       @mouseover="kJoverHander"
+                  >
+                  <img src="@/assets/images/shortcuts_solid_white_24x24.png" alt=""
+                       v-if="kJshow || item.shortcut"
+                       @mouseout="kJoutHander"
+                       @click.stop="addkJHander(item)"
+                  >
                 </div>
                 <div class="n-delete cont-icon">
                   <img src="@/assets/images/delete_white_24x24.png" alt="" title="删除">
@@ -243,9 +251,16 @@
 
             </div>
 
-            <div class="defshake main" title="添加快捷方式">
-              <img src="@/assets/images/defshoucang.png" alt="">
-              <img src="@/assets/images/shanchukuaijiefangshiwujiaoxing.png" alt="" style="display: none;">
+            <div class="defshake main" :title="!noteContent.shortcut ? '添加快捷方式' : '移除快捷方式'">
+              <img src="@/assets/images/defshoucang.png" alt=""
+                   v-if="!noteContent.shortcut && !tkJshow"
+                   @mouseover="tkJoverHander"
+              >
+              <img src="@/assets/images/shanchukuaijiefangshiwujiaoxing.png" alt=""
+                   v-if="noteContent.shortcut || tkJshow"
+                   @mouseout="tkJoutHander"
+                   @click.stop="addkJHander(noteContent)"
+              >
             </div>
             <div class="definfo main" title="笔记信息">
               <img src="@/assets/images/defbijixinxipng.png" alt="">
@@ -361,7 +376,7 @@
         </div>
 
         <!--/***********/-->
-        <div class="editCount">
+        <div class="editCount" ref="editScroll">
 
           <div class="root">
             <div class="editTitle">
@@ -413,11 +428,18 @@
               tagVal:'', //绑定tag输入框数据
               count: [],  //保存标签数据
               editTagShow:false, //自定义标签输入框的显示隐藏
+
+              kJshow:false, //快捷方式显示隐藏
+              tkJshow:false, //顶部快捷方式显示隐藏
            }
         },
        methods:{
           // 初始化noteContent
           inteContent(){
+               // 默认滚动条高度0
+               let editSroll = this.$refs.editScroll;
+               editSroll.scrollTo(0,0);
+
               let userId = this.$route.params.id || this.allNoteList[0].id;
               this.state = userId;
               if(userId){
@@ -526,6 +548,27 @@
 
             this.editTagShow = false;
             this.tagVal = '';
+         },
+
+         // 快捷鼠标移入移出, 鼠标移入
+         kJoverHander(){
+            this.kJshow = true;
+         },
+         tkJoverHander(){
+             this.tkJshow = true;
+         },
+         //鼠标移开
+         kJoutHander(){
+            this.kJshow = false;
+         },
+         tkJoutHander(){
+            this.tkJshow = false;
+         },
+         //添加快捷方式
+         addkJHander(item){
+            this.$store.commit('addkJHander',{
+               obj:item,
+            })
          }
        },
 
@@ -546,7 +589,6 @@
           tagWidth(){
            return {
               width:this.tagVal.length * 12 + 26 + 'px'
-              // 添加标签已完成-------------------------------------------------------------------------
            }
           }
         },
