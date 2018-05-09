@@ -1,5 +1,5 @@
 <template>
-  <div class="youbian clearfix">
+  <div class="youbian clearfix" @click="closeSelect">
         <!--最右侧笔记本内容信息区域-------------------------------->
         <!--左侧区域-->
         <div class="yinxDet clearfix" id="yinxdet">
@@ -35,23 +35,13 @@
               <div class="detup mains">
                 升级
               </div>
-              <div class="defshared clearfix mains">
-                <span class="gongx">共享</span>
-                <div class="target"></div>
-                <div class="shakeDown">
-                  <div class="s-notes">
-                    共享笔记
-                  </div>
-                  <div class="send-email">
-                    发送邮件
-                  </div>
-                </div>
-              </div>
-              <!--展开 全屏-->
-              <div class="defscreen mains" title="展开"></div>
+              <div class="defscreen mains" title="展开" v-if="false"></div>
               <!--写笔记完成-->
-              <div class="writeNotesOk">
+              <div class="writeNotesOk" v-if="editOk">
                 完成
+              </div>
+              <div class="writeCancel">
+                  取消
               </div>
             </div>
           </div>
@@ -74,46 +64,34 @@
 
             <!--第几阶段笔记-->
             <div class="dijijieduanBJ clearfix">
-              <div class="yidong clearfix">
+              <div class="yidong clearfix" @click.stop="moveSelect">
                 <img src="@/assets/images/dijijieduanbiji.png" alt="" class="tubiao" title="移动笔记">
                 <div class="notecont" title="移动笔记">
-                  javascript_第二阶段笔记
+                  {{showNoteBook.title}}
                 </div>
-                <div class="qianwangBJB" title="前往笔记本">
-                  <img src="@/assets/images/qianwangbijiben.png" alt="">
-                </div>
-
                 <!--移动笔记本 可查找-->
-                <div class="yidongBJB">
-                  <div class="findnotes">
-                    <input type="text" class="findValue" placeholder="查找笔记本">
+                <div class="yidongBJB" v-show="init">
+                  <div class="findnotes" @click.stop>
+                    <input type="text" class="findValue" placeholder="查找笔记本" v-model="findNotes" ref="findval">
                   </div>
-                  <div class="chuanjian">
-                    <img src="@/assets/images/chuangjianbijiben.png" alt="">
-                    <span>创建新笔记本</span>
-                  </div>
-                  <div class="mynotesbook">
-                    JavaScript_第一阶段笔记
-                  </div>
-                  <div class="mynotesbook">
-                    JavaScript_第一阶段笔记
-                  </div>
-                  <div class="mynotesbook active">
-                    JavaScript_第一阶段笔记
-                  </div>
-                  <div class="mynotesbook">
-                    JavaScript_第一阶段笔记
+                  <div class="mynotesbook"
+                       v-for="(item,index) in filterNoteBooks"
+                       :key="item.id"
+                       :class="item.id === state ? 'active' : ''"
+                       @click="moveBooksHander(item)"
+                  >
+                    {{item.title}}
                   </div>
                 </div>
 
               </div>
 
               <!--新建标签-->
-              <div class="addtag">
-                <div class="tianjiaBQ">
-                  添加标签
-                </div>
-              </div>
+              <!--<div class="addtag">-->
+                <!--<div class="tianjiaBQ">-->
+                  <!--添加标签-->
+                <!--</div>-->
+              <!--</div>-->
             </div>
           </div>
 
@@ -122,48 +100,18 @@
 
             <div class="root">
               <div class="editTitle">
-                <input type="text" value="2018-02-08 dom可视区操作" class="editValue">
+                <input type="text" v-model="inputValue" class="editValue">
               </div>
-              <div class="textArea">
-                            <textarea>
-                                知识点: offsetPatent, offsetWidht,offsetHeight,clinetWidth,clinetHeight,offsetTop,offsetLeft, document.documentElement.clinetWidth/Height
+              <div class="textArea edit-textarea">
+                <textarea v-model="editTextarea" placeholder="写入笔记内容...">
 
-    elem.offsetParent: 获取距离当前元素最近的有定位属性的父级
-    elem.offsetLeft/offsetTop: 当前元﻿﻿素距离有定位属性的父级元素的距离，不管自身有没有定位
-
-    elem.clientWidth/elem.clientHeight : 获取元素自身的宽高，不包括边框，包括边框以内，包括padding的距离
-    elem.offsetWidth/offsetHeight: 边框 + padding + 元素本身的宽高
-
-    获取页面可视区的宽高
-    document.body.clientWidth/clientHeight: 获取的是body的可视区，不包括外面的margin值( 16px )
-    document.documentElement(文档).clientWidth/Height : (获取的是html的可视区范围)
-    window.innerHeight/Width: 也可以获取页面可视区的宽高
-
-    elem.getBoundingClientReat()  返回的是一个对象，存放着当前元素的位置大小的属性
-
-    获取元素滚动条和设置元素滚动条
-
-    window.pageYOffset  纵向滚动条
-    window.pageXOffset 横向滚动条距离
-    document.documentElement.scrollTop: 纵向滚动条距离
-    document.documentElement.scrollLeft: 横向滚动条距离
-
-    document.body.scrollHeight/document.documentElement.Height /一个是body的滚动条高度，一个是文档的滚动条高度
-
-    document.body.scrollTop:为什么为0
-    页面指定了DTD，即指定了DOCTYPE时，使用document.documentElement。
-    页面没有DTD，即没指定DOCTYPE时，使用document.body
-
-    window.scroll(x,y)  指定滚动条的距离 (横向,纵向)
-    window.scrollTo(x,y)
-    window.scrollBy(x,y) 可累加的
-                            </textarea>
-
+                </textarea>
               </div>
             </div>
 
           </div>
         </div>
+    {{filterNote}}
   </div>
 </template>
 
@@ -171,8 +119,70 @@
     import {editclient} from '@/assets/js/client'
     export default {
         name: "edit",
+        data(){
+          return {
+            inputValue:'写下笔记标题',
+            editTextarea:'',
+            noteBookList:[],  //第几阶段笔记本列表
+            showNoteBook:{},  //当前展示的笔记本对象-----------
+            init:false,      // 移动笔记下拉列表的显示和隐藏
+            state:"f1",      // 显示第几阶段笔记本标题内容
+            findNotes:'', //查找笔记本
+
+            editOk:false,   //完成图标显示
+            editCancel:true, // 取消图标显示
+          }
+        },
         mounted(){
            editclient();
+        },
+        methods:{
+          // 笔记本下拉列表点击的时候,把当前点击的对象传过来
+          // 当前的标识状态state就等于点击对象的id, active就会加到点击对象的身上
+          // 让当前显示的状态第几阶段笔记标题显示出来
+          moveBooksHander(obj){
+             this.state = obj.id;
+             this.showNoteBook = obj;
+          },
+
+          // 移动下拉框显示和隐藏
+          moveSelect(){
+              this.init = !this.init;
+              let bl = this.$refs.findval;
+              this.$nextTick(function(){
+                bl.focus();
+              })
+          },
+          closeSelect(){
+            this.init = false;
+          }
+        },
+        computed:{
+           //根据state id 过滤出要展示的第几阶段笔记本
+             filterNote(){
+              let n = this.noteBookList.filter(item => item.id === this.state)[0]
+              this.showNoteBook = n;
+              // console.log(this.showNoteBook)
+            },
+
+          // 过滤笔记本
+          filterNoteBooks() {
+            return this.noteBookList.filter(item => {
+              return item.title.trim().match(this.findNotes)
+            })
+          }
+        },
+        created(){
+            let n = this.$store.state.dataList;
+
+            // 判断vuex中的数据有没有,如果没有就跳转到Home页
+            if(n.length > 0){
+               this.noteBookList = n;
+            }else if(n.length < 1){
+              this.$router.push({
+                path:'/home'
+              })
+            }
         }
     }
 </script>

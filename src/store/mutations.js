@@ -1,4 +1,5 @@
 export default {
+  // action异步请求提交
   resSuccess(state,data){
      let arr = [];
      state.dataList = data;
@@ -65,5 +66,24 @@ export default {
            item.shortcut = !item.shortcut
         }
      })
-  }
+  },
+
+  //删除笔记Home提交
+  delClickHander(state,params){
+      state.delNoteInfo = params.obj; //将要删除的对象同步到state状态delNoteInfo,让删除的组件显示这个对象的信息
+      state.delnoteNextId = params.id;
+      state.noteDelShow = true;
+  },
+  //取消删除 delete组件commit
+  cancelHander(state){
+     state.noteDelShow = false;
+     state.delNoteInfo = {};
+  },
+  //确定删除
+  isdelHander(state){
+     state.allList = state.allList.filter(item => item !== state.delNoteInfo)
+     state.noteDelShow = false;
+  },
+
+
 }

@@ -22,8 +22,16 @@
 .yinxDet .defmore {
     position: relative;
 }
+.dethead .defdelete {
+   width: 24px;
+   height: 24px;
+   background: url("../images/defshanchu.png") no-repeat;
+}
+.dethead .defdelete:hover {
+   background: url("../images/shanchubiji.png") no-repeat;
+}
 
-/*闹钟提醒*/
+  /*闹钟提醒*/
 .dethead .deftimes {
     position: relative;
 }
@@ -234,7 +242,7 @@
 }
 
 /*写笔记完成*/
-.yinxDet .writeNotesOk {
+.yinxDet .writeNotesOk , .yinxDet .writeCancel{
     width: 58px;
     height: 28px;
     color: #ffffff;
@@ -244,7 +252,11 @@
     background: #2dbe60;
     border-radius: 4px;
     margin-right: 4px;
-    display: none;
+}
+
+ /*取消按钮*/
+.yinxDet .writeCancel{
+
 }
 
 /*发送邮件 发送消息弹窗*/
@@ -824,5 +836,22 @@
     right: 16px;
     top: 14px;
 }
+
+#delicom {
+   background: url("../images/delete_white_24x24.png") no-repeat;
+   width: 24px;
+   height: 24px;
+}
+#delicom:hover{
+  background: url("../images/deletehover_solid_white_24x24.png") no-repeat;
+}
+
+.edit-textarea textarea::placeholder{
+    font-family: gotham, helvetica, arial, sans-serif;
+    color: #c4c4c4;
+    font-size: 13px;
+}
+
+
 
 

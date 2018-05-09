@@ -184,9 +184,7 @@
                        @click.stop="addkJHander(item)"
                   >
                 </div>
-                <div class="n-delete cont-icon">
-                  <img src="@/assets/images/delete_white_24x24.png" alt="" title="删除">
-                </div>
+                <div class="n-delete cont-icon" id="delicom" title="删除笔记" @click.stop="delNoteHandel(item)"></div>
               </div>
             </router-link>
 
@@ -266,10 +264,7 @@
               <img src="@/assets/images/defbijixinxipng.png" alt="">
               <img src="@/assets/images/bijixinxihover.png" alt="" style="display: none">
             </div>
-            <div class="defdelete main" title="删除笔记">
-              <img src="@/assets/images/defshanchu.png" alt="">
-              <img src="@/assets/images/shanchubiji.png" alt="" style="display: none">
-            </div>
+            <div class="defdelete main" title="删除笔记" @click.stop="delNoteHandel(noteContent)"></div>
             <!--复制笔记链接-->
             <div class="defmore main" title="更多">
               <img src="@/assets/images/defgengduo.png" alt="">
@@ -369,6 +364,7 @@
                        v-model="tagVal"
                        :style="tagWidth"
                        @blur="BlurFn"
+                       @keydown.enter="enterFn"
                 >
               </div>
             </div>
@@ -431,18 +427,26 @@
 
               kJshow:false, //快捷方式显示隐藏
               tkJshow:false, //顶部快捷方式显示隐藏
+              sCshow:false,  //删除图标显示和隐藏
+              delNextId:1,  //删除对象下一个兄弟的id
            }
         },
        methods:{
           // 初始化noteContent
           inteContent(){
-               // 默认滚动条高度0
-               let editSroll = this.$refs.editScroll;
-               editSroll.scrollTo(0,0);
+
+              // 只需要修改路由对象,会自动更新全部这个组件需要的所有数据
+               // 默认滚动条高度0  当可以获取到这个元素的时候再进行重置0
+              let editSroll = this.$refs.editScroll;
+              if(editSroll){
+                 editSroll.scrollTo(0,0)
+              }
+
 
               let userId = this.$route.params.id || this.allNoteList[0].id;
               this.state = userId;
               if(userId){
+
                 let n = this.allNoteList.filter(item => item.id == userId)[0];
                 if(n){
                   this.noteContent = n;
@@ -549,6 +553,10 @@
             this.editTagShow = false;
             this.tagVal = '';
          },
+          // 键盘Enter事件保存标签
+         enterFn(){
+            this.BlurFn();
+         },
 
          // 快捷鼠标移入移出, 鼠标移入
          kJoverHander(){
@@ -568,6 +576,21 @@
          addkJHander(item){
             this.$store.commit('addkJHander',{
                obj:item,
+            })
+         },
+
+         // 删除笔记点击事件
+         delNoteHandel(obj){
+            //保存当前删除对象的下一个兄弟对象id
+            this.allNoteList.forEach((item,i) => {
+                if(item === obj){
+                    this.delNextId = this.allNoteList[i+1].id;
+                }
+            });
+
+            this.$store.commit('delClickHander',{
+               obj:obj,
+               id:this.delNextId,
             })
          }
        },
@@ -593,16 +616,26 @@
           }
         },
 
-
         // 钩子函数 请求数据同步vuex
         created(){
-           this.https.getList().then(({data}) => {
-               this.$store.dispatch('success',data)
-           }).then(() => {
-              // 请求成功之后
-              this.allNoteList = this.$store.state.allList;  //全部的笔记
-              this.inteContent();
-           });
+
+            let Storage = JSON.parse(localStorage.getItem('yinxiang'));
+            if(Storage === null){
+                this.https.getList().then(({data}) => {
+                  this.$store.dispatch('success',data);
+                  localStorage.setItem('yinxiang',JSON.stringify(data));
+                }).then(() => {
+                  // 请求成功之后
+                  this.allNoteList = this.$store.state.allList;  //全部的笔记
+                  this.inteContent();
+                });
+            }else{
+
+                // 从locaLStorage中取数据
+                this.$store.dispatch('success',{data:Storage});
+                this.allNoteList = this.$store.state.allList;
+                this.inteContent();
+            }
 
         },
         mounted(){
@@ -625,6 +658,14 @@
          // 监听textarea内容
          textareaValue(){
              this.EditTextarea = this.textareaValue;
+         },
+
+         //监听vuex数据状态
+         '$store.state.allList':{
+            handler(){
+                localStorage.setItem('yinxiang',JSON.stringify(this.$store.state.dataList))
+            },
+           deep:true,
          }
        },
 

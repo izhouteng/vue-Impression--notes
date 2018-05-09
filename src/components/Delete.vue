@@ -1,5 +1,5 @@
 <template>
-  <div class="delpage">
+  <div class="delpage" v-if="$store.state.noteDelShow">
       <div class="delbox">
         <div class="title">
           <img src="@/assets/images/112.png" alt="">
@@ -7,12 +7,12 @@
         </div>
         <div style="height: 58px;"></div>
         <div class="n-note">
-          确定删除<strong style="font-weight: normal">2018-5-2 jquery extend</strong>吗?
+          确定删除<strong style="font-weight: normal">{{$store.state.delNoteInfo.title}}</strong>吗?
         </div>
         <div style="height: 66px"></div>
         <div class="btn clearfix">
-           <span class="calcel GJDCG5COCC">取消</span>
-           <span class="isdel GJDCG5COCC">删除</span>
+           <span class="calcel GJDCG5COCC" @click="cancelHander">取消</span>
+           <span class="isdel GJDCG5COCC" @click="yesDelHander">删除</span>
         </div>
       </div>
   </div>
@@ -21,7 +21,26 @@
 <script>
     // 布完局了
     export default {
-
+      data(){
+         return {
+            routeId:1,
+         }
+      },
+      methods:{
+        //取消删除
+        cancelHander(){
+            this.$store.commit('cancelHander')
+        },
+        //确定删除
+        yesDelHander(){
+          //确定删除的时候就根据删除对象的下一个id进行修改路由
+           this.$store.commit('isdelHander');
+           this.routeId = this.$store.state.delnoteNextId;
+           this.$router.push({
+              path:'/home/'+this.routeId,
+           })
+        }
+      }
     }
 </script>
 

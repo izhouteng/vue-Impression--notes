@@ -77,13 +77,28 @@
           this.xJ = false;
       },
       outxJ(){
-         this.xJ = true;
+          this.xJ = true;
       },
       // 新建笔记
       Edithander(){
-        console.log(1);
          this.navShow = false;
       }
+    },
+    watch:{
+        $route(){
+          let routeName = this.$route.path.slice(0,5);
+          // console.log(routeName);
+
+          if(routeName === '/edit'){
+            if(this.navShow !== false){
+              this.navShow = false;
+            }
+          }else if(routeName === '/home'){
+
+              this.navShow = true;
+
+          }
+        }
     }
   }
 </script>
