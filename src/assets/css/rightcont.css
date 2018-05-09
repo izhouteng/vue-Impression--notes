@@ -194,10 +194,20 @@
     line-height: 28px;
     color: #ffffff;
 }
+.detup:hover{
+  background: rgb(218,115,11);
+}
 /*共享 发送消息 发送邮件*/
 .defshared {
     position: relative;
 
+}
+.defshared:hover .gongx{
+   border-color: #2dbe60;
+   color: #2dbe60;
+}
+.defshared:hover .target{
+   border-color: #2dbe60;
 }
 .defshared .gongx {
     float: left;
@@ -228,7 +238,9 @@
     border: solid 1px #2dbe60;
     border-radius: 4px;
     box-sizing: border-box;
-
+}
+.yinxDet .defscreen:hover{
+  background: url("../images/defquanping.png") no-repeat center center #2dbe60;
 }
 .yinxDet .cancel {
     width: 58px;
@@ -252,11 +264,15 @@
     background: #2dbe60;
     border-radius: 4px;
     margin-right: 4px;
+    /*display: none;*/
 }
 
  /*取消按钮*/
-.yinxDet .writeCancel{
-
+.yinxDet .writeNotesOk:hover{
+  background: rgb(40,169,85);
+}
+.yinxDet .writeCancel:hover{
+   background: rgb(40,169,85);
 }
 
 /*发送邮件 发送消息弹窗*/
@@ -845,7 +861,9 @@
 #delicom:hover{
   background: url("../images/deletehover_solid_white_24x24.png") no-repeat;
 }
-
+.edit-textarea textarea {
+  font-size: 16px;
+}
 .edit-textarea textarea::placeholder{
     font-family: gotham, helvetica, arial, sans-serif;
     color: #c4c4c4;

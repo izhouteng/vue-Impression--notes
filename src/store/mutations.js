@@ -3,12 +3,7 @@ export default {
   resSuccess(state,data){
      let arr = [];
      state.dataList = data;
-     data.forEach(item => {
-        item.children.forEach(el => {
-           arr.push(el)
-        })
-     });
-    state.allList = arr;
+     state.allList = this.getters.tBallList;
   },
 
   // 同步 title和textarea内容
@@ -81,9 +76,26 @@ export default {
   },
   //确定删除
   isdelHander(state){
-     state.allList = state.allList.filter(item => item !== state.delNoteInfo)
+    //保持 allList和dataList是同步的数据状态
+     state.dataList.forEach(item => {
+        if(item.id == state.delNoteInfo.pid){
+           item.children = item.children.filter(el => el !== state.delNoteInfo)
+        }
+     });
+     //通过调用getters中的方法,将dataList第几阶段中的每条笔记同步到allList
+    state.allList = this.getters.tBallList;
      state.noteDelShow = false;
   },
 
+  // 新建笔记
+  addNotes(state,params){
+     state.dataList.forEach(item => {
+        if(item.id == params.id){
+          item.children.push(params.obj)
+          console.log(item.children)
+        }
+     });
+     state.allList = this.getters.tBallList;
+  }
 
 }

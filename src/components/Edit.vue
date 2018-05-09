@@ -37,10 +37,10 @@
               </div>
               <div class="defscreen mains" title="展开" v-if="false"></div>
               <!--写笔记完成-->
-              <div class="writeNotesOk" v-if="editOk">
+              <div class="writeNotesOk editOk" v-if="editTextarea.trim().length" @click="xJnotesHander">
                 完成
               </div>
-              <div class="writeCancel">
+              <div class="writeCancel" v-if="!editTextarea.trim().length" @click="editCancelHander">
                   取消
               </div>
             </div>
@@ -122,7 +122,7 @@
         data(){
           return {
             inputValue:'写下笔记标题',
-            editTextarea:'',
+            editTextarea:'',  // 双向数据绑定textarea框
             noteBookList:[],  //第几阶段笔记本列表
             showNoteBook:{},  //当前展示的笔记本对象-----------
             init:false,      // 移动笔记下拉列表的显示和隐藏
@@ -130,12 +130,13 @@
             findNotes:'', //查找笔记本
 
             editOk:false,   //完成图标显示
-            editCancel:true, // 取消图标显示
           }
         },
         mounted(){
            editclient();
         },
+
+
         methods:{
           // 笔记本下拉列表点击的时候,把当前点击的对象传过来
           // 当前的标识状态state就等于点击对象的id, active就会加到点击对象的身上
@@ -155,8 +156,51 @@
           },
           closeSelect(){
             this.init = false;
+          },
+
+          // 取消保存
+          editCancelHander(){
+             this.$router.go(-1)
+          },
+          //新建完成
+          xJnotesHander(){
+             if(this.inputValue.trim() === '写下笔记标题'){
+               this.inputValue = '无标题内容'
+             }
+            let obj = {
+               "title":this.inputValue,
+               "id":this.$store.state.allList.length + 16,
+               "pid":this.showNoteBook.id,
+               "shortcut":false,
+               "remind":false,
+               "label":[],
+               "sel":false,
+               "createTime":"刚刚",
+               "Shared":false,
+               "size":"1KB",
+               "url": "https://github.com/qiqingfu",
+               "author": "9116895@qq.com",
+               "remindTime":"",
+               "content":this.editTextarea,
+            };
+              // 新建笔记对象保存到vuex状态
+            if(obj){
+               this.$store.commit('addNotes',{
+                  obj:obj,
+                  id:this.state
+               });
+               // 提交到vuex之后,立马存储到本地,因为路由跳转的create的生命周期钩子函数比 watch要早
+               // 如果现在不存,跳转到home路由去本地取出的数据还是最新的
+              localStorage.setItem('yinxiang',JSON.stringify(this.$store.state.dataList));
+              this.$router.push({
+                 path:'/home/'+obj.id
+              })
+            }
+
           }
         },
+
+
         computed:{
            //根据state id 过滤出要展示的第几阶段笔记本
              filterNote(){
@@ -172,9 +216,10 @@
             })
           }
         },
+
+
         created(){
             let n = this.$store.state.dataList;
-
             // 判断vuex中的数据有没有,如果没有就跳转到Home页
             if(n.length > 0){
                this.noteBookList = n;
@@ -183,7 +228,7 @@
                 path:'/home'
               })
             }
-        }
+        },
     }
 </script>
 

@@ -296,7 +296,7 @@
             <!--展开 全屏-->
             <div class="defscreen mains" title="展开"></div>
             <!--写笔记完成-->
-            <div class="writeNotesOk">
+            <div class="writeNotesOk" v-if="false">
               完成
             </div>
           </div>
@@ -432,6 +432,18 @@
            }
         },
        methods:{
+          // 当本地数据为null,请求
+          getList(){
+            this.https.getList().then(({data}) => {
+              this.$store.dispatch('success',data);
+              localStorage.setItem('yinxiang',JSON.stringify(data));
+            }).then(() => {
+              // 请求成功之后
+              this.allNoteList = this.$store.state.allList;  //全部的笔记
+              this.inteContent();
+            });
+          },
+
           // 初始化noteContent
           inteContent(){
 
@@ -583,8 +595,17 @@
          delNoteHandel(obj){
             //保存当前删除对象的下一个兄弟对象id
             this.allNoteList.forEach((item,i) => {
-                if(item === obj){
-                    this.delNextId = this.allNoteList[i+1].id;
+                if(item === obj && this.allNoteList.length > 1){
+                    if(this.allNoteList[i+1]){
+                       // 如果下个兄弟存在
+                      this.delNextId = this.allNoteList[i+1].id;
+                    }else{
+                      this.delNextId = this.allNoteList[i-1].id;
+                    }
+                    // 新建笔记 待添加 标签 收藏 以及及时删除------------------------
+                }else if(this.allNoteList.length <= 1){
+                  //笔记删除完了,从mock数据重新请求
+                  this.getList();
                 }
             });
 
@@ -618,20 +639,12 @@
 
         // 钩子函数 请求数据同步vuex
         created(){
-
             let Storage = JSON.parse(localStorage.getItem('yinxiang'));
             if(Storage === null){
-                this.https.getList().then(({data}) => {
-                  this.$store.dispatch('success',data);
-                  localStorage.setItem('yinxiang',JSON.stringify(data));
-                }).then(() => {
-                  // 请求成功之后
-                  this.allNoteList = this.$store.state.allList;  //全部的笔记
-                  this.inteContent();
-                });
+                this.getList();
             }else{
-
                 // 从locaLStorage中取数据
+                console.log('从locaLStorage取数据',Storage);
                 this.$store.dispatch('success',{data:Storage});
                 this.allNoteList = this.$store.state.allList;
                 this.inteContent();
@@ -641,29 +654,27 @@
         mounted(){
            clientAuto()
         },
-
        // 侦听路由对象变化
        watch:{
           $route(){
             this.inteContent();
             this.moveNote = false;
           },
-
          // 监听标题信息
          titleValue(){
             this.EditTitle = this.titleValue;
             this.EditId = this.$route.params.id || this.allNoteList[0].id.toString(); // 字符串类型的id
          },
-
          // 监听textarea内容
          textareaValue(){
              this.EditTextarea = this.textareaValue;
          },
 
          //监听vuex数据状态
-         '$store.state.allList':{
+         '$store.state.dataList':{
             handler(){
-                localStorage.setItem('yinxiang',JSON.stringify(this.$store.state.dataList))
+                console.log('监听vuex数据状态',this.$store.state.dataList);
+                localStorage.setItem('yinxiang',JSON.stringify(this.$store.state.dataList));
             },
            deep:true,
          }
