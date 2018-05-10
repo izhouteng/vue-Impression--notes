@@ -9,7 +9,7 @@ import Edit from '@/components/Edit'
 let routes = [
   {
     path:'/home/:id?',
-    component:Home
+    component:Home,
   },
   {
     path:'/edit',

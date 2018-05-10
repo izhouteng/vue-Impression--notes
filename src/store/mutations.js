@@ -82,8 +82,11 @@ export default {
            item.children = item.children.filter(el => el !== state.delNoteInfo)
         }
      });
+     // 搜索过滤后的数据删除当中要删除的对象
+     state.findNotesList = state.findNotesList.filter(item => item !== state.delNoteInfo);
+
      //通过调用getters中的方法,将dataList第几阶段中的每条笔记同步到allList
-    state.allList = this.getters.tBallList;
+     state.allList = this.getters.tBallList;
      state.noteDelShow = false;
   },
 
@@ -96,6 +99,28 @@ export default {
         }
      });
      state.allList = this.getters.tBallList;
-  }
+  },
 
+
+  // 将搜索到的列表集合同步到vuex中
+  savefilterNote(state,params){
+     state.findNotesList = params.obj;
+  },
+
+  // 搜索框显示隐藏
+  searchShow(state){
+     state.searchBox = true;
+  },
+  //回Home页,搜索框隐藏
+  searchNone(state){
+    state.searchBox = false;
+  },
+  //未搜索到笔记
+  isNot404False(state){
+    state.Not404 = false;
+  },
+  //搜索到笔记
+  isNot404Yes(state){
+    state.Not404 = true;
+  }
 }

@@ -9,13 +9,16 @@
             </div>
             <!-- 新建搜索分享 -->
             <div class="yinxfcn">
-              <router-link tag="div" to="/edit" class="newnotes" @mouseover.native="overxJ" @mouseout.native="outxJ">
+              <router-link tag="div" to="/edit" class="newnotes"
+                           @mouseover.native="overxJ"
+                           @mouseout.native="outxJ"
+              >
                 <img src="./assets/images/xinjian1.png" alt="" v-if="xJ">
                 <img src="./assets/images/xinjian.png" alt="" v-if="!xJ" title="新建笔记" @click="Edithander">
               </router-link>
-              <div class="newSearch">
-                <img src="./assets/images/sousuo1.png" alt="">
-                <img src="./assets/images/sousuo2.png" alt="" style="display:none" title="搜索">
+              <div class="newSearch" @mouseover="sSoverHander" @mouseout="sSoutHander">
+                <img src="./assets/images/sousuo1.png" alt="" v-show="!searchshow ">
+                <img src="./assets/images/sousuo2.png" alt="" v-show="searchshow" title="搜索" @click="searchState">
               </div>
               <div class="newshare">
                 <img src="./assets/images/fenxiang1.png" alt="">
@@ -29,13 +32,10 @@
                 <img src="./assets/images/shoucang2png.png" alt="" style="display:none" title="收藏">
               </div>
               <div class="notesbook">
-                <img src="./assets/images/biji3.png" alt="" style="display:none">
-                <img src="./assets/images/biji2.png" alt="" title="笔记">
+                <img src="./assets/images/biji3.png" alt="" v-if="false">
+                <img src="./assets/images/biji2.png" alt="" @click="goHome">
               </div>
-              <div class="notethis">
-                <img src="./assets/images/bijiben1.png" alt="">
-                <img src="./assets/images/bijiben2.png" alt="" style="display:none" title="笔记本">
-              </div>
+              <div class="notethis"></div>
               <div class="yinxltag">
                 <img src="./assets/images/biaoqian1.png" alt="">
                 <img src="./assets/images/biaoqian2.png" alt="" style="display:none" title="标签">
@@ -66,6 +66,7 @@
       return {
         xJ:true,   //新建显隐
         navShow:true, // 导航显隐
+        searchshow:false, //搜索显隐
       }
     },
     components:{
@@ -82,6 +83,32 @@
       // 新建笔记
       Edithander(){
          this.navShow = false;
+      },
+      // 鼠标移入搜索框
+      sSoverHander(){
+         this.searchshow = true;
+      },
+      sSoutHander(){
+        this.searchshow = false;
+      },
+
+      // 让搜索框通过vuex中的状态让它显示出来,并且网页剪辑隐藏
+      searchState(){
+         this.$store.commit('searchShow')
+      },
+
+      // 跳转到Home页,吧vuex中的404设为true
+      goHome(){
+         this.$store.commit('savefilterNote',{
+            obj:[],
+         });
+          //删除vuex中管理的 搜索框隐藏
+          this.$store.commit('searchNone');
+          this.$store.commit('isNot404Yes');
+          //定位到/home/1
+          this.$router.push({
+             path:'/home/1'
+          })
       }
     },
     watch:{
@@ -94,9 +121,7 @@
               this.navShow = false;
             }
           }else if(routeName === '/home'){
-
               this.navShow = true;
-
           }
         }
     }

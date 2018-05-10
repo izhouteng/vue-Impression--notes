@@ -45,12 +45,19 @@
     width: 36px;
     height: 36px;
     margin-top:14px;
-    /* border: solid 1px blue; */
+    /*background: url("../images/biji3.png") no-repeat;*/
+}
+.notesbook:hover{
+  /*background: url("../images/biji2.png") no-repeat;*/
 }
 .notethis {
     width: 36px;
     height: 36px;
     margin-top: 14px;
+    background: url("../images/bijiben1.png") no-repeat;
+}
+.notethis:hover{
+  background: url("../images/bijiben2.png") no-repeat;
 }
 .yinxltag {
     width: 36px;

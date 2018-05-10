@@ -91,21 +91,29 @@
       <!--标签滑窗结束----------------------------------->
 
       <!--搜索笔记-------------------------------------------------------------------->
-      <div class="searchNote">
+      <div class="searchNote" v-show="$store.state.searchBox">
         <div class="searchChild">
-          <input type="text" class="searchValue" placeholder="搜索笔记">
-          <img src="@/assets/images/qingchusousuoneirong.png" alt="" class="clearSearch">
+          <input type="text" class="searchValue" placeholder="搜索笔记"
+                 v-model="searchValue"
+                 @keydown.enter="searchDown"
+                 ref="noteSearchVal"
+          >
+          <img src="@/assets/images/qingchusousuoneirong.png" alt=""
+               class="clearSearch"
+               v-if="searchValue.trim().length"
+               @click="searchValue=''"
+          >
           <div class="tishixinxi">
             正在搜索 <span>你的笔记本</span>
           </div>
         </div>
       </div>
       <!-- 笔记列表区域 ------------------------------------------------------->
-      <div class="yinxList" @mousedown.prevent>
+      <div class="yinxList" @mousedown.prevent >
         <div class="yinxTitle">
 
-          <!--首页显示-->
-          <div class="cuthide">
+          <!--首页显示        如果搜索到笔记就不显示-->
+          <div class="cuthide" v-show="!$store.state.searchBox">
             <h2 class="notTitle">笔记</h2>
             <div class="yinxcut">
               <span>网页剪藏</span>
@@ -156,8 +164,10 @@
                          v-for="(item,index) in allNoteList"
                          :key="item.id"
                          :to="/home/+item.id"
-                          @click.native="state=index"
+                          @click.native="state=item.id"
                          :class="state == item.id ? 'sel' : ''"
+                          v-show="true"
+
             >
               <h2 class="n-title">{{item.title}}</h2>
               <div class="n-times">{{item.createTime}}</div>
@@ -189,10 +199,10 @@
             </router-link>
 
             <!--未找到搜索的笔记  动态计算高度----------------->
-            <div class="notFound">
+            <div class="notFound" v-show="!$store.state.Not404">
               <div class="count">
                 <img src="@/assets/images/drawers_empty_state_search_icon.png" alt="">
-                <p class="tip">未找到"好吧"笔记。</p>
+                <p class="tip">未找到"{{NotFindNotesName}}"笔记。</p>
               </div>
             </div>
 
@@ -203,7 +213,7 @@
 
       <!--最右侧笔记本内容信息区域-------------------------------->
       <!--左侧区域-->
-      <div class="yinxDet clearfix" id="yinxdet">
+      <div class="yinxDet clearfix" id="yinxdet" v-show="$store.state.Not404">
         <!--标题功能栏-->
         <div class="dethead" @mousedown.prevent>
           <div class="detfunc">
@@ -379,9 +389,7 @@
               <input type="text" v-model="titleValue" class="editValue">
             </div>
             <div class="textArea">
-                <textarea v-model="textareaValue">
-
-                </textarea>
+                <textarea v-model="textareaValue"></textarea>
             </div>
           </div>
 
@@ -429,6 +437,9 @@
               tkJshow:false, //顶部快捷方式显示隐藏
               sCshow:false,  //删除图标显示和隐藏
               delNextId:1,  //删除对象下一个兄弟的id
+
+              searchValue:'', //搜索关键字
+              NotFindNotesName:'', //如果没有找到当前输入笔记,保存当前输入的问题当作提示信息
            }
         },
        methods:{
@@ -454,7 +465,6 @@
                  editSroll.scrollTo(0,0)
               }
 
-
               let userId = this.$route.params.id || this.allNoteList[0].id;
               this.state = userId;
               if(userId){
@@ -476,14 +486,21 @@
               // 同步标签 此时this.count和this.noteContent引用的是同一个对象label
               this.count = this.noteContent.label;
               // vuex的数据同步到Home组件
-              this.allNoteList = this.$store.state.allList;  //全部的笔记
+
+              if(this.$store.state.findNotesList.length > 0){
+                   this.allNoteList = this.$store.state.findNotesList;
+              }else{
+                   //全部的笔记 路由跳转实时同步vuex中的笔记列表
+                   this.allNoteList = this.$store.state.allList;
+              }
+
               this.allNoteBook = this.$store.state.dataList; // 全部的第几阶段笔记
 
               // 根据Pid过滤不同阶段的笔记
               // 在笔记本列表中过滤出与Pid一样的数据,就是当前显示数据的父亲
               let dJ = this.allNoteBook.filter(item => item.id == this.Pid)[0];
               this.noteBookTitle = dJ;
-
+              // this.findDateList; //搜索笔记列表
 
 
               //切换路由对象的时候 提交更新后的title和textarea内容
@@ -555,7 +572,8 @@
          // 失去焦点
          BlurFn(){
             //保存数据 提交mutations 修改当前对象的标签
-            if(this.tagVal.length){
+            let isHsh = this.noteContent.label.some(el => el === this.tagVal);  //判断标签有没有重复的
+            if(this.tagVal.length && !isHsh){
                this.$store.commit('saveLabel',{
                   obj:this.noteContent,
                   label:this.tagVal
@@ -605,7 +623,8 @@
                     // 新建笔记 待添加 标签 收藏 以及及时删除------------------------
                 }else if(this.allNoteList.length <= 1){
                   //笔记删除完了,从mock数据重新请求
-                  this.getList();
+                   this.getList();
+                   this.searchValue = ''; //笔记删除完了,重新请求
                 }
             });
 
@@ -613,15 +632,38 @@
                obj:obj,
                id:this.delNextId,
             })
+         },
+
+         // searchDown  搜索笔记本列表
+         // 从vuex中的笔记列表中过滤,同步到当前组件
+         searchDown(){
+           let arr = this.$store.state.allList.filter(item => {
+              return item.title.match(this.searchValue) || item.content.match(this.searchValue)
+           });
+           this.allNoteList = arr;
+           // this.searchDate = arr;   //保存过滤后的数组  //将搜索到的列表集合同步到vuex中
+           this.$store.commit('savefilterNote',{
+              obj:arr,
+           });
+           //判断搜索笔记有没有 -> 如果没有搜索到笔记
+           if(arr.length < 1){
+               // this.Not404 = false;  //路由跳转到allList的第一个id
+               this.$store.commit('isNot404False');
+               this.NotFindNotesName = this.searchValue;
+               let n = this.$store.state.allList;
+           }else if(arr.length >= 1){
+               //搜索到了笔记
+                this.$store.commit('isNot404Yes');
+                this.$router.push({
+                  path:'/home/'+arr[0].id
+                })
+           }
          }
        },
 
 
         // 计算属性
         computed:{
-            vuexallList(){
-               // return this.$store.state.allList;
-            },
 
            //搜索笔记
            filterNoteBooks(){
@@ -634,7 +676,7 @@
            return {
               width:this.tagVal.length * 12 + 26 + 'px'
            }
-          }
+          },
         },
 
         // 钩子函数 请求数据同步vuex
@@ -644,7 +686,6 @@
                 this.getList();
             }else{
                 // 从locaLStorage中取数据
-                console.log('从locaLStorage取数据',Storage);
                 this.$store.dispatch('success',{data:Storage});
                 this.allNoteList = this.$store.state.allList;
                 this.inteContent();
@@ -668,12 +709,12 @@
          // 监听textarea内容
          textareaValue(){
              this.EditTextarea = this.textareaValue;
+             this.EditId = this.$route.params.id || this.allNoteList[0].id.toString();
          },
 
          //监听vuex数据状态
          '$store.state.dataList':{
             handler(){
-                console.log('监听vuex数据状态',this.$store.state.dataList);
                 localStorage.setItem('yinxiang',JSON.stringify(this.$store.state.dataList));
             },
            deep:true,

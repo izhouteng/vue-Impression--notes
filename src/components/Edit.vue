@@ -7,18 +7,16 @@
           <div class="dethead">
             <div class="detfunc">
 
-              <div class="defshake main" title="添加快捷方式">
-                <img src="@/assets/images/defshoucang.png" alt="">
-                <img src="@/assets/images/shanchukuaijiefangshiwujiaoxing.png" alt="" style="display: none;">
-              </div>
+              <div class="editDefshake main"
+                    :title="!shortcut ? '添加快捷方式' : '移除快捷方式'"
+                   :class="shortcut ? 'editshake' : ''"
+                   @click="addshakeHander"
+              ></div>
               <div class="definfo main" title="笔记信息">
                 <img src="@/assets/images/defbijixinxipng.png" alt="">
                 <img src="@/assets/images/bijixinxihover.png" alt="" style="display: none">
               </div>
-              <div class="defdelete main" title="删除笔记">
-                <img src="@/assets/images/defshanchu.png" alt="">
-                <img src="@/assets/images/shanchubiji.png" alt="" style="display: none">
-              </div>
+              <div class="editDefdelete main" title="删除笔记" @click="editDelHander"></div>
               <!--复制笔记链接-->
               <div class="defmore main" title="更多">
                 <img src="@/assets/images/defgengduo.png" alt="">
@@ -87,11 +85,19 @@
               </div>
 
               <!--新建标签-->
-              <!--<div class="addtag">-->
-                <!--<div class="tianjiaBQ">-->
-                  <!--添加标签-->
-                <!--</div>-->
-              <!--</div>-->
+              <div class="addtag">
+                <div class="tianjiaBQ">
+                  <Tag v-for="item in count" :key="item" :name="item" closable @on-close="handleClose2">{{item}}</Tag>
+                  <Button icon="ios-plus-empty" type="dashed" size="small" @click="handleAdd" v-show="!tagShow">自定义标签</Button>
+                  <input type="text" class="tagValue"
+                         ref="tagValue"
+                         v-model="tagVal"
+                         :style="tagWidth"
+                         v-show="tagShow"
+                         @blur="inputBlur"
+                  >
+                </div>
+              </div>
             </div>
           </div>
 
@@ -117,6 +123,7 @@
 
 <script>
     import {editclient} from '@/assets/js/client'
+    import {Tag,Button } from 'iview'
     export default {
         name: "edit",
         data(){
@@ -130,6 +137,10 @@
             findNotes:'', //查找笔记本
 
             editOk:false,   //完成图标显示
+            count: ['qiqingfu'], //标签
+            tagVal:'', //双向数据绑定输入标签的内容
+            tagShow:false,//标签input框显示和隐藏
+            shortcut:false, //快捷方式状态
           }
         },
         mounted(){
@@ -171,9 +182,9 @@
                "title":this.inputValue,
                "id":this.$store.state.allList.length + 16,
                "pid":this.showNoteBook.id,
-               "shortcut":false,
+               "shortcut":this.shortcut,
                "remind":false,
-               "label":[],
+               "label":this.count,
                "sel":false,
                "createTime":"刚刚",
                "Shared":false,
@@ -196,7 +207,46 @@
                  path:'/home/'+obj.id
               })
             }
+          },
 
+            handleAdd () {
+              this.tagShow = true;
+              this.$nextTick(function(){
+                this.$refs.tagValue.focus();
+              })
+            },
+            handleClose2 (event, name) {
+              const index = this.count.indexOf(name);
+              this.count.splice(index, 1);
+            },
+           // 失去焦点保存,如果输入的内容不为空
+           inputBlur(){
+             //添加标签之前先判断有没有重复的
+             let isHas = this.count.some(item => item === this.tagVal);
+             if(this.tagVal.trim() && !isHas){
+                this.count.push(this.tagVal)
+             }
+             this.tagShow = false;
+             this.tagVal = ''; //失去焦点清空双向数据绑定的内容
+          },
+          //添加快捷方式
+          addshakeHander(){
+             this.shortcut = !this.shortcut;
+          },
+          //删除当前新建笔记
+          editDelHander(){
+             // 判断标题有没有输入内容
+             let o = {};
+             if(this.inputValue.trim() === '写下笔记标题'){
+                o = {title:'无标题内容'};
+                // console.log(this.$route.params)
+             }else{
+               o = {title:this.inputValue};
+             }
+              this.$store.commit('delClickHander',{
+                obj:o,
+                id:1,
+              })
           }
         },
 
@@ -214,6 +264,12 @@
             return this.noteBookList.filter(item => {
               return item.title.trim().match(this.findNotes)
             })
+          },
+
+          tagWidth(){
+            return {
+              width:this.tagVal.length * 12 + 26 + 'px'
+            }
           }
         },
 
