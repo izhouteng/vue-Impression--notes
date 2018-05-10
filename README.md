@@ -1,7 +1,4 @@
-# biji
-
-> A Vue.js project
-
+# 正在写中...
 ## Build Setup
 
 ``` bash
