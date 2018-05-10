@@ -27,15 +27,15 @@
             </div>
             <!-- 收藏 笔记 笔记本 标签 -->
             <div class="yinxlb">
-              <div class="stars">
-                <img src="./assets/images/shoucang1.png" alt="">
-                <img src="./assets/images/shoucang2png.png" alt="" style="display:none" title="收藏">
+              <div class="stars" title="收藏" @click="startHander">
+                <!--<img src="./assets/images/shoucang1.png" alt="">-->
+                <!--<img src="./assets/images/shoucang2png.png" alt="" style="display:none" title="收藏">-->
               </div>
-              <div class="notesbook">
+              <div class="notesbook" title="笔记">
                 <img src="./assets/images/biji3.png" alt="" v-if="false">
                 <img src="./assets/images/biji2.png" alt="" @click="goHome">
               </div>
-              <div class="notethis"></div>
+              <div class="notethis" title="笔记本"></div>
               <div class="yinxltag">
                 <img src="./assets/images/biaoqian1.png" alt="">
                 <img src="./assets/images/biaoqian2.png" alt="" style="display:none" title="标签">
@@ -109,6 +109,11 @@
           this.$router.push({
              path:'/home/1'
           })
+      },
+
+      //收藏组件显示和隐藏
+      startHander(){
+         this.$store.commit('startShow')
       }
     },
     watch:{
@@ -130,5 +135,9 @@
 <style>
   [v-cloak]{
     display: none;
+  }
+  .content {
+    width: 100%;
+    height: 100%;
   }
 </style>

@@ -122,5 +122,23 @@ export default {
   //搜索到笔记
   isNot404Yes(state){
     state.Not404 = true;
-  }
+  },
+
+  //收藏组件显示和隐藏
+  startShow(state){
+     state.quickShow = !state.quickShow;
+  },
+  //点击快捷方式的详细信息,隐藏Home组件笔记列表
+  noteListshow(state){
+     state.dataListShow = false;
+  },
+
+  // 删除快捷方式
+  delquickHander(state,{obj}){
+     state.allList.forEach(item => {
+        if(item === obj){
+            item.shortcut = false;
+        }
+     })
+  },
 }

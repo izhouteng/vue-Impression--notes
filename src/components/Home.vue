@@ -21,39 +21,7 @@
       </div>
 
       <!--快捷方式滑窗口--------------------------------------------------------------->
-      <div class="quick">
-        <div class="q_biaoti">
-          <h2>快捷方式</h2>
-        </div>
-        <!--快捷信息 收藏的列表-->
-        <div class="kuaijieInfo">
-          <div class="nokuaijie">
-            <img src="@/assets/images/kuaijiefangshiwuneirong.png" alt="" class="logo">
-            <div class="quickxinxi">
-              <p>工作更高效</p>
-              <p>移动鼠标至列表中的某个笔记或笔记本,并点击☆创建快捷方式(这个五角星我是真没图片)</p>
-            </div>
-          </div>
-
-          <!--有收藏列表内容------------------------------->
-          <div class="quickList">
-            <div class="item clearfix" style="background: #2dbe60">
-              <div class="beforeicon"></div>
-              <div class="q_t">
-                2018-5-2 jquery extend
-              </div>
-              <!--移出收藏-->
-              <div class="delete" title="删除快捷方式"></div>
-            </div>
-            <div class="item clearfix">
-              <div class="beforeicon"></div>
-              <div class="q_t">
-                2018-5-2 jquery extend
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+      <quick></quick>
 
       <!--笔记本滑动窗----------------->
       <div class="bijibenHDC">
@@ -108,8 +76,9 @@
           </div>
         </div>
       </div>
+
       <!-- 笔记列表区域 ------------------------------------------------------->
-      <div class="yinxList" @mousedown.prevent >
+      <div class="yinxList" @mousedown.prevent v-show="$store.state.dataListShow">
         <div class="yinxTitle">
 
           <!--首页显示        如果搜索到笔记就不显示-->
@@ -404,12 +373,14 @@
 
     import {clientAuto} from '@/assets/js/client'
     import {Tag,Button } from 'iview'
+    import quick from '@/func/quick/Quick'
 
     export default {
         name: "home",
         components:{
           Tag,
           Button,
+          quick,
         },
         data(){
            return {

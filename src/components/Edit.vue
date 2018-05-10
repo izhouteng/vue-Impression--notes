@@ -289,5 +289,10 @@
 </script>
 
 <style scoped>
-
+  .yinxDet{
+    margin-left: 0px;
+  }
+  .youbian {
+    margin-left: 0;
+  }
 </style>
