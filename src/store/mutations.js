@@ -152,5 +152,14 @@ export default {
   // 修改笔记内容详情的margin-left 设置为0
   yinLeftHander(state){
      state.yinxdetWidth = true;
+  },
+
+  //Home组件展开 显示完成按钮
+  openHander(state){
+     state.unfoldShow = true;
+  },
+  //Home组件收起, 显示展开图标
+  closeHander(state){
+    state.unfoldShow = false;
   }
 }

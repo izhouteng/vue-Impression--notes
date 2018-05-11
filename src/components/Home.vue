@@ -280,9 +280,15 @@
               </div>
             </div>
             <!--展开 全屏-->
-            <div class="defscreen mains" title="展开"></div>
+            <div class="defscreen mains" title="展开"
+                 v-show="!$store.state.unfoldShow"
+                 @click="openHander"
+            ></div>
             <!--写笔记完成-->
-            <div class="writeNotesOk" v-if="false">
+            <div class="writeNotesOk"
+                 v-if="$store.state.unfoldShow"
+                 @click="closeHander"
+            >
               完成
             </div>
           </div>
@@ -636,6 +642,19 @@
                   path:'/home/'+arr[0].id
                 })
            }
+         },
+
+         //笔记本展开
+         openHander(){
+            this.$store.commit('openHander'); //显示完成按钮
+            this.$store.commit('searchNone'); //搜索框隐藏
+            this.$store.commit('noteListshow'); //隐藏Home组件笔记本列表
+            this.$store.commit('yinLeftHander'); //margin-left 设置为0
+         },
+         // 笔记本收起 完成
+         closeHander(){
+            this.$store.commit('closeHander'); //显示展开图标
+            this.$store.commit('noteListTrue') //margin-left为原始值,笔记本列表显示
          }
        },
 

@@ -56,6 +56,8 @@
             this.$store.commit('searchNone');
             // 将vuex中的Not404设置为true,预防没有搜索到笔记的情况下直接点击快捷方式
             this.$store.commit('isNot404Yes');
+            //显示完成按钮
+            this.$store.commit('openHander'); //显示完成按钮
 
             this.$store.commit('startShow');
             this.$store.commit('noteListshow');

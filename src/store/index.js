@@ -25,6 +25,9 @@ const store = new Vuex.Store({
      // 右侧内容区域的margin-left 值是0还是 350多
      // 点击快捷方式列表的时候设置为true,让它的margin-left值为0
       yinxdetWidth:false,
+
+     //展开和完成状态
+     unfoldShow:false,
    },
    mutations,
    actions,

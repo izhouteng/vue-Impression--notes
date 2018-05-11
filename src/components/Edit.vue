@@ -33,7 +33,6 @@
               <div class="detup mains">
                 升级
               </div>
-              <div class="defscreen mains" title="展开" v-if="false"></div>
               <!--写笔记完成-->
               <div class="writeNotesOk editOk" v-if="editTextarea.trim().length" @click="xJnotesHander">
                 完成
@@ -178,9 +177,12 @@
              if(this.inputValue.trim() === '写下笔记标题'){
                this.inputValue = '无标题内容'
              }
+             // "id":this.$store.state.allList.length + 16,
+             // 这样给定新建笔记的Id有bug,如果新建一个笔记。这个笔记的id是根据vuex中的allList笔记本列表的长度加上一个数字
+             // 组成的id,如果新建完再随意删除一个笔记,再新建一个笔记。这两个笔记引用同一个Id的Bug
             let obj = {
                "title":this.inputValue,
-               "id":this.$store.state.allList.length + 16,
+               "id":parseInt(Math.random()*10000000),
                "pid":this.showNoteBook.id,
                "shortcut":this.shortcut,
                "remind":false,
