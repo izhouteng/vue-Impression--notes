@@ -19,8 +19,12 @@ const store = new Vuex.Store({
       searchBox:false,  //控制搜索框和网页剪接的显示和隐藏状态
       Not404:true, //和Home组件的Not404保持一致,返回Home时,App组件要用
 
-      quickShow:false, //控制快捷方式组件的显示和隐藏
+      quickShow:false, //控制快捷方式组件的显示和隐藏,控制yinList内容信息的透明度
       dataListShow:true, //快捷方式进入详情笔记本,笔记信息列表隐藏
+
+     // 右侧内容区域的margin-left 值是0还是 350多
+     // 点击快捷方式列表的时候设置为true,让它的margin-left值为0
+      yinxdetWidth:false,
    },
    mutations,
    actions,

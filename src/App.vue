@@ -94,7 +94,8 @@
 
       // 让搜索框通过vuex中的状态让它显示出来,并且网页剪辑隐藏
       searchState(){
-         this.$store.commit('searchShow')
+         this.$store.commit('searchShow');
+         this.$store.commit('noteListTrue')
       },
 
       // 跳转到Home页,吧vuex中的404设为true
@@ -106,9 +107,15 @@
           this.$store.commit('searchNone');
           this.$store.commit('isNot404Yes');
           //定位到/home/1
+          let n = this.$store.state.allList;
           this.$router.push({
-             path:'/home/1'
-          })
+             path:'/home/11111111'
+          });
+
+          //让显示笔记列表的盒模型显示出来
+           this.$store.commit('noteListTrue')
+          // 让yinList 笔记内容信息展示盒模型的margin-left为300多
+
       },
 
       //收藏组件显示和隐藏

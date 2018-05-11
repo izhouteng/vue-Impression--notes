@@ -182,7 +182,14 @@
 
       <!--最右侧笔记本内容信息区域-------------------------------->
       <!--左侧区域-->
-      <div class="yinxDet clearfix" id="yinxdet" v-show="$store.state.Not404">
+      <!--:style=""-->
+      <!--$store.state.quickShow-->
+      <!--notWidth  添加class -->
+      <div class="yinxDet clearfix" id="yinxdet"
+           v-show="$store.state.Not404"
+           :class="$store.state.yinxdetWidth ? 'notWidth' : ''"
+           :style="this.$store.state.quickShow?'opacity:0.2':''"
+      >
         <!--标题功能栏-->
         <div class="dethead" @mousedown.prevent>
           <div class="detfunc">
@@ -449,7 +456,7 @@
                 }else{
                    // 重定向
                    this.$router.replace({
-                      path:'/home/1'
+                      path:'/home'
                    })
                 }
               }
@@ -697,4 +704,7 @@
 
 <style scoped>
 
+  .notWidth {
+    margin-left: 0px;
+  }
 </style>

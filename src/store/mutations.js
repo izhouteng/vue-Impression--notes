@@ -94,8 +94,7 @@ export default {
   addNotes(state,params){
      state.dataList.forEach(item => {
         if(item.id == params.id){
-          item.children.push(params.obj)
-          console.log(item.children)
+          item.children.unshift(params.obj);
         }
      });
      state.allList = this.getters.tBallList;
@@ -128,10 +127,18 @@ export default {
   startShow(state){
      state.quickShow = !state.quickShow;
   },
+
+
   //点击快捷方式的详细信息,隐藏Home组件笔记列表
   noteListshow(state){
      state.dataListShow = false;
   },
+  // 让笔记本列表盒模型显示出来
+  noteListTrue(state){
+     state.dataListShow = true;
+     state.yinxdetWidth = false;
+  },
+
 
   // 删除快捷方式
   delquickHander(state,{obj}){
@@ -141,4 +148,9 @@ export default {
         }
      })
   },
+
+  // 修改笔记内容详情的margin-left 设置为0
+  yinLeftHander(state){
+     state.yinxdetWidth = true;
+  }
 }

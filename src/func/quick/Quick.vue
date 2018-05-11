@@ -49,6 +49,14 @@
         },
         //跳转笔记详情页
         clickHander(obj){
+
+            // 修改vuex中的状态值,设置为true,让右侧的笔记详情内容的margin-left为0
+            this.$store.commit('yinLeftHander');
+            //进入笔记列表时,让搜索框盒模型隐
+            this.$store.commit('searchNone');
+            // 将vuex中的Not404设置为true,预防没有搜索到笔记的情况下直接点击快捷方式
+            this.$store.commit('isNot404Yes');
+
             this.$store.commit('startShow');
             this.$store.commit('noteListshow');
             this.$router.push({
