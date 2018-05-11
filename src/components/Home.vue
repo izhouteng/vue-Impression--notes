@@ -24,39 +24,7 @@
       <quick></quick>
 
       <!--笔记本滑动窗----------------->
-      <div class="bijibenHDC">
-        <div class="bijibenInfo">
-          <h2>笔记本信息</h2>
-          <img src="@/assets/images/huachuangbijiben.png" alt="" class="xinjian" title="创建笔记本">
-          <div class="message">
-            <input type="text" class="messageValue" placeholder="查找笔记本">
-          </div>
-        </div>
-        <!--笔记本列表-->
-        <div class="bijibenList">
-          <div class="notList">
-            暂无笔记本信息...
-          </div>
-          <!--笔记本数据列表-->
-          <div class="liebiao">
-            <div class="list_main">
-              <div class="bijixinxi">
-                <div class="noteTitle">
-                  JavaScript_第一阶段笔记
-                </div>
-                <p class="number">21 条笔记</p>
-                <img src="@/assets/images/1shanchubiji.png" alt="" class="delnotes" title="删除笔记本">
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!--标签滑窗开始----------------------------------->
-
-
-
-      <!--标签滑窗结束----------------------------------->
+      <notebook></notebook>
 
       <!--搜索笔记-------------------------------------------------------------------->
       <div class="searchNote" v-show="$store.state.searchBox">
@@ -90,7 +58,7 @@
           </div>
 
           <!--进入笔记本的时候 显示的笔记本名称-->
-          <div class="noteNames">
+          <div class="noteNames" v-if="false">
             <img src="@/assets/images/dijijieduanbijibenxinxi.png" alt="" class="noteinfoPic">
             <div class="title">
               Javascript_第一阶段笔记
@@ -364,7 +332,7 @@
         </div>
 
         <!--/***********/-->
-        <div class="editCount" ref="editScroll">
+        <div class="editCount" ref="editScroll" @click="closeQuick">
 
           <div class="root">
             <div class="editTitle">
@@ -387,6 +355,7 @@
     import {clientAuto} from '@/assets/js/client'
     import {Tag,Button } from 'iview'
     import quick from '@/func/quick/Quick'
+    import notebook from '@/func/notebook/Notebook'
 
     export default {
         name: "home",
@@ -394,6 +363,7 @@
           Tag,
           Button,
           quick,
+          notebook,
         },
         data(){
            return {
@@ -655,6 +625,11 @@
          closeHander(){
             this.$store.commit('closeHander'); //显示展开图标
             this.$store.commit('noteListTrue') //margin-left为原始值,笔记本列表显示
+         },
+
+         //点击内容,隐藏快捷栏
+         closeQuick(){
+             this.$store.commit('closeQuickbox')
          }
        },
 

@@ -161,5 +161,12 @@ export default {
   //Home组件收起, 显示展开图标
   closeHander(state){
     state.unfoldShow = false;
+  },
+
+  //当点击textarea 和 title区域,隐藏快捷方式栏
+  closeQuickbox(state){
+      if(state.quickShow){
+        state.quickShow = false;
+      }
   }
 }

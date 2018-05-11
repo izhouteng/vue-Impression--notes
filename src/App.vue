@@ -35,7 +35,7 @@
                 <img src="./assets/images/biji3.png" alt="" v-if="false">
                 <img src="./assets/images/biji2.png" alt="" @click="goHome">
               </div>
-              <div class="notethis" title="笔记本"></div>
+              <div class="notethis" title="笔记本" @click="noteBookHander"></div>
               <div class="yinxltag">
                 <img src="./assets/images/biaoqian1.png" alt="">
                 <img src="./assets/images/biaoqian2.png" alt="" style="display:none" title="标签">
@@ -121,6 +121,11 @@
       //收藏组件显示和隐藏
       startHander(){
          this.$store.commit('startShow')
+      },
+
+      //笔记本组件显示
+      noteBookHander(){
+
       }
     },
     watch:{

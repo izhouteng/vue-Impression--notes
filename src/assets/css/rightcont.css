@@ -715,17 +715,12 @@
     height: 100%;
 }
 .quick .quickList .item {
-    padding: 9px 0px;
+    padding: 7px 0px;
     color: #4a4a4a;
     font-family: caecilia, times, serif;
     font-size: 16px;
     position: relative;
 }
-/*鼠标移入*/
-/*.quick .quickList .item:hover{*/
-    /*background: rgb(66,197,112);*/
-
-/*}*/
 .quick .item .beforeicon {
     width: 16px;
     height: 16px;
@@ -769,7 +764,7 @@
 /*笔记本滑动窗-----------------------------------*/
 .youbian .bijibenHDC {
     position: absolute;
-    left: -462px;
+
     top: 0px;
     right: 0px;
     bottom: 0px;
@@ -822,10 +817,8 @@
 .youbian .liebiao .list_main {
     height: 60px;
     width: 100%;
-    padding: 0 12px;
+    padding: 0 24px;
     box-sizing: border-box;
-    background: rgb(64,188,108);
-    /*鼠标移入笔记 这里添加背景颜色为 64 188 108*/
 }
 .youbian .liebiao .list_main .bijixinxi {
     height: 100%;
@@ -836,11 +829,10 @@
 }
 .youbian .liebiao .list_main .noteTitle {
     white-space:normal;
-    /*color: #4a4a4a;*/
-    color: #fff;
+    color: #4a4a4a;
     overflow: hidden;
     text-overflow:ellipsis;
-    height: 18px;
+    height: 30px;
     padding-top: 10px;
 }
 .youbian .liebiao .list_main .number {
@@ -848,12 +840,18 @@
     font-size: 11px;
     font-weight: 500;
     padding-top: 6px;
-    color: #c9f2d0;
+    color: #878787;
 }
 .youbian .liebiao .list_main .delnotes {
     position: absolute;
-    right: 16px;
+    right: 0px;
     top: 14px;
+    width: 24px;
+    height: 24px;
+    background: url("../images/1shanchubiji.png") no-repeat;
+}
+.youbian .liebiao .list_main .delnotes:hover{
+    background: url("../images/deletehover_solid_white_24x24.png") no-repeat;
 }
 
 #delicom {

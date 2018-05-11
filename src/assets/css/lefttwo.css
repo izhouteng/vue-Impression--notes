@@ -61,7 +61,6 @@
     height: 150px;
     background: #393d41;
     position: relative;
-    display: none;
 }
 .noteNames .noteinfoPic {
     position: absolute;
@@ -82,12 +81,11 @@
 /* 选项列表 */
 .selList {
     width: 205px;
-    /* height: 374px; */
     box-shadow: 0px 6px 20px rgba(0, 0, 0, 0.04), -6px 8px 15px rgba(0, 0, 0, 0.04), 6px 8px 15px rgba(0, 0, 0, 0.04);
     position: absolute;
     right: -138px;
     top: 24px;
-    z-index: 50;
+    z-index: 5200;
     background: #ffffff;
     display: none;
 }
