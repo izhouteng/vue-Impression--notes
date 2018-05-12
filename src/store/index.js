@@ -18,6 +18,7 @@ const store = new Vuex.Store({
       findNotesList:[], // 搜索笔记到的数组集合
       searchBox:false,  //控制搜索框和网页剪接的显示和隐藏状态
       Not404:true, //和Home组件的Not404保持一致,返回Home时,App组件要用
+      searchValue:'', // 搜索关键字
 
       quickShow:false, //控制快捷方式组件的显示和隐藏,控制yinList内容信息的透明度
       dataListShow:true, //快捷方式进入详情笔记本,笔记信息列表隐藏

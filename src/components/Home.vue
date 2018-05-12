@@ -32,12 +32,11 @@
           <input type="text" class="searchValue" placeholder="搜索笔记"
                  v-model="searchValue"
                  @keydown.enter="searchDown"
-                 ref="noteSearchVal"
           >
           <img src="@/assets/images/qingchusousuoneirong.png" alt=""
                class="clearSearch"
                v-if="searchValue.trim().length"
-               @click="searchValue=''"
+               @click="clearSearchVal"
           >
           <div class="tishixinxi">
             正在搜索 <span>你的笔记本</span>
@@ -131,12 +130,7 @@
             </router-link>
 
             <!--未找到搜索的笔记  动态计算高度----------------->
-            <div class="notFound" v-show="!$store.state.Not404">
-              <div class="count">
-                <img src="@/assets/images/drawers_empty_state_search_icon.png" alt="">
-                <p class="tip">未找到"{{NotFindNotesName}}"笔记。</p>
-              </div>
-            </div>
+            <notsearch></notsearch>
 
           </div>
         </div>
@@ -351,7 +345,8 @@
     import {Tag,Button } from 'iview'
     import quick from '@/func/quick/Quick'
     import notebook from '@/func/notebook/Notebook'
-    import notebookInfo from '@/components/notebookInfo'
+    import notebookInfo from '@/components/prompt/notebookInfo'
+    import notsearch from '@/components/prompt/Notsearch'
 
     export default {
         name: "home",
@@ -361,6 +356,7 @@
           quick,
           notebook,
           notebookInfo,
+          notsearch,
         },
         data(){
            return {
@@ -390,7 +386,6 @@
               delNextId:1,  //删除对象下一个兄弟的id
 
               searchValue:'', //搜索关键字
-              NotFindNotesName:'', //如果没有找到当前输入笔记,保存当前输入的问题当作提示信息
            }
         },
        methods:{
@@ -427,6 +422,7 @@
           inteContent(){
               // 只需要修改路由对象,会自动更新全部这个组件需要的所有数据
                // 默认滚动条高度0  当可以获取到这个元素的时候再进行重置0
+               // QQ浏览器 Error in callback for watcher "$route": "TypeError: editSroll.scrollTo is not a function"
               let editSroll = this.$refs.editScroll;
               let homeScroll = this.$refs.homeScroll; //笔记列表滚动条
               if(editSroll){
@@ -434,9 +430,14 @@
               }
 
               //判断 如果是点击了Home
-              if(this.$route.params.id === '11111111'){
-                  homeScroll.scrollTo(0,0)
-              }
+                if(this.$route.params.id === '11111111' && homeScroll){
+                   homeScroll.scrollTo(0,0)
+                }
+
+                // 判断搜索关键字是不是和vuex状态管理中的一样
+                if(this.searchValue !== this.$store.state.searchValue){
+                   this.searchValue = this.$store.state.searchValue;
+                }
 
               let userId = this.$route.params.id || this.allNoteList[0].id;
               this.state = userId;
@@ -604,8 +605,12 @@
          // searchDown  搜索笔记本列表
          // 从vuex中的笔记列表中过滤,同步到当前组件
          searchDown(){
+           //将搜索的关键字同步到vuex
+           this.$store.commit('searchHander',{
+              text:this.searchValue,
+           });
            let arr = this.$store.state.allList.filter(item => {
-              return item.title.match(this.searchValue) || item.content.match(this.searchValue)
+              return item.title.match(this.$store.state.searchValue) || item.content.match(this.$store.state.searchValue)
            });
            this.allNoteList = arr;
            // this.searchDate = arr;   //保存过滤后的数组  //将搜索到的列表集合同步到vuex中
@@ -616,7 +621,6 @@
            if(arr.length < 1){
                // this.Not404 = false;  //路由跳转到allList的第一个id
                this.$store.commit('isNot404False');
-               this.NotFindNotesName = this.searchValue;
                let n = this.$store.state.allList;
            }else if(arr.length >= 1){
                //搜索到了笔记
@@ -625,6 +629,11 @@
                   path:'/home/'+arr[0].id
                 })
            }
+         },
+         // 清空搜索关键字
+         clearSearchVal(){
+            this.searchValue = '';
+            this.$store.commit('clearHanderValue')
          },
 
          //笔记本展开
@@ -692,7 +701,7 @@
 
         },
         mounted(){
-           clientAuto()
+           clientAuto();
         },
        // 侦听路由对象变化
        watch:{

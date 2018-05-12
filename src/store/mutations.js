@@ -117,9 +117,10 @@ export default {
   searchShow(state){
      state.searchBox = true;
   },
-  //回Home页,搜索框隐藏
+  //回Home页,搜索框隐藏, 搜索关键字清空
   searchNone(state){
     state.searchBox = false;
+    state.searchValue = '';
   },
   //未搜索到笔记
   isNot404False(state){
@@ -222,5 +223,14 @@ export default {
   QWNOTEBOOK(state,params){
     state.joinNoteBookObj = params.obj;
     state.joinNoteList = params.obj.children;
+  },
+
+  // 搜索关键字同步到vuex
+  searchHander(state,params){
+     state.searchValue = params.text;
+  },
+  // 清空搜索关键字
+  clearHanderValue(state){
+    state.searchValue = '';
   }
 }
