@@ -177,5 +177,25 @@ export default {
   noteBookHander(state){
      state.noteBookShow = !state.noteBookShow;
      state.yinListopation = state.noteBookShow;
+  },
+
+
+
+  // Notebook组件
+  // 让删除笔记本二次确认组件显示
+  deleteNoteBook(state,params){
+     state.delNoteBookShow = true;
+     state.delNoteBookObj = params.obj;
+  },
+  // 取消删除
+  cancelDelete(state){
+    state.delNoteBookShow = false;
+    state.delNoteBookObj = {}
+  },
+  //确定删除
+  isDeleteBook(state){
+     state.dataList = state.dataList.filter(item => item !== state.delNoteBookObj);
+     state.allList = this.getters.tBallList;
+     state.delNoteBookShow = false;
   }
 }

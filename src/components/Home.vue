@@ -428,7 +428,7 @@
 
           // 初始化noteContent
           inteContent(){
-
+              console.log('初始化');
               // 只需要修改路由对象,会自动更新全部这个组件需要的所有数据
                // 默认滚动条高度0  当可以获取到这个元素的时候再进行重置0
               let editSroll = this.$refs.editScroll;

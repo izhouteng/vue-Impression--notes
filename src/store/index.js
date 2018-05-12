@@ -30,6 +30,10 @@ const store = new Vuex.Store({
      //展开和完成状态
      unfoldShow:false,
      noteBookShow:false,  //笔记本组件显示和隐藏 Notebook 组件
+
+     delNoteBookShow:false,  //删除笔记本组件显隐
+     delNoteBookObj:{}, // 要删除的笔记本
+
    },
    mutations,
    actions,

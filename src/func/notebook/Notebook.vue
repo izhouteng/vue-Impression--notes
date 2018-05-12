@@ -20,7 +20,7 @@
                   {{item.title}}
                 </div>
                 <p class="number">{{item.children.length}} 条笔记</p>
-                 <div class="delnotes" title="删除笔记本"></div>
+                 <div class="delnotes" title="删除笔记本" @click="deleteNoteBook(item)"></div>
               </div>
             </div>
           </div>
@@ -35,6 +35,14 @@
            return {
 
            }
+        },
+        methods:{
+          //删除笔记本 提交vuex
+          deleteNoteBook(obj){
+            this.$store.commit('deleteNoteBook',{
+               obj:obj,
+            })
+          }
         },
         computed:{
            //从vuex中取笔记列表

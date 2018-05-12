@@ -2,6 +2,7 @@
       <div id="app" v-cloak>
         <div class="content clearfix">
           <my-del></my-del>
+          <my-delbook></my-delbook>
           <!-- 左侧操作栏 -->
           <div class="yinxleft" id="navl" v-show="navShow" @mousedown.prevent>
             <div class="yinxt">
@@ -58,7 +59,8 @@
 
 <script>
 
-  import del from '@/components/Delete'
+  import del from '@/components/Delete'  //删除笔记组件
+  import delBook from '@/components/delBook'
 
   export default {
     name: 'App',
@@ -71,6 +73,7 @@
     },
     components:{
       'my-del':del,
+      'my-delbook':delBook,
     },
     methods:{
       // 新建鼠标移入移出事件
