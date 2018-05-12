@@ -10,7 +10,7 @@ export default {
   editChange(state,params){
       state.allList.forEach(item => {
          if(item.id == params.id){
-            item.title = params.title
+            item.title = params.title;
             item.content = params.content;
          }
       })
@@ -126,6 +126,7 @@ export default {
   //收藏组件显示和隐藏
   startShow(state){
      state.quickShow = !state.quickShow;
+     state.yinListopation = state.quickShow;
   },
 
 
@@ -165,8 +166,16 @@ export default {
 
   //当点击textarea 和 title区域,隐藏快捷方式栏
   closeQuickbox(state){
-      if(state.quickShow){
+      if(state.quickShow || state.noteBookShow){
         state.quickShow = false;
+        state.noteBookShow = false;
+        state.yinListopation = false;
       }
+  },
+
+  //第几阶段笔记本列表显示和隐藏
+  noteBookHander(state){
+     state.noteBookShow = !state.noteBookShow;
+     state.yinListopation = state.noteBookShow;
   }
 }

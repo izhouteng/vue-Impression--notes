@@ -94,6 +94,7 @@
                          :style="tagWidth"
                          v-show="tagShow"
                          @blur="inputBlur"
+                         @keydown.enter="editEnterHander"
                   >
                 </div>
               </div>
@@ -249,6 +250,11 @@
                 obj:o,
                 id:1,
               })
+          },
+
+          //enter事件保存标签
+          editEnterHander(){
+             this.inputBlur()
           }
         },
 

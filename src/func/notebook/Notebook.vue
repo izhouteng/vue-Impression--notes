@@ -1,5 +1,5 @@
 <template>
-      <div class="bijibenHDC">
+      <div class="bijibenHDC" v-show="$store.state.noteBookShow">
         <div class="bijibenInfo">
           <h2>笔记本</h2>
           <img src="@/assets/images/huachuangbijiben.png" alt="" class="xinjian" title="创建笔记本">

@@ -156,7 +156,7 @@
       <div class="yinxDet clearfix" id="yinxdet"
            v-show="$store.state.Not404"
            :class="$store.state.yinxdetWidth ? 'notWidth' : ''"
-           :style="this.$store.state.quickShow?'opacity:0.2':''"
+           :style="this.$store.state.yinListopation?'opacity:0.2':''"
       >
         <!--标题功能栏-->
         <div class="dethead" @mousedown.prevent>
@@ -397,6 +397,23 @@
            }
         },
        methods:{
+         // 同步textarea实时修改,左侧笔记列表实时更新
+         synchronous(){
+             //切换路由对象的时候 提交更新后的title和textarea内容
+             if(this.EditTitle === ''){
+               this.EditTitle = '无标题内容'
+             }
+             // this.EditTitle === '' || this.EditTextarea === '' &&
+             if(this.EditId !== ''){
+               // 提交vuex 修改数据
+               this.$store.commit('editChange',{
+                 id:this.EditId,
+                 title:this.EditTitle,
+                 content:this.EditTextarea,
+               })
+             }
+         },
+
           // 当本地数据为null,请求
           getList(){
             this.https.getList().then(({data}) => {
@@ -456,20 +473,9 @@
               this.noteBookTitle = dJ;
               // this.findDateList; //搜索笔记列表
 
+              //每次路由更新就调用这个方法,同步textarea和笔记列表数据
+              this.synchronous()
 
-              //切换路由对象的时候 提交更新后的title和textarea内容
-              if(this.EditTitle === ''){
-                  this.EditTitle = '无标题内容'
-              }
-            // this.EditTitle === '' || this.EditTextarea === '' &&
-            if(this.EditId !== ''){
-                  // 提交vuex 修改数据
-                  this.$store.commit('editChange',{
-                     id:this.EditId,
-                     title:this.EditTitle,
-                     content:this.EditTextarea,
-                  })
-              }
           },
 
          // 点击 移动笔记
@@ -625,6 +631,7 @@
          closeHander(){
             this.$store.commit('closeHander'); //显示展开图标
             this.$store.commit('noteListTrue') //margin-left为原始值,笔记本列表显示
+            this.synchronous(); //点击完成也同步左右两边的数据
          },
 
          //点击内容,隐藏快捷栏

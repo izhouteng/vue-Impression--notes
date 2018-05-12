@@ -113,9 +113,10 @@
           });
 
           //让显示笔记列表的盒模型显示出来
-           this.$store.commit('noteListTrue')
+           this.$store.commit('noteListTrue');
           // 让yinList 笔记内容信息展示盒模型的margin-left为300多
-
+           this.$store.commit('closeQuickbox');
+           this.$store.commit('closeHander') //显示展开图标
       },
 
       //收藏组件显示和隐藏
@@ -125,7 +126,7 @@
 
       //笔记本组件显示
       noteBookHander(){
-
+         this.$store.commit('noteBookHander')
       }
     },
     watch:{
