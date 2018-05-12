@@ -109,6 +109,7 @@
           //删除vuex中管理的 搜索框隐藏
           this.$store.commit('searchNone');
           this.$store.commit('isNot404Yes');
+          this.$store.commit('noteBookList'); //清空第几阶段展示的信息
           //定位到/home/1
           let n = this.$store.state.allList;
           this.$router.push({

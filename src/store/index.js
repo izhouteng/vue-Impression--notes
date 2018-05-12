@@ -34,6 +34,9 @@ const store = new Vuex.Store({
      delNoteBookShow:false,  //删除笔记本组件显隐
      delNoteBookObj:{}, // 要删除的笔记本
 
+     joinNoteList:[], // 进入的笔记本列表数据
+     joinNoteBookObj:{}, //当前显示的笔记本
+
    },
    mutations,
    actions,

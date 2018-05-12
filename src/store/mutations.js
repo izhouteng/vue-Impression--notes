@@ -83,7 +83,14 @@ export default {
         }
      });
      // 搜索过滤后的数据删除当中要删除的对象
-     state.findNotesList = state.findNotesList.filter(item => item !== state.delNoteInfo);
+     if(state.findNotesList.length > 0){
+       state.findNotesList = state.findNotesList.filter(item => item !== state.delNoteInfo);
+     }
+     //在详情笔记本列表中删除对象
+     if(state.joinNoteList.length > 0){
+        state.joinNoteList = state.joinNoteList.filter(item => item !== state.delNoteInfo);
+     }
+
 
      //通过调用getters中的方法,将dataList第几阶段中的每条笔记同步到allList
      state.allList = this.getters.tBallList;
@@ -197,5 +204,18 @@ export default {
      state.dataList = state.dataList.filter(item => item !== state.delNoteBookObj);
      state.allList = this.getters.tBallList;
      state.delNoteBookShow = false;
+  },
+
+  // 进入笔记本详细列表
+  inNotelist(state,params){
+     state.joinNoteBookObj = params.obj;
+     state.joinNoteList = params.obj.children;
+     state.noteBookShow = false; //笔记本组件隐藏
+     state.yinListopation = false;
+  },
+  // Home键,清空第几阶段展示的笔记列表
+  noteBookList(state){
+     state.joinNoteList = [];
+     state.joinNoteBookObj = {};
   }
 }

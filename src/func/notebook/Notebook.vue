@@ -13,14 +13,14 @@
             暂无笔记本信息...
           </div>
           <!--笔记本数据列表-->
-          <div class="liebiao" v-for="item in noteBooks" :key="item.id">
+          <div class="liebiao" v-for="item in noteBooks" :key="item.id" @click="clickHander(item)">
             <div class="list_main">
               <div class="bijixinxi">
                 <div class="noteTitle">
                   {{item.title}}
                 </div>
                 <p class="number">{{item.children.length}} 条笔记</p>
-                 <div class="delnotes" title="删除笔记本" @click="deleteNoteBook(item)"></div>
+                 <div class="delnotes" title="删除笔记本" @click.stop="deleteNoteBook(item)"></div>
               </div>
             </div>
           </div>
@@ -42,6 +42,21 @@
             this.$store.commit('deleteNoteBook',{
                obj:obj,
             })
+          },
+          // 进入详细的笔记本信息
+          clickHander(obj){
+             this.$store.commit('inNotelist',{
+                obj:obj,
+             });
+             // 跳转路由到详细笔记本列表中的第一个id
+             let booklist = this.$store.state.joinNoteList;
+             if(booklist.length > 0){
+                this.$router.push({
+                   path:'/home/' + booklist[0].id
+                })
+             }else if(booklist.length === 0){
+                console.log('0条')
+             }
           }
         },
         computed:{

@@ -591,13 +591,13 @@
 .youbian .header {
     height: 110px;
     border-bottom: 1px solid #ececec;
-    padding: 22px 24px 12px 24px;
+    padding: 24px 24px 12px 24px;
     color: #878787;
     position: relative;
 }
 .youbian .title {
-    font-family: gotham, helvetica, arial, sans-serif;
-    font-size: 21px;
+    font-family: Arial,helvetica, arial, sans-serif;
+    font-size: 14px;
     text-transform: uppercase;
     letter-spacing:0.5px;
     font-weight: normal;

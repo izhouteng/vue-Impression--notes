@@ -50,20 +50,15 @@
         <div class="yinxTitle">
 
           <!--首页显示        如果搜索到笔记就不显示-->
-          <div class="cuthide" v-show="!$store.state.searchBox">
-            <h2 class="notTitle">笔记</h2>
-            <div class="yinxcut">
-              <span>网页剪藏</span>
-            </div>
-          </div>
+              <div class="cuthide" v-show="!$store.state.searchBox" v-if="!this.$store.state.joinNoteBookObj.title">
+                <h2 class="notTitle">笔记</h2>
+                <div class="yinxcut">
+                  <span>网页剪藏</span>
+                </div>
+              </div>
 
           <!--进入笔记本的时候 显示的笔记本名称-->
-          <div class="noteNames" v-if="false">
-            <img src="@/assets/images/dijijieduanbijibenxinxi.png" alt="" class="noteinfoPic">
-            <div class="title">
-              Javascript_第一阶段笔记
-            </div>
-          </div>
+          <notebookInfo></notebookInfo>
 
 
           <!-- 笔记条数和选项 -->
@@ -95,7 +90,7 @@
 
         <!-- 笔记内容列表区域----------------------------------- -->
         <div class="NodesTwoList">
-          <div class="nodescroll" id="nodescroll">
+          <div class="nodescroll" id="nodescroll" ref="homeScroll">
 
             <router-link tag="div" class="n-conts"
                          v-for="(item,index) in allNoteList"
@@ -356,6 +351,7 @@
     import {Tag,Button } from 'iview'
     import quick from '@/func/quick/Quick'
     import notebook from '@/func/notebook/Notebook'
+    import notebookInfo from '@/components/notebookInfo'
 
     export default {
         name: "home",
@@ -364,6 +360,7 @@
           Button,
           quick,
           notebook,
+          notebookInfo,
         },
         data(){
            return {
@@ -428,12 +425,17 @@
 
           // 初始化noteContent
           inteContent(){
-              console.log('初始化');
               // 只需要修改路由对象,会自动更新全部这个组件需要的所有数据
                // 默认滚动条高度0  当可以获取到这个元素的时候再进行重置0
               let editSroll = this.$refs.editScroll;
+              let homeScroll = this.$refs.homeScroll; //笔记列表滚动条
               if(editSroll){
                  editSroll.scrollTo(0,0)
+              }
+
+              //判断 如果是点击了Home
+              if(this.$route.params.id === '11111111'){
+                  homeScroll.scrollTo(0,0)
               }
 
               let userId = this.$route.params.id || this.allNoteList[0].id;
@@ -460,7 +462,12 @@
 
               if(this.$store.state.findNotesList.length > 0){
                    this.allNoteList = this.$store.state.findNotesList;
-              }else{
+              }
+              // 判断vuex状态管理中的 笔记本列表是否有
+              else if(this.$store.state.joinNoteList.length > 0){
+                   this.allNoteList = this.$store.state.joinNoteList;
+              }
+              else{
                    //全部的笔记 路由跳转实时同步vuex中的笔记列表
                    this.allNoteList = this.$store.state.allList;
               }
