@@ -217,5 +217,10 @@ export default {
   noteBookList(state){
      state.joinNoteList = [];
      state.joinNoteBookObj = {};
+  },
+  //Home组件 前往当前笔记本
+  QWNOTEBOOK(state,params){
+    state.joinNoteBookObj = params.obj;
+    state.joinNoteList = params.obj.children;
   }
 }

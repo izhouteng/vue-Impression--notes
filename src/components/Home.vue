@@ -281,7 +281,7 @@
                 {{noteBookTitle.title}}
               </div>
               <div class="qianwangBJB" title="前往笔记本" @mousedown.prevent>
-                <img src="@/assets/images/qianwangbijiben.png" alt="">
+                 <img src="@/assets/images/qianwangbijiben.png" alt="" @click="qWnoteBooks">
               </div>
 
               <!--移动笔记本 可查找-->
@@ -644,6 +644,19 @@
          //点击内容,隐藏快捷栏
          closeQuick(){
              this.$store.commit('closeQuickbox')
+         },
+
+         //前往笔记本
+         qWnoteBooks(){
+            // console.log(this.noteBookTitle)
+            this.$store.commit('QWNOTEBOOK',{
+               obj:this.noteBookTitle
+            });
+            if(this.$store.state.joinNoteList.length >= 1){
+               this.$router.push({
+                  path:'/home/' + this.$store.state.joinNoteList[0].id
+               })
+            }
          }
        },
 
