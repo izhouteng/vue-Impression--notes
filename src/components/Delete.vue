@@ -35,7 +35,12 @@
         yesDelHander(){
           //确定删除的时候就根据删除对象的下一个id进行修改路由
            this.$store.commit('isdelHander');
-           this.routeId = this.$store.state.delnoteNextId;
+           if(this.$store.state.delnoteNextId > 0){
+             this.routeId = this.$store.state.delnoteNextId;
+           }else{
+             this.routeId = this.$store.state.delNoteInfo.id;
+           }
+
            this.$router.push({
               path:'/home/'+this.routeId,
            });

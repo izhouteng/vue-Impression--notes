@@ -112,9 +112,12 @@
           this.$store.commit('noteBookList'); //清空第几阶段展示的信息
           //定位到/home/1
           let n = this.$store.state.allList;
-          this.$router.push({
-             path:'/home/11111111'
-          });
+          if(n.length > 0){
+            this.$router.push({
+              path:'/home/11111111'
+            });
+          }
+
 
           //让显示笔记列表的盒模型显示出来
            this.$store.commit('noteListTrue');

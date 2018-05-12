@@ -592,15 +592,18 @@
 
          // 删除笔记点击事件
          delNoteHandel(obj){
-           console.log(this.allNoteList.length)
             //保存当前删除对象的下一个兄弟对象id
+           // 问题: 删除完笔记列表,新建一个笔记再次删除会报错id问题
             this.allNoteList.forEach((item,i) => {
                 if(item === obj && this.allNoteList.length > 1){
                     if(this.allNoteList[i+1]){
                        // 如果下个兄弟存在
                       this.delNextId = this.allNoteList[i+1].id;
-                    }else{
+                    }
+                    else if(this.allNoteList[i-1]){
                       this.delNextId = this.allNoteList[i-1].id;
+                    }else if(this.allNoteList.length === 1){
+                      this.delNextId = this.allNoteList[0].id;
                     }
                     // 新建笔记 待添加 标签 收藏 以及及时删除------------------------
                 }else if(this.allNoteList.length === 1){

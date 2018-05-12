@@ -1,5 +1,5 @@
 <template>
-    <div class="meiyouBj" v-show="$store.state.notelistNumber">
+    <div class="meiyouBj" v-show="$store.state.notelistNumber" @mousedown.prevent>
       <div class="tishi">
         <img src="@/assets/images/meiyoubijiliebiaoIco.png" alt="">
         <p class="addTip">
