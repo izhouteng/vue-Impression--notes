@@ -54,8 +54,6 @@
                 this.$router.push({
                    path:'/home/' + booklist[0].id
                 })
-             }else if(booklist.length === 0){
-                console.log('0条')
              }
           }
         },

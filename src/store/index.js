@@ -37,6 +37,8 @@ const store = new Vuex.Store({
 
      joinNoteList:[], // 进入的笔记本列表数据
      joinNoteBookObj:{}, //当前显示的笔记本
+     notelistNumber:false, //笔记列表如果删除完了,显示tip组件信息  如果为true,说明笔记本列表清空了,如果为False说明还有
+     // clearAll:false, //当joinNoteList笔记本列表删除完了之后变为true
 
    },
    mutations,

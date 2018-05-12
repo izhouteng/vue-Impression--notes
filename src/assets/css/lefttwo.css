@@ -57,7 +57,7 @@
 
 /*进入笔记本的时候 显示的笔记本名称*/
 .noteNames {
-    width: 350px;
+    /*width: 350px;*/
     height: 150px;
     background: #393d41;
 }

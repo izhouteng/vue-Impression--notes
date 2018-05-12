@@ -232,5 +232,13 @@ export default {
   // 清空搜索关键字
   clearHanderValue(state){
     state.searchValue = '';
+  },
+  //笔记列表删除完了
+  deleteAll(state){
+    state.notelistNumber = true;
+  },
+  // 笔记列表中不为空
+  showNoteList(state){
+    state.notelistNumber = false;
   }
 }

@@ -97,7 +97,7 @@
                          :to="/home/+item.id"
                           @click.native="state=item.id"
                          :class="state == item.id ? 'sel' : ''"
-                          v-show="true"
+                          v-show="!$store.state.notelistNumber"
 
             >
               <h2 class="n-title">{{item.title}}</h2>
@@ -131,6 +131,7 @@
 
             <!--未找到搜索的笔记  动态计算高度----------------->
             <notsearch></notsearch>
+            <my-tip></my-tip>
 
           </div>
         </div>
@@ -333,9 +334,13 @@
           </div>
 
         </div>
+
+        <!--遮罩层-->
+        <div class="noteList" v-show="$store.state.notelistNumber">
+
+        </div>
+
       </div>
-
-
     </div>
 </template>
 
@@ -347,6 +352,7 @@
     import notebook from '@/func/notebook/Notebook'
     import notebookInfo from '@/components/prompt/notebookInfo'
     import notsearch from '@/components/prompt/Notsearch'
+    import myTip from '@/components/prompt/tip'
 
     export default {
         name: "home",
@@ -357,6 +363,8 @@
           notebook,
           notebookInfo,
           notsearch,
+          'my-tip':myTip,
+
         },
         data(){
            return {
@@ -438,6 +446,11 @@
                 if(this.searchValue !== this.$store.state.searchValue){
                    this.searchValue = this.$store.state.searchValue;
                 }
+
+              //判断笔记列表为不为空 并且vuex中控制提示的显示的为空 不为false的时候,再更新vuex中的状态
+              if(this.allNoteList.length > 0 && this.$store.state.notelistNumber){
+                 this.$store.commit('showNoteList')
+              }
 
               let userId = this.$route.params.id || this.allNoteList[0].id;
               this.state = userId;
@@ -579,6 +592,7 @@
 
          // 删除笔记点击事件
          delNoteHandel(obj){
+           console.log(this.allNoteList.length)
             //保存当前删除对象的下一个兄弟对象id
             this.allNoteList.forEach((item,i) => {
                 if(item === obj && this.allNoteList.length > 1){
@@ -589,10 +603,11 @@
                       this.delNextId = this.allNoteList[i-1].id;
                     }
                     // 新建笔记 待添加 标签 收藏 以及及时删除------------------------
-                }else if(this.allNoteList.length <= 1){
+                }else if(this.allNoteList.length === 1){
                   //笔记删除完了,从mock数据重新请求
-                   this.getList();
-                   this.searchValue = ''; //笔记删除完了,重新请求
+                  //  this.getList();
+                  // this.$store.commit('isNot404False'); //笔记列表删除完了,右侧展示页隐藏
+                  this.searchValue = ''; //笔记删除完了,重新请求
                 }
             });
 
@@ -633,7 +648,6 @@
          // 清空搜索关键字
          clearSearchVal(){
             this.searchValue = '';
-            this.$store.commit('clearHanderValue')
          },
 
          //笔记本展开
@@ -684,7 +698,7 @@
            return {
               width:this.tagVal.length * 12 + 26 + 'px'
            }
-          },
+          }
         },
 
         // 钩子函数 请求数据同步vuex
@@ -726,6 +740,15 @@
                 localStorage.setItem('yinxiang',JSON.stringify(this.$store.state.dataList));
             },
            deep:true,
+         },
+         '$store.state.notelistNumber':{
+           handler(){
+             // 如果为false,说明当前笔记本列表为空,那么判断当前组件的allNoteList为不为空,如果不为空,则清空
+             if(this.$store.state.notelistNumber){
+                 this.allNoteList = [];
+             }
+           },
+           deep:true,
          }
        },
 
@@ -736,5 +759,14 @@
 
   .notWidth {
     margin-left: 0px;
+  }
+  .noteList {
+     background: rgb(248,248,248);
+     position: absolute;
+     left: 0;
+     top: 0;
+     z-index: 12000;
+     width: 100%;
+     height: 100%;
   }
 </style>

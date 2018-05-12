@@ -38,7 +38,11 @@
            this.routeId = this.$store.state.delnoteNextId;
            this.$router.push({
               path:'/home/'+this.routeId,
-           })
+           });
+           //笔记本列表删除完了
+          if(this.$store.state.joinNoteList.length <= 0){
+              this.$store.commit('deleteAll')
+          }
         }
       }
     }
