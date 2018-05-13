@@ -87,7 +87,7 @@ export default {
        state.findNotesList = state.findNotesList.filter(item => item !== state.delNoteInfo);
      }
      //在详情笔记本列表中删除对象
-     if(state.joinNoteList.length > 0){
+     if(state.joinNoteList.length >= 0){
         state.joinNoteList = state.joinNoteList.filter(item => item !== state.delNoteInfo);
      }
 

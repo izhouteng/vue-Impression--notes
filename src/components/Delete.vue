@@ -35,18 +35,19 @@
         yesDelHander(){
           //确定删除的时候就根据删除对象的下一个id进行修改路由
            this.$store.commit('isdelHander');
-           if(this.$store.state.delnoteNextId > 0){
-             this.routeId = this.$store.state.delnoteNextId;
-           }else{
-             this.routeId = this.$store.state.delNoteInfo.id;
-           }
+             if(this.$store.state.delnoteNextId > 0){
+               this.routeId = this.$store.state.delnoteNextId;
+             }else{
+               this.routeId = this.$store.state.delNoteInfo.id;
+             }
 
-           this.$router.push({
-              path:'/home/'+this.routeId,
-           });
+             this.$router.push({
+                path:'/home/'+this.routeId,
+             });
+
            //笔记本列表删除完了
           if(this.$store.state.joinNoteList.length <= 0){
-              this.$store.commit('deleteAll')
+              this.$store.commit('deleteAll');
           }
         }
       }

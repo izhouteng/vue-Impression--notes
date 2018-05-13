@@ -592,6 +592,7 @@
 
          // 删除笔记点击事件
          delNoteHandel(obj){
+           console.log(obj);
             //保存当前删除对象的下一个兄弟对象id
            // 问题: 删除完笔记列表,新建一个笔记再次删除会报错id问题
             this.allNoteList.forEach((item,i) => {
@@ -602,16 +603,13 @@
                     }
                     else if(this.allNoteList[i-1]){
                       this.delNextId = this.allNoteList[i-1].id;
-                    }else if(this.allNoteList.length === 1){
-                      this.delNextId = this.allNoteList[0].id;
                     }
                     // 新建笔记 待添加 标签 收藏 以及及时删除------------------------
-                }else if(this.allNoteList.length === 1){
-                  //笔记删除完了,从mock数据重新请求
-                  //  this.getList();
-                  // this.$store.commit('isNot404False'); //笔记列表删除完了,右侧展示页隐藏
-                  this.searchValue = ''; //笔记删除完了,重新请求
-                }
+                  }
+                  else if(this.allNoteList.length === 1){
+                      // console.log(this.allNoteList);
+                      // this.delNextId = this.allNoteList[0].id;
+                  }
             });
             /*----------------------------------------------------*/
             // 在Home组件中的删除功能,点击删除传入当前显示的对象,应该判断它pid的chilren的长度来决定第几阶段的笔记删除完了
@@ -673,7 +671,7 @@
          // 笔记本收起 完成
          closeHander(){
             this.$store.commit('closeHander'); //显示展开图标
-            this.$store.commit('noteListTrue') //margin-left为原始值,笔记本列表显示
+            this.$store.commit('noteListTrue'); //margin-left为原始值,笔记本列表显示
             this.synchronous(); //点击完成也同步左右两边的数据
          },
 
@@ -685,12 +683,14 @@
          //前往笔记本
          qWnoteBooks(){
             // console.log(this.noteBookTitle)
+            this.$store.commit('noteListTrue');
+            this.$store.commit('closeHander');
             this.$store.commit('QWNOTEBOOK',{
                obj:this.noteBookTitle
             });
             if(this.$store.state.joinNoteList.length >= 1){
                this.$router.push({
-                  path:'/home/' + this.$store.state.joinNoteList[0].id
+                  path:'/home/' + Math.random()
                })
             }
          }
