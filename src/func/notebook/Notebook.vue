@@ -56,7 +56,8 @@
              let booklist = this.$store.state.joinNoteList;
              if(booklist.length > 0){
                 this.$router.push({
-                   path:'/home/' + booklist[0].id
+                   // path:'/home/' + booklist[0].id
+                   path:'/home/11111111'
                 })
              }
           }

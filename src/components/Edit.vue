@@ -184,7 +184,7 @@
             let obj = {
                "title":this.inputValue,
                "id":parseInt(Math.random()*10000000),
-               "pid":this.showNoteBook.id,
+               "pid":this.state,
                "shortcut":this.shortcut,
                "remind":false,
                "label":this.count,
@@ -199,6 +199,7 @@
             };
               // 新建笔记对象保存到vuex状态
             if(obj){
+               console.log(obj);
                this.$store.commit('addNotes',{
                   obj:obj,
                   id:this.state
