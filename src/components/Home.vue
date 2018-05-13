@@ -284,8 +284,8 @@
                 <div class="findnotes">
                   <input type="text" class="findValue" placeholder="查找笔记本" v-model="findNotes" ref="findval">
                 </div>
-                <div class="chuanjian" @mousedown.prevent>
-                  <img src="@/assets/images/chuangjianbijiben.png" alt="" @mousedown.prevent>
+                <div class="chuanjian" @mousedown.prevent @click="createNoteBook">
+                  <div class="chuangjianIco"></div>
                   <span @mousedown.prevent>创建新笔记本</span>
                 </div>
                 <div class="mynotesbook"
@@ -693,6 +693,12 @@
                   path:'/home/' + Math.random()
                })
             }
+         },
+
+         // 新建笔记
+         createNoteBook(){
+            this.$store.commit('createHanderShow');
+            this.moveNote = false;
          }
        },
 

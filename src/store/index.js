@@ -40,6 +40,7 @@ const store = new Vuex.Store({
      notelistNumber:false, //笔记列表如果删除完了,显示tip组件信息  如果为true,说明笔记本列表清空了,如果为False说明还有
 
      createBookShow:false, //创建笔记本组件显隐
+     noteBookBg:-1, //笔记本列表的背景颜色控制 和index判断
 
    },
    mutations,

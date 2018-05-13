@@ -170,6 +170,7 @@ export default {
   //Home组件收起, 显示展开图标
   closeHander(state){
     state.unfoldShow = false;
+    state.noteBookBg = -1;  //下次进入笔记本列表 默认都没有背景颜色
   },
 
   //当点击textarea 和 title区域,隐藏快捷方式栏
@@ -221,6 +222,7 @@ export default {
   },
   //Home组件 前往当前笔记本
   QWNOTEBOOK(state,params){
+    state.noteBookBg = params.obj.id; //同步笔记本的id
     state.joinNoteBookObj = params.obj;
     state.joinNoteList = params.obj.children;
   },
@@ -255,5 +257,9 @@ export default {
   addBooks(state,params){
      state.dataList.push(params.obj);
      state.allList = this.getters.tBallList;
+  },
+  // 笔记本背景颜色下标
+  notebookState(state,index){
+      state.noteBookBg = index;
   }
 }

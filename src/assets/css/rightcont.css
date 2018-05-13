@@ -383,6 +383,19 @@
     border-bottom: solid 1px #ececec;
     margin: 0 16px;
 }
+.chuanjian .chuangjianIco {
+  width: 24px;
+  height: 24px;
+  background: url("../images/chuangjianbijiben.png") no-repeat;
+  float: left;
+  margin: 14px 7px 0px 12px;
+}
+.yidongBJB .chuanjian:hover {
+   color: #2dbe60;
+}
+.yidongBJB .chuanjian:hover .chuangjianIco{
+   background: url("../images/hoverxinjianbiji.png") no-repeat;
+}
 .yidongBJB .chuanjian img {
     float: left;
     margin: 16px 6px 0 11px;
@@ -731,10 +744,13 @@
 }
 .quick .item .q_t {
     float: left;
-    white-space:normal;
-    overflow: hidden;
+    width: 70%;
+    height: 20px;
     color: #4a4a4a;
     margin-left: 5px;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap
 }
 
 .quick .item .delete {
@@ -812,7 +828,7 @@
 }
 /*有笔记本信息显示*/
 .youbian .liebiao {
-    /*display: none;*/
+
 }
 .youbian .liebiao .list_main {
     height: 60px;

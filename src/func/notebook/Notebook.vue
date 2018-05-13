@@ -13,14 +13,20 @@
             暂无笔记本信息...
           </div>
           <!--笔记本数据列表-->
-          <div class="liebiao" v-for="item in noteBooks" :key="item.id" @click="clickHander(item)">
+          <div class="liebiao"
+               v-for="(item,index) in noteBooks"
+               :key="item.id" @click="clickHander(item,item.id)"
+               :style="{backgroundColor:$store.state.noteBookBg === item.id ? 'rgb(236,236,236)' : ''}"
+               @mouseover="state=index"
+               @mouseout="state=-1"
+          >
             <div class="list_main">
               <div class="bijixinxi">
                 <div class="noteTitle">
                   {{item.title}}
                 </div>
                 <p class="number">{{item.children.length}} 条笔记</p>
-                 <div class="delnotes" title="删除笔记本" @click.stop="deleteNoteBook(item)"></div>
+                 <div class="delnotes" title="删除笔记本" @click.stop="deleteNoteBook(item)" v-show="state===index"></div>
               </div>
             </div>
           </div>
@@ -33,7 +39,7 @@
         name: "notebook",
         data(){
            return {
-
+              state:-1,
            }
         },
         methods:{
@@ -44,8 +50,9 @@
             })
           },
           // 进入详细的笔记本信息
-          clickHander(obj){
+          clickHander(obj,index){
              //应该判断点击笔记本列表对象的chilren的长度,不能通过vuex状态判断,不靠谱
+             this.$store.commit('notebookState',index);
              if(obj.children.length < 1){
                this.$store.commit('deleteAll')
              }
@@ -64,7 +71,8 @@
           //创建笔记本
           createHander(){
              this.$store.commit('createHanderShow')
-          }
+          },
+
         },
         computed:{
            //从vuex中取笔记列表

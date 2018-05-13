@@ -51,6 +51,7 @@
 
            //创建成功,隐藏创建笔记本组件
            this.$store.commit('createHanderNone');
+           this.noteBookName = ''; //创建成功之后把笔记本名清空,方便下次创建
 
          }
       }
