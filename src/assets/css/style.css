@@ -40,29 +40,17 @@
     width: 36px;
     height: 36px;
     /* border: solid 1px red; */
-    background: url("../images/shoucang1.png") no-repeat;
-}
-.stars:hover{
-
-  background: url("../images/shoucang2png.png") no-repeat;
 }
 .notesbook {
     width: 36px;
     height: 36px;
     margin-top:14px;
-    /*background: url("../images/biji3.png") no-repeat;*/
-}
-.notesbook:hover{
-  /*background: url("../images/biji2.png") no-repeat;*/
+    /* border: solid 1px blue; */
 }
 .notethis {
     width: 36px;
     height: 36px;
     margin-top: 14px;
-    background: url("../images/bijiben1.png") no-repeat;
-}
-.notethis:hover{
-  background: url("../images/bijiben2.png") no-repeat;
 }
 .yinxltag {
     width: 36px;
