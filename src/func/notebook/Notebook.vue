@@ -54,6 +54,8 @@
                 this.$router.push({
                    path:'/home/' + booklist[0].id
                 })
+             }else if(booklist.length === 0){
+                 this.$store.commit('deleteAll')
              }
           }
         },
