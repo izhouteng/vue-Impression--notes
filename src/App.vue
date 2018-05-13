@@ -3,6 +3,7 @@
         <div class="content clearfix">
           <my-del></my-del>
           <my-delbook></my-delbook>
+          <my-createbook></my-createbook>
           <!-- 左侧操作栏 -->
           <div class="yinxleft" id="navl" v-show="navShow" @mousedown.prevent>
             <div class="yinxt">
@@ -60,7 +61,8 @@
 <script>
 
   import del from '@/components/Delete'  //删除笔记组件
-  import delBook from '@/components/delBook'
+  import delBook from '@/components/delBook' //删除笔记本组件
+  import createBook from '@/components/createBook'
 
   export default {
     name: 'App',
@@ -74,6 +76,7 @@
     components:{
       'my-del':del,
       'my-delbook':delBook,
+      'my-createbook':createBook,
     },
     methods:{
       // 新建鼠标移入移出事件
@@ -117,7 +120,6 @@
               path:'/home/11111111'
             });
           }
-
 
           //让显示笔记列表的盒模型显示出来
            this.$store.commit('noteListTrue');
