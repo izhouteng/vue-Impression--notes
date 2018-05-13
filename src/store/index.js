@@ -42,6 +42,9 @@ const store = new Vuex.Store({
      createBookShow:false, //创建笔记本组件显隐
      noteBookBg:-1, //笔记本列表的背景颜色控制 和index判断
 
+     information:false, //笔记信息组件
+     noteInfos:{}, //组件显示笔记信息对象
+
    },
    mutations,
    actions,

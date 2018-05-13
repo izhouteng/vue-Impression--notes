@@ -261,5 +261,11 @@ export default {
   // 笔记本背景颜色下标
   notebookState(state,index){
       state.noteBookBg = index;
+  },
+
+  //组件显示的笔记信息对象
+  infoHander(state,params){
+     state.noteInfos = params.obj;
+     state.information = true; //展示的组件显示出来
   }
 }

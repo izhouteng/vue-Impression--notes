@@ -1,5 +1,5 @@
 <template>
-  <div class="delpage" v-show="false">
+  <div class="delpage" v-show="$store.state.information">
     <div class="cont-center">
       <div class="nt-h-yxs" @mousedown.prevent>
         <div class="nt-h-p">
@@ -19,7 +19,7 @@
             <span class="r-t">更新时间:</span><span class="GJDCG5CMIC">2018 五月 2, 星期三, 下午 6:40</span>
           </div>
           <div class="GJDCG5CLIC" @mousedown.prevent>
-            <span class="r-t">大小:</span><span class="GJDCG5CMIC">3KB</span>
+            <span class="r-t">大小:</span><span class="GJDCG5CMIC">{{dataInfo.size}}</span>
           </div>
           <div class="GJDCG5CLIC" @mousedown.prevent>
             <span class="r-t">历史记录:</span><span class="GJDCG5CMIC" style="color: #23944b">暂无记录</span>
@@ -27,11 +27,11 @@
           <div class="ads">
             <div class="url">
               <span @mousedown.prevent>URL</span>
-              <input type="text" value="https://github.com/qiqingfu" class="val-my" placeholder="设置链接...">
+              <input type="text" v-model="dataUrl" class="val-my" placeholder="设置链接...">
             </div>
             <div class="url">
               <span @mousedown.prevent>作者</span>
-              <input type="text" value="https://github.com/qiqingfu" class="val-my">
+              <input type="text" v-model="dataAuthor" class="val-my">
             </div>
           </div>
         </div>
@@ -53,7 +53,28 @@
 <script>
   // 笔记信息组件
   export default {
-
+      data(){
+        return {
+          dataUrl:'',
+          dataAuthor:'',
+        }
+      },
+     computed:{
+        dataInfo(){
+           let infoDate = this.$store.state.noteInfos;
+           this.dataUrl = infoDate.url;
+           this.dataAuthor = infoDate.author;
+           return infoDate;
+        }
+     },
+    /**
+     * 明天写:
+     *   创建时间
+     *   更新时间
+     *   Kb
+     *   取消
+     *   保存功能
+     */
   }
 </script>
 

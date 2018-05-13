@@ -204,10 +204,7 @@
                    @click.stop="addkJHander(noteContent)"
               >
             </div>
-            <div class="definfo main" title="笔记信息">
-              <img src="@/assets/images/defbijixinxipng.png" alt="">
-              <img src="@/assets/images/bijixinxihover.png" alt="" style="display: none">
-            </div>
+            <div class="definfo main bj-n" title="笔记信息" @click="infoHander"></div>
             <div class="defdelete main" title="删除笔记" @click.stop="delNoteHandel(noteContent)"></div>
             <!--复制笔记链接-->
             <div class="defmore main" title="更多">
@@ -699,6 +696,13 @@
          createNoteBook(){
             this.$store.commit('createHanderShow');
             this.moveNote = false;
+         },
+
+         //infoMation组件显示的笔记信息对象
+         infoHander(){
+            this.$store.commit('infoHander',{
+               obj:this.noteContent,
+            })
          }
        },
 
@@ -787,5 +791,13 @@
      z-index: 12000;
      width: 100%;
      height: 100%;
+  }
+  .bj-n {
+     width: 24px;
+     height: 24px;
+     background: url("../assets/images/defbijixinxipng.png") no-repeat;
+  }
+  .bj-n:hover {
+    background: url("../assets/images/bijixinxihover.png") no-repeat;
   }
 </style>
