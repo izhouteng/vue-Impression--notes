@@ -2,7 +2,7 @@
 .yinxList {
     float: left;
     position: relative;
-    width: 350px;
+    width: 356px;
     height: 100%;
     border-right: solid 1px #ececec;
     box-sizing: border-box;
@@ -57,11 +57,9 @@
 
 /*进入笔记本的时候 显示的笔记本名称*/
 .noteNames {
-    width: 350px;
+    /*width: 350px;*/
     height: 150px;
     background: #393d41;
-    position: relative;
-    display: none;
 }
 .noteNames .noteinfoPic {
     position: absolute;
@@ -82,12 +80,11 @@
 /* 选项列表 */
 .selList {
     width: 205px;
-    /* height: 374px; */
     box-shadow: 0px 6px 20px rgba(0, 0, 0, 0.04), -6px 8px 15px rgba(0, 0, 0, 0.04), 6px 8px 15px rgba(0, 0, 0, 0.04);
     position: absolute;
     right: -138px;
     top: 24px;
-    z-index: 50;
+    z-index: 5200;
     background: #ffffff;
     display: none;
 }
@@ -136,14 +133,14 @@
     padding: 12px 26px;
     height: 120px;
     overflow-y: hidden;
-    border-bottom: solid 1px #ececec;
+    border: solid 3px transparent;
     box-sizing: border-box;
     position: relative;
     line-height: 17px;
     transition: 0.1s;
 }
 .nodescroll .n-conts.sel {
-  border: solid 3px rgb(217,217,217);
+  border-color: rgb(217,217,217);
   box-sizing: border-box;
 }
 .nodescroll .n-conts:hover {
@@ -198,13 +195,12 @@
 .nodescroll .notFound {
     width: 100%;
     height: 100%;
-    overflow-y: scroll;
+    /*overflow-y: scroll;*/
     overflow-x:hidden;
     font-family: caecilia, times, serif;
     word-wrap:break-word;
     font-size: 16px;
     font-weight: 400;
-    display: none;
     /**隐藏**/
 }
 .nodescroll .notFound .count{

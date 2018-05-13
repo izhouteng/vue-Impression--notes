@@ -1,10 +1,12 @@
 .yinxDet {
-    float: left;
+    /*float: left;*/
     position: relative;
     height: 100%;
     /*overflow: hidden;  这个不能设置overflow hidden  会隐藏掉设置提醒弹窗 */
     cursor: pointer;
+    margin-left: 356px;
 }
+
 .dethead {
     height: 53px;
     /*border-bottom: solid 1px #cccccc;*/
@@ -22,8 +24,16 @@
 .yinxDet .defmore {
     position: relative;
 }
+.dethead .defdelete {
+   width: 24px;
+   height: 24px;
+   background: url("../images/defshanchu.png") no-repeat;
+}
+.dethead .defdelete:hover {
+   background: url("../images/shanchubiji.png") no-repeat;
+}
 
-/*闹钟提醒*/
+  /*闹钟提醒*/
 .dethead .deftimes {
     position: relative;
 }
@@ -186,10 +196,20 @@
     line-height: 28px;
     color: #ffffff;
 }
+.detup:hover{
+  background: rgb(218,115,11);
+}
 /*共享 发送消息 发送邮件*/
 .defshared {
     position: relative;
 
+}
+.defshared:hover .gongx{
+   border-color: #2dbe60;
+   color: #2dbe60;
+}
+.defshared:hover .target{
+   border-color: #2dbe60;
 }
 .defshared .gongx {
     float: left;
@@ -220,7 +240,9 @@
     border: solid 1px #2dbe60;
     border-radius: 4px;
     box-sizing: border-box;
-
+}
+.yinxDet .defscreen:hover{
+  background: url("../images/defquanping.png") no-repeat center center #2dbe60;
 }
 .yinxDet .cancel {
     width: 58px;
@@ -234,7 +256,7 @@
 }
 
 /*写笔记完成*/
-.yinxDet .writeNotesOk {
+.yinxDet .writeNotesOk , .yinxDet .writeCancel{
     width: 58px;
     height: 28px;
     color: #ffffff;
@@ -245,6 +267,14 @@
     border-radius: 4px;
     margin-right: 4px;
     /*display: none;*/
+}
+
+ /*取消按钮*/
+.yinxDet .writeNotesOk:hover{
+  background: rgb(40,169,85);
+}
+.yinxDet .writeCancel:hover{
+   background: rgb(40,169,85);
 }
 
 /*发送邮件 发送消息弹窗*/
@@ -326,7 +356,6 @@
     z-index: 99;
     background: #ffffff;
     box-shadow: 0 6px 20px rgba(0, 0, 0, 0.04), -6px 8px 15px rgba(0, 0, 0, 0.04), 6px 8px 15px rgba(0, 0, 0, 0.04);
-    display: none;
 }
 .yidongBJB .findnotes {
     height: 68px;
@@ -344,6 +373,9 @@
     padding-left: 6px;
     box-sizing: border-box;
     border-radius: 2px;
+}
+.yidongBJB .findValue::placeholder{
+  text-align: center;
 }
  /*创建笔记本*/
 .yidongBJB .chuanjian {
@@ -373,7 +405,9 @@
     background: url("../images/bijibenxuanzhongdebiaoshi.png") no-repeat 300px 14px;
     color: #2dbe60;
 }
-
+.yidongBJB .mynotesbook:hover{
+  color: rgba(43,181,92,0.9);
+}
 
 
 
@@ -404,6 +438,20 @@
 }
 .addtag .tianjiaBQ {
     margin-left: 14px;
+    margin-top: -4px;
+}
+.addtag .tianjiaBQ .tagValue {
+  outline: 0;
+  border: 1px solid #e9eaec;
+  border-radius: 4px;
+  height: 22px;
+  line-height: 22px;
+  margin: 2px 4px 2px 0;
+  padding: 0 8px;
+  background: #f7f7f7;
+  font-size: 12px;
+  vertical-align:middle;
+  overflow: hidden;
 }
 
 /*编辑*/
@@ -470,9 +518,10 @@
 
 /*搜索笔记---------------------------------------------------------------------------*/
 .youbian {
-    float: left;
+    /*float: left;*/
     position: relative;
     overflow: hidden;
+    margin-left: 72px;
     /*群聊 等等滑窗移出需要隐藏*/
 }
 /*组件根容器div,需要浮动*/
@@ -480,18 +529,19 @@
   float: left;
 }
 .youbian .searchNote {
-    height: 228px;
+    height: 165px;
     position: relative;
     padding: 0 64px;
     box-sizing: border-box;
     cursor: pointer;
-    display: none;
+    border-bottom: solid 1px #ececec;
+    /*display: none;*/
 }
 .youbian .searchChild {
-    border-bottom: solid 1px #ececec;
     width: 100%;
     height: 100%;
     position: relative;
+    top: -71px;
 }
 .youbian .searchChild .searchValue {
     height: 52px;
@@ -517,7 +567,6 @@
     position: absolute;
     right: 12px;
     top: 136px;
-    display: none;
 }
 /*修改placehodle样式*/
 .youbian .searchChild .searchValue::placeholder{
@@ -542,13 +591,13 @@
 .youbian .header {
     height: 110px;
     border-bottom: 1px solid #ececec;
-    padding: 22px 24px 12px 24px;
+    padding: 24px 24px 12px 24px;
     color: #878787;
     position: relative;
 }
 .youbian .title {
-    font-family: gotham, helvetica, arial, sans-serif;
-    font-size: 21px;
+    font-family: Arial,helvetica, arial, sans-serif;
+    font-size: 14px;
     text-transform: uppercase;
     letter-spacing:0.5px;
     font-weight: normal;
@@ -613,7 +662,7 @@
 /*<!--快捷方式滑窗口--------------------------------------------------------------->*/
 .youbian .quick {
     position: absolute;
-    left: -465px;
+    /*left: -465px;*/
     top: 0px;
     height: 100%;
     width: 456px;
@@ -664,26 +713,21 @@
     overflow-y: auto;
     width: 100%;
     height: 100%;
-    display: none;
 }
 .quick .quickList .item {
-    padding: 9px 0px;
+    padding: 7px 0px;
     color: #4a4a4a;
     font-family: caecilia, times, serif;
     font-size: 16px;
     position: relative;
 }
-/*鼠标移入*/
-/*.quick .quickList .item:hover{*/
-    /*background: rgb(66,197,112);*/
-
-/*}*/
 .quick .item .beforeicon {
     width: 16px;
     height: 16px;
     background: url("../images/kuaijiefangshiyouneirongdetubiao.png") no-repeat 0px 0px;
     float: left;
     margin-left: 33px;
+    margin-top: 4px;
 }
 .quick .item .q_t {
     float: left;
@@ -720,7 +764,7 @@
 /*笔记本滑动窗-----------------------------------*/
 .youbian .bijibenHDC {
     position: absolute;
-    left: -462px;
+
     top: 0px;
     right: 0px;
     bottom: 0px;
@@ -773,10 +817,8 @@
 .youbian .liebiao .list_main {
     height: 60px;
     width: 100%;
-    padding: 0 12px;
+    padding: 0 24px;
     box-sizing: border-box;
-    background: rgb(64,188,108);
-    /*鼠标移入笔记 这里添加背景颜色为 64 188 108*/
 }
 .youbian .liebiao .list_main .bijixinxi {
     height: 100%;
@@ -787,11 +829,10 @@
 }
 .youbian .liebiao .list_main .noteTitle {
     white-space:normal;
-    /*color: #4a4a4a;*/
-    color: #fff;
+    color: #4a4a4a;
     overflow: hidden;
     text-overflow:ellipsis;
-    height: 18px;
+    height: 30px;
     padding-top: 10px;
 }
 .youbian .liebiao .list_main .number {
@@ -799,12 +840,55 @@
     font-size: 11px;
     font-weight: 500;
     padding-top: 6px;
-    color: #c9f2d0;
+    color: #878787;
 }
 .youbian .liebiao .list_main .delnotes {
     position: absolute;
-    right: 16px;
+    right: 0px;
     top: 14px;
+    width: 24px;
+    height: 24px;
+    background: url("../images/1shanchubiji.png") no-repeat;
 }
+.youbian .liebiao .list_main .delnotes:hover{
+    background: url("../images/deletehover_solid_white_24x24.png") no-repeat;
+}
+
+#delicom {
+   background: url("../images/delete_white_24x24.png") no-repeat;
+   width: 24px;
+   height: 24px;
+}
+#delicom:hover{
+  background: url("../images/deletehover_solid_white_24x24.png") no-repeat;
+}
+.edit-textarea textarea {
+  font-size: 16px;
+}
+.edit-textarea textarea::placeholder{
+    font-family: gotham, helvetica, arial, sans-serif;
+    color: #c4c4c4;
+    font-size: 13px;
+}
+.editDefshake {
+   width: 24px;
+   height: 24px;
+   background: url("../images/defshoucang.png") no-repeat;
+}
+.editshake{
+  background: url("../images/shanchukuaijiefangshiwujiaoxing.png") no-repeat;
+}
+.editDefshake:hover{
+    background: url("../images/shanchukuaijiefangshiwujiaoxing.png") no-repeat;
+}
+.editDefdelete {
+  width: 24px;
+  height: 24px;
+  background: url("../images/defshanchu.png") no-repeat;
+}
+.editDefdelete:hover{
+  background: url("../images/shanchubiji.png") no-repeat;
+}
+
 
 
