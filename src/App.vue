@@ -4,6 +4,7 @@
           <my-del></my-del>
           <my-delbook></my-delbook>
           <my-createbook></my-createbook>
+          <my-information></my-information>
           <!-- 左侧操作栏 -->
           <div class="yinxleft" id="navl" v-show="navShow" @mousedown.prevent>
             <div class="yinxt">
@@ -63,6 +64,7 @@
   import del from '@/components/Delete'  //删除笔记组件
   import delBook from '@/components/delBook' //删除笔记本组件
   import createBook from '@/components/createBook'
+  import inforMation from '@/components/inforMation'
 
   export default {
     name: 'App',
@@ -77,6 +79,7 @@
       'my-del':del,
       'my-delbook':delBook,
       'my-createbook':createBook,
+      'my-information':inforMation,
     },
     methods:{
       // 新建鼠标移入移出事件
