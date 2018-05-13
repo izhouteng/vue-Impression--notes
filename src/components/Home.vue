@@ -613,6 +613,16 @@
                   this.searchValue = ''; //笔记删除完了,重新请求
                 }
             });
+            /*----------------------------------------------------*/
+            // 在Home组件中的删除功能,点击删除传入当前显示的对象,应该判断它pid的chilren的长度来决定第几阶段的笔记删除完了
+            // 不能只考虑笔记列表中的删除功能
+            this.allNoteBook.forEach(el => {
+                if(el.id == obj.pid){
+                   if(el.children.length < 1){
+                      this.$store.commit('deleteAll')
+                   }
+                }
+            });
 
             this.$store.commit('delClickHander',{
                obj:obj,

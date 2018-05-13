@@ -45,6 +45,10 @@
           },
           // 进入详细的笔记本信息
           clickHander(obj){
+             //应该判断点击笔记本列表对象的chilren的长度,不能通过vuex状态判断,不靠谱
+             if(obj.children.length < 1){
+               this.$store.commit('deleteAll')
+             }
              this.$store.commit('inNotelist',{
                 obj:obj,
              });
@@ -54,8 +58,6 @@
                 this.$router.push({
                    path:'/home/' + booklist[0].id
                 })
-             }else if(booklist.length === 0){
-                 this.$store.commit('deleteAll')
              }
           }
         },
