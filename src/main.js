@@ -10,6 +10,8 @@ import iView from 'iView';
 import 'iview/dist/styles/iview.css';
 Vue.use(iView);
 
+import dayjs from '@/assets/js/getDateTimes'
+Vue.use(dayjs);
 
 import https from '@/server/index'
 Vue.use(https);
