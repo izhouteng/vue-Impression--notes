@@ -297,5 +297,17 @@ export default {
   // 选项列表显示
   selectShowHander(state){
     state.selectDown = !state.selectDown;
+  },
+
+  /***********同步数据日期****************/
+
+   /*---------七天之内 一天之上的日期 ----------*/
+   sevendays(state,params){
+      state.allList.forEach(item => {
+         if(item === params.obj){
+            item.createTime = params.time;
+         }
+      })
   }
+  /***************************/
 }

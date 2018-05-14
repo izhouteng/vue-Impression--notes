@@ -335,7 +335,8 @@
     import notsearch from '@/components/prompt/Notsearch'
     import myTip from '@/components/prompt/tip'
     import yxSelectSort from '@/func/select/yx-SelectSort'
-
+    let dayjs = require('dayjs');
+    dayjs().format();
 
     export default {
         name: "home",
@@ -408,9 +409,73 @@
               this.allNoteList = this.$store.state.allList;  //全部的笔记
               this.inteContent();
               //关闭loading动画
-              this.$store.commit('closeLoadding');
-            });
+              setTimeout(() => {
+                this.$store.commit('closeLoadding');
+              },1000)
+            }).catch((err) => {
+               alert('网络延迟,请刷新重试')
+            })
           },
+
+           // 同步笔记时间数据
+            getDateTimes(){
+                //在这里计算时间
+                let newTime = dayjs().unix();
+                this.allNoteList.forEach(item => {
+                  let diffTime = newTime - item.beginTime;   // 获取到时间差,计算 小时 分钟 天 周
+
+                  //创建时间为7天之内的笔记对象
+                  let day = parseInt(diffTime / 86400);
+                  // console.log(day);
+                  if(day <= 7){
+                    this.$store.commit('sevendays',{
+                      time:day + ' 天前',
+                      obj:item,
+                    })
+                  }
+                  // 一周前
+                  else if(day > 7 && day < 14){
+                    this.$store.commit('sevendays',{
+                      time:"上周",
+                      obj:item,
+                    })
+                  }
+                  // 2周前
+                  else if(day >= 14 && day < 21){
+                    this.$store.commit('sevendays',{
+                      time:"2 周前",
+                      obj:item,
+                    })
+                  }
+                  // 3周前
+                  else if(day >= 21 && day < 28){
+                    this.$store.commit('sevendays',{
+                      time:"3 周前",
+                      obj:item
+                    })
+                  }
+                  //4 周前
+                  else if(day >= 28 && day <= 31){
+                    this.$store.commit('sevendays',{
+                      time:"4 周前",
+                      obj:item,
+                    })
+                  }
+                  // 通过 对象的时间戳 转换为 18/xx/xx
+                  else if(day > 31){
+                    let dateObj = item.beginTime;
+                    // 获取到 2018/4/10格式的时间
+                    let newTimer = new Date(dateObj*1000).toLocaleString().split(' ')[0].split('/').join(' /');
+                    // 提交mutations 修改vuex中数据的createTime
+                    this.$store.commit('sevendays',{
+                      time:newTimer,
+                      obj:item,
+                    })
+                  }
+                });
+                // 一天之内的
+
+            },
 
           // 初始化noteContent
           inteContent(){
@@ -728,7 +793,8 @@
                 this.$store.dispatch('success',{data:Storage});
                 this.allNoteList = this.$store.state.allList;
                 this.inteContent();
-                this.$store.commit('closeLoadding');
+                this.$store.commit('closeLoadding'); //关闭加载loading
+                this.getDateTimes(); //第一次请求成功,同步时间
             }
 
         },
