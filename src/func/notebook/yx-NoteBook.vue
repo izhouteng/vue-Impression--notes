@@ -66,6 +66,9 @@
                    path:'/home/1111111'
                 })
              }
+             // 进入笔记列表,获取最新的笔记创建时间
+             this.getDateTimes.getDateTimes.call(this,booklist)
+
           },
 
           //创建笔记本

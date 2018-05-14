@@ -493,8 +493,6 @@
               //每次路由更新就调用这个方法,同步textarea和笔记列表数据
               // 这两个待优化
               this.synchronous();
-              // this.getDateTimes(); //更新笔记时间
-
           },
 
          // 点击 移动笔记

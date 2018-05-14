@@ -125,6 +125,7 @@
             this.$router.push({
               path:'/home/11111111'
             });
+            this.getDateTimes.getDateTimes.call(this,n)
           }
 
           //让显示笔记列表的盒模型显示出来
@@ -147,7 +148,6 @@
     watch:{
         $route(){
           let routeName = this.$route.path.slice(0,5);
-          // console.log(routeName);
 
           if(routeName === '/edit'){
             if(this.navShow !== false){

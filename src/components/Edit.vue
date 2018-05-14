@@ -206,7 +206,6 @@
             };
               // 新建笔记对象保存到vuex状态
             if(obj){
-               console.log(obj);
                this.$store.commit('addNotes',{
                   obj:obj,
                   id:this.state

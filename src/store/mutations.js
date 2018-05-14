@@ -179,9 +179,10 @@ export default {
   openHander(state){
      state.unfoldShow = true;
   },
-  //Home组件收起, 显示展开图标
+  //Home组件收起, 显示展开图标   // 隐藏笔记信息组件
   closeHander(state){
     state.unfoldShow = false;
+    state.information = false;
   },
 
   //当点击textarea 和 title区域,隐藏快捷方式栏
@@ -278,10 +279,6 @@ export default {
   infoHander(state,params){
      state.noteInfos = params.obj;
      state.information = true; //展示的组件显示出来
-  },
-  // 隐藏笔记信息组件
-  closeHander(state){
-     state.information = false;
   },
   // 保存笔记信息的 url 作者信息更改
   saveHander(state,params){
