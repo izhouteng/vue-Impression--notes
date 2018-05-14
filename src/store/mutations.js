@@ -267,5 +267,19 @@ export default {
   infoHander(state,params){
      state.noteInfos = params.obj;
      state.information = true; //展示的组件显示出来
+  },
+  // 隐藏笔记信息组件
+  closeHander(state){
+     state.information = false;
+  },
+  // 保存笔记信息的 url 作者信息更改
+  saveHander(state,params){
+     state.allList.forEach(item => {
+        if(item.id == params.id){
+           item.url = params.url;
+           item.author = params.author;
+        }
+     });
+    state.information = false;
   }
 }

@@ -6,7 +6,7 @@
           <img src="@/assets/images/note-info-pages.png" alt="">
           <p class="info-p">笔记信息</p>
           <div class="h-x"></div>
-          <div class="t-t-nt">2018-02-08 Dom操作</div>
+          <div class="t-t-nt">{{dataInfo.title}}</div>
         </div>
       </div>
       <div class="g-t-y">
@@ -43,8 +43,8 @@
         </div>
       </div>
       <div class="btn clearfix" @mousedown.prevent>
-        <span class="calcel GJDCG5COCC">取消</span>
-        <span class="isdel GJDCG5COCC">保存</span>
+        <span class="calcel GJDCG5COCC" @click="closeHander">取消</span>
+        <span class="isdel GJDCG5COCC" @click="saveHander">保存</span>
       </div>
     </div>
   </div>
@@ -59,6 +59,21 @@
           dataAuthor:'',
         }
       },
+    methods:{
+        //取消
+      closeHander(){
+         this.$store.commit('closeHander');
+      },
+      // 保存修改笔记信息
+      // 将当前对象的id, url地址, 作者信息提交mutations 进行匹配这个数据进行修改数据
+      saveHander(){
+         this.$store.commit('saveHander',{
+            id:this.dataInfo.id,
+            url:this.dataUrl,
+            author:this.dataAuthor,
+         })
+      }
+    },
      computed:{
         dataInfo(){
            let infoDate = this.$store.state.noteInfos;
