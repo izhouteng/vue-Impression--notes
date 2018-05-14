@@ -21,10 +21,10 @@
       </div>
 
       <!--快捷方式滑窗口--------------------------------------------------------------->
-      <quick></quick>
+      <yxQuickBook></yxQuickBook>
 
       <!--笔记本滑动窗----------------->
-      <notebook></notebook>
+      <yxNotebook></yxNotebook>
 
       <!--搜索笔记-------------------------------------------------------------------->
       <div class="searchNote" v-show="$store.state.searchBox">
@@ -345,8 +345,8 @@
 
     import {clientAuto} from '@/assets/js/client'
     import {Tag,Button } from 'iview'
-    import quick from '@/func/quick/Quick'
-    import notebook from '@/func/notebook/Notebook'
+    import yxQuickBook from '@/func/quick/yx-QuickBook'
+    import yxNotebook from '@/func/notebook/yx-NoteBook'
     import notebookInfo from '@/components/prompt/notebookInfo'
     import notsearch from '@/components/prompt/Notsearch'
     import myTip from '@/components/prompt/tip'
@@ -358,8 +358,8 @@
         components:{
           Tag,
           Button,
-          quick,
-          notebook,
+          yxQuickBook,
+          yxNotebook,
           notebookInfo,
           notsearch,
           'my-tip':myTip,

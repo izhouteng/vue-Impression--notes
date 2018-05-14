@@ -121,6 +121,7 @@ export default {
   searchNone(state){
     state.searchBox = false;
     state.searchValue = '';
+    state.noteBookBg = -1;   // 回Home页,让笔记本bg-color为未选中
   },
   //未搜索到笔记
   isNot404False(state){
@@ -170,7 +171,6 @@ export default {
   //Home组件收起, 显示展开图标
   closeHander(state){
     state.unfoldShow = false;
-    state.noteBookBg = -1;  //下次进入笔记本列表 默认都没有背景颜色
   },
 
   //当点击textarea 和 title区域,隐藏快捷方式栏
