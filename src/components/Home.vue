@@ -422,6 +422,8 @@
               // 请求成功之后
               this.allNoteList = this.$store.state.allList;  //全部的笔记
               this.inteContent();
+              //关闭loading动画
+              this.$store.commit('closeLoadding');
             });
           },
 
@@ -736,6 +738,7 @@
                 this.$store.dispatch('success',{data:Storage});
                 this.allNoteList = this.$store.state.allList;
                 this.inteContent();
+                this.$store.commit('closeLoadding');
             }
 
         },

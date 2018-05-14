@@ -6,6 +6,11 @@ export default {
      state.allList = this.getters.tBallList;
   },
 
+  // 请求成功,关闭loadding动画
+  closeLoadding(state){
+     state.loadingState = false;
+  },
+
   // 同步 title和textarea内容
   editChange(state,params){
       state.allList.forEach(item => {
@@ -97,7 +102,7 @@ export default {
      state.noteDelShow = false;
   },
 
-  // 新建笔记
+  // 新建笔记 完成
   addNotes(state,params){
      state.dataList.forEach(item => {
         if(item.id == params.id){
@@ -105,6 +110,12 @@ export default {
         }
      });
      state.allList = this.getters.tBallList;
+
+     // 处理情况,如果当前在笔记本列表中新建笔记的话,如果新建完成,应该回到Home列表笔记本,展示出所有的笔记数据
+     // 并且笔记本的bg为不选中的状态
+     state.joinNoteList = [];
+     state.joinNoteBookObj = {};
+     state.noteBookBg = -1;
   },
 
 

@@ -5,6 +5,9 @@
           <yxDeleteNoteBooks></yxDeleteNoteBooks>
           <yx-CreateBook></yx-CreateBook>
           <yxInforMationBook></yxInforMationBook>
+          <div class="loading" v-show="$store.state.loadingState">
+              <img src="./assets/images/loadding.gif" alt="" class="loadingPic">
+          </div>
           <!-- 左侧操作栏 -->
           <div class="yinxleft" id="navl" v-show="navShow" @mousedown.prevent>
             <div class="yinxt">
@@ -164,5 +167,22 @@
   .content {
     width: 100%;
     height: 100%;
+  }
+  .loading {
+    position: relative;
+    z-index: 99999;
+    width: 100%;
+    height: 100%;
+    background: #5e4674;
+  }
+  .loadingPic {
+    width: 400px;
+    height: 325px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
   }
 </style>
