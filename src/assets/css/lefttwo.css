@@ -114,7 +114,7 @@
     padding: 8px 54px 10px 20px;
     background: url('../images/box_checked_green_24x24.png') no-repeat 162px 4px;
 }
-.viewsel .n-pit {
+.viewsel.n-pit {
   color: #606060;
   padding: 8px 54px 10px 20px;
   background: url("../../assets/images/checkebox1.png") no-repeat 162px 4px;
@@ -166,8 +166,9 @@
     width: 60%;
 }
 .nodescroll .n-times {
-    font-size: 11px;
+    font-size: 13px;
     color: #878787;
+    font-weight: 400;
     padding: 4px 0;
 }
 .nodescroll .n-wrap {

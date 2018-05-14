@@ -335,6 +335,7 @@
     import notsearch from '@/components/prompt/Notsearch'
     import myTip from '@/components/prompt/tip'
     import yxSelectSort from '@/func/select/yx-SelectSort'
+    // 问题: 当我两个多个组件用到这个模块,怎么设置可以每个组件都共享
     let dayjs = require('dayjs');
     dayjs().format();
 
@@ -408,6 +409,7 @@
               // 请求成功之后
               this.allNoteList = this.$store.state.allList;  //全部的笔记
               this.inteContent();
+              this.getDateTimes(); // 第一次请求mock数据同步时间
               //关闭loading动画
               setTimeout(() => {
                 this.$store.commit('closeLoadding');
@@ -427,7 +429,7 @@
                   //创建时间为7天之内的笔记对象
                   let day = parseInt(diffTime / 86400);
                   // console.log(day);
-                  if(day <= 7){
+                  if(day <= 7 && day > 1){
                     this.$store.commit('sevendays',{
                       time:day + ' 天前',
                       obj:item,
@@ -472,9 +474,45 @@
                       obj:item,
                     })
                   }
-                });
-                // 一天之内的
+                  else if(day >= 0 && day <= 1){
+                     // 计算小时 1 <= h < 24
+                     let hours = parseInt(diffTime / 3600);
+                     if( 1 <= hours && hours < 24){
+                       this.$store.commit('sevendays',{
+                         time:hours + ' 小时前',
+                         obj:item,
+                       })
+                     }
+                     // 划分分钟
+                     if( 0 <= hours && hours < 1){
+                        let minutes = parseInt(diffTime / 60);
+                         this.$store.commit('sevendays',{
+                           time:minutes + ' 分钟前',
+                           obj:item,
+                         });
+                         // 划分秒 > 5s || < 5s 刚刚
+                        if(minutes < 1){
+                           let seconds = diffTime;
+                           if(seconds > 5){
+                              // 大于5 显示几秒前,否则显示刚刚
+                               this.$store.commit('sevendays',{
+                                 time:seconds + ' 秒前',
+                                 obj:item,
+                               });
+                           }else {
+                               this.$store.commit('sevendays',{
+                                 time:"刚刚",
+                                 obj:item,
+                               });
+                           }
+                        }
+                     }
+                  }
 
+
+                  // 一天之内的 24小时 17小时 5小时 57分钟 20分钟 刚刚 情况下处理
+
+                });
             },
 
           // 初始化noteContent
@@ -546,7 +584,9 @@
               // this.findDateList; //搜索笔记列表
 
               //每次路由更新就调用这个方法,同步textarea和笔记列表数据
-              this.synchronous()
+              // 这两个待优化
+              this.synchronous();
+              this.getDateTimes(); //更新笔记时间
 
           },
 
@@ -794,7 +834,7 @@
                 this.allNoteList = this.$store.state.allList;
                 this.inteContent();
                 this.$store.commit('closeLoadding'); //关闭加载loading
-                this.getDateTimes(); //第一次请求成功,同步时间
+                this.getDateTimes(); //localStorage中获取之后同步时间
             }
 
         },

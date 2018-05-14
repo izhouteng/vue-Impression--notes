@@ -18,7 +18,7 @@ export default {
             item.title = params.title;
             item.content = params.content;
          }
-      })
+      });
   },
 
   // 移动笔记

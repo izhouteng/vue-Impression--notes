@@ -124,6 +124,9 @@
 <script>
     import {editclient} from '@/assets/js/client'
     import {Tag,Button } from 'iview'
+    let dayjs = require('dayjs');
+    dayjs().format();
+
     export default {
         name: "edit",
         data(){
@@ -141,6 +144,7 @@
             tagVal:'', //双向数据绑定输入标签的内容
             tagShow:false,//标签input框显示和隐藏
             shortcut:false, //快捷方式状态
+            beginTime:'', //当前笔记创建时间
           }
         },
         mounted(){
@@ -171,7 +175,8 @@
 
           // 取消保存
           editCancelHander(){
-             this.$router.go(-1)
+             this.$router.go(-1);
+             this.beginTime = '';
           },
           //新建完成
           xJnotesHander(){
@@ -189,13 +194,15 @@
                "remind":false,
                "label":this.count,
                "sel":false,
-               "createTime":"刚刚",
+               "createTime":"",
                "Shared":false,
                "size":"1KB",
                "url": "https://github.com/qiqingfu",
                "author": "9116895@qq.com",
                "remindTime":"",
                "content":this.editTextarea,
+               "beginTime":this.beginTime,  //同步创建笔记的时间
+               "updateTime":'', //更新的时间暂时未空
             };
               // 新建笔记对象保存到vuex状态
             if(obj){
@@ -293,6 +300,9 @@
                 path:'/home'
               })
             }
+
+            // 组件初始化,获取创建笔记的时间戳
+            this.beginTime = dayjs().unix();
         },
     }
 </script>
