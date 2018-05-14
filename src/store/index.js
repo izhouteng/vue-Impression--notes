@@ -46,6 +46,8 @@ const store = new Vuex.Store({
      information:false, //笔记信息组件
      noteInfos:{}, //组件显示笔记信息对象
 
+     selectDown:false, //选项列表组件的显隐
+
    },
    mutations,
    actions,

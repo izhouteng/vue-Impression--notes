@@ -63,27 +63,11 @@
           <!-- 笔记条数和选项 -->
           <div class="noteNumbers clearfix">
             <div class="yinxnum">{{allNoteList.length}} 条笔记</div>
-            <div class="select">
+            <div class="select" @click="selectHander">
               <span>选项</span>
             </div>
-            <!-- 选项列表 -->
-            <div class="selList">
-              <legend class="sortingWay">排序方式</legend>
-              <ul class="sortlist">
-                <li>创建日期(最早优先)</li>
-                <li>创建日期(最新优先)</li>
-                <li style="background: url('@/assets/images/duigou.png') no-repeat 162px 11px;">更新日期(最早优先)</li>
-                <li>创建日期(最新优先)</li>
-                <li>标题(升序排列)</li>
-                <li>标题(降序排列)</li>
-              </ul>
-              <div class="MenuDivider"></div>
-              <div class="viewsel">
-                <legend>查看选项</legend>
-                <div>显示图片</div>
-                <div>显示文字</div>
-              </div>
-            </div>
+            <!--选项列表-->
+            <yxSelectSort></yxSelectSort>
           </div>
         </div>
 
@@ -350,7 +334,7 @@
     import notebookInfo from '@/components/prompt/notebookInfo'
     import notsearch from '@/components/prompt/Notsearch'
     import myTip from '@/components/prompt/tip'
-
+    import yxSelectSort from '@/func/select/yx-SelectSort'
 
 
     export default {
@@ -363,6 +347,7 @@
           notebookInfo,
           notsearch,
           'my-tip':myTip,
+          yxSelectSort,
 
         },
         data(){
@@ -707,6 +692,11 @@
             this.$store.commit('infoHander',{
                obj:this.noteContent,
             })
+         },
+
+         // 选项列表功能
+         selectHander(){
+            this.$store.commit('selectShowHander')
          }
        },
 

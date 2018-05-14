@@ -4,7 +4,8 @@ import VueRouter from 'vue-router'
 Vue.use(VueRouter);
 
 import Home from '@/components/Home'
-import Edit from '@/components/Edit'
+// import Edit from '@/components/Edit'
+const Edit = () => import('@/components/Edit');
 
 let routes = [
   {

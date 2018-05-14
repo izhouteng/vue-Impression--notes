@@ -86,7 +86,6 @@
     top: 24px;
     z-index: 5200;
     background: #ffffff;
-    display: none;
 }
 .sortingWay {
     font-size: 11px;
@@ -110,10 +109,15 @@
     font-size: 11px;
     color: #ababab;
 }
-.viewsel div {
+.viewsel .s-pit {
     color: #606060;
     padding: 8px 54px 10px 20px;
     background: url('../images/box_checked_green_24x24.png') no-repeat 162px 4px;
+}
+.viewsel .n-pit {
+  color: #606060;
+  padding: 8px 54px 10px 20px;
+  background: url("../../assets/images/checkebox1.png") no-repeat 162px 4px;
 }
 
 /* 笔记本列表区域 */

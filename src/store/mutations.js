@@ -292,5 +292,10 @@ export default {
         }
      });
     state.information = false;
+  },
+
+  // 选项列表显示
+  selectShowHander(state){
+    state.selectDown = !state.selectDown;
   }
 }
