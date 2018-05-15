@@ -47,13 +47,15 @@ const store = new Vuex.Store({
      noteInfos:{}, //组件显示笔记信息对象
 
      selectDown:false, //选项列表组件的显隐
-
      noteListSortway:'createLatest', //笔记本列表排序方式,默认 创建日期(最新优先)
-
      showTextState:true,  // 笔记列表 显示文字功能(yx-SelectSort组件)
 
      tipsuccessInfo:{},  // successInfo 组件显示的内容
      tipsuccessState:false, // successInfo 组件显隐状态
+
+     setRemin:false, //提醒已添加组件
+     changeRemin:false, // 修改弹窗提醒
+     undoRemin:false, // 清除提醒,撤销
 
    },
    mutations,

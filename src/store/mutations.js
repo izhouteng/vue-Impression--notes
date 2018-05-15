@@ -337,5 +337,24 @@ export default {
   // 显示 successinfo提示
   successShow(state){
      state.tipsuccessState = true;
+  },
+
+
+  // 点击任意一处,关闭通知提醒弹窗
+  closeRemin(state){
+    state.setRemin = false;
+    state.changeRemin = false;
+    state.undoRemin = false;
+  },
+  // 设置提醒,同步allList数据
+  setRemin(state,params){
+     state.allList.forEach(item => {
+        if(item === params.obj){
+           item.remind = true;
+        }
+     });
+    // 通知我组件加载..
+    state.setRemin = true;
   }
+
 }

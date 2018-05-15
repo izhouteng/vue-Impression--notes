@@ -55,7 +55,7 @@
               <div class="cuthide" v-show="!$store.state.searchBox" v-if="!this.$store.state.joinNoteBookObj.title">
                 <h2 class="notTitle">笔记</h2>
                 <div class="yinxcut">
-                  <span>网页剪藏</span>
+                  <a href="https://www.yinxiang.com/webclipper/" target="_blank">网页剪藏</a>
                 </div>
               </div>
 
@@ -139,45 +139,21 @@
         <!--标题功能栏-->
         <div class="dethead" @mousedown.prevent>
           <div class="detfunc">
-            <div class="deftimes main">
-              <img src="@/assets/images/defshizhong.png" alt="" title="设置提醒">
+            <!--active-->
+            <div class="deftimes main"
+                 title="设置提醒"
+                 @click.stop="remindHander"
+                 :class="noteContent.remind ? 'active' : ''"
+            >
               <span class="tixingshijian">18/5/5</span>
               <!--提醒已添加 通知我弹窗-->
-              <div class="reminderAdded">
-                <img src="@/assets/images/shangjianjiaohao.png" alt="" class="target">
-                <p class="tixingok">提醒已添加</p>
-                <div class="notice">
-                  通知我
-                </div>
-              </div>
+              <setremin></setremin>
 
               <!--修改弹窗提醒-->
-              <div class="changeTixing">
-                <img src="@/assets/images/shangjianjiaohao.png" alt="" class="target">
-                <div class="complete main">
-                  标记完成
-                </div>
-                <div class="main">
-                  清除提醒
-                </div>
-                <div class="main">
-                  修改日期
-                </div>
-              </div>
+              <changeremin></changeremin>
 
               <!--撤销 修改提醒 清除日期-->
-              <div class="undo">
-                <img src="@/assets/images/shangjianjiaohao.png" alt="" class="target">
-                <div class="complete main">
-                  撤销
-                </div>
-                <div class="main">
-                  清除提醒
-                </div>
-                <div class="main">
-                  修改日期
-                </div>
-              </div>
+              <undoremin></undoremin>
 
             </div>
 
@@ -344,6 +320,11 @@
     let dayjs = require('dayjs');
     dayjs().format();
 
+    //设置提醒组件
+    import setremin from '@/func/reminders/SetRemin'
+    import changeremin from '@/func/reminders/changeremin'
+    import undoremin from '@/func/reminders/UndoRemin'
+
     export default {
         name: "home",
         components:{
@@ -356,6 +337,10 @@
           'my-tip':myTip,
           yxSelectSort,
           successinfo,
+          setremin,
+          changeremin,
+          undoremin,
+
 
         },
         data(){
@@ -728,6 +713,20 @@
          // 选项列表功能
          selectHander(){
             this.$store.commit('selectShowHander')
+         },
+
+         // 点击设置提醒 给当前对象设置
+         remindHander(){
+           this.$store.commit('closeSelectHander'); //设置提醒和选项菜单都阻止了冒泡,应该手动关闭
+            // 如果当前对象没有设置提醒,就设置
+            if(!this.noteContent.remind){
+                this.$store.commit('setRemin',{
+                  obj:this.noteContent,
+                })
+            }else{
+              // 如果已经设置了提醒
+
+            }
          }
        },
 

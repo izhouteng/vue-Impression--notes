@@ -144,11 +144,12 @@
       noteBookHander(){
          this.$store.commit('noteBookHander')
       },
-      // 选项下拉菜单收起
+      // 选项下拉菜单收起 通知提醒弹框显示
       closeSelect(state){
          if(this.$store.state.selectDown){
             this.$store.commit('closeSelectHander')
          }
+         this.$store.commit('closeRemin');
       }
     },
     watch:{
