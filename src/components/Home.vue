@@ -476,6 +476,8 @@
                 }
               }
 
+              window.document.title = this.noteContent.title;
+
               // 同步标签 此时this.count和this.noteContent引用的是同一个对象label
               this.count = this.noteContent.label;
               // vuex的数据同步到Home组件
