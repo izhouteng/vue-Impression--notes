@@ -906,5 +906,57 @@
   background: url("../images/shanchubiji.png") no-repeat;
 }
 
+.youbian .deleteTip {
+     height: 34px;
+     width: 100%;
+     position: absolute;
+     left: 0px;
+     top: 16px;
+     z-index: 999111;
+}
+.deleteTip .d-tip-cont {
+    height: 34px;
+    width: 624px;
+    background: #26be5b;
+    margin: 0 auto;
+    border-radius: 4px;
+    cursor: pointer;
+}
+.deleteTip .s-cont {
+    width: 574px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    text-align: center;
+    vertical-align: middle;
+}
+.deleteTip .duigou {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  margin-right: 6px;
+  background: #1d9351;
+  border-radius: 50%;
+  text-align: center;
+  padding-top: 6px;
+  position: relative;
+  top: 6px;
+}
+.deleteTip .shanchuTip {
+  display: inline-block;
+  color: #ffffff;
+  font-family: gotham, helvetica, arial, sans-serif;
+  font-size: 11px;
+  position: relative;
+  top: 2px;
+}
+.deleteTip .shanchuTip span {
+   text-decoration: underline;
+   margin-left: 2px;
+}
+
 
 

@@ -97,11 +97,17 @@ export default {
         state.joinNoteList = state.joinNoteList.filter(item => item !== state.delNoteInfo);
      }
 
-
+     //将删除的对象同步到tipsuccessInfo中
+      state.tipsuccessInfo = {
+        objname:state.delNoteInfo.title,
+        tip:'已成功删除笔记',
+      };
+      state.tipsuccessState = false; //先隐藏,再显示
      //通过调用getters中的方法,将dataList第几阶段中的每条笔记同步到allList
      state.allList = this.getters.tBallList;
      state.noteDelShow = false;
   },
+
 
   // 新建笔记 完成
   addNotes(state,params){
@@ -322,5 +328,14 @@ export default {
   // 修改vuex showTextState状态,作为Home组件vuex过滤条件
   changeShowHander(state,params){
      state.showTextState = params.st;
+  },
+
+  // 提示组件2s之后隐藏提示 [successInfo组件提交commit]
+  closetipsuccess(state){
+    state.tipsuccessState = false;
+  },
+  // 显示 successinfo提示
+  successShow(state){
+     state.tipsuccessState = true;
   }
 }

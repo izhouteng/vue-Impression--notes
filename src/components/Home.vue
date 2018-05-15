@@ -26,6 +26,9 @@
       <!--笔记本滑动窗----------------->
       <yxNotebook></yxNotebook>
 
+      <!--提示组件-->
+      <successinfo></successinfo>
+
       <!--搜索笔记-------------------------------------------------------------------->
       <div class="searchNote" v-show="$store.state.searchBox">
         <div class="searchChild">
@@ -336,6 +339,7 @@
     import notsearch from '@/components/prompt/Notsearch'
     import myTip from '@/components/prompt/tip'
     import yxSelectSort from '@/func/select/yx-SelectSort'
+    import successinfo from '@/components/prompt/successInfo'
     // 问题: 当我两个多个组件用到这个模块,怎么设置可以每个组件都共享
     let dayjs = require('dayjs');
     dayjs().format();
@@ -351,6 +355,7 @@
           notsearch,
           'my-tip':myTip,
           yxSelectSort,
+          successinfo,
 
         },
         data(){
@@ -415,7 +420,7 @@
               // 请求成功之后
               this.allNoteList = this.$store.state.allList;  //全部的笔记
               this.inteContent();
-
+              console.log(this.allNoteList);
               this.getDateTimes.getDateTimes.call(this,this.allNoteList);
               //关闭loading动画
               setTimeout(() => {
@@ -604,7 +609,6 @@
 
          // 删除笔记点击事件
          delNoteHandel(obj){
-           console.log(obj);
             //保存当前删除对象的下一个兄弟对象id
            // 问题: 删除完笔记列表,新建一个笔记再次删除会报错id问题
             this.allNoteList.forEach((item,i) => {

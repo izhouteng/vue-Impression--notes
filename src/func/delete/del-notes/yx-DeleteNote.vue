@@ -44,6 +44,15 @@
              this.$router.push({
                 path:'/home/'+this.routeId,
              });
+             // 确定删除的时候,将删除的对象同步到vuex,供successInfo组件显示
+          /*---------------------------问题-------------------------------------*/
+          // 每次删除的时候,先再mutations中隐藏掉这个组件显示的数据,再延迟提交mutations显示,再隐藏
+           let timer = setTimeout(() => {
+               this.$store.commit('successShow');
+                  setTimeout(() => {
+                  this.$store.commit('closetipsuccess');
+               },7000)
+             },300);
 
            //笔记本列表删除完了
           if(this.$store.state.joinNoteList.length <= 0){

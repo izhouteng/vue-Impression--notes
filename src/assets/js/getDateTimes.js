@@ -11,7 +11,7 @@ export function getDateTimes(data){
     //创建时间为7天之内的笔记对象
     let day = parseInt(diffTime / 86400);
     // console.log(day);
-    if(day <= 7 && day > 1){
+    if(day <= 7 && day >= 1){
       this.$store.commit('sevendays',{
         time:day + ' 天前',
         obj:item,
@@ -56,7 +56,7 @@ export function getDateTimes(data){
         obj:item,
       })
     }
-    else if(day >= 0 && day <= 1){
+    else if(day >= 0 && day < 1){
       // 计算小时 1 <= h < 24
       let hours = parseInt(diffTime / 3600);
       if( 1 <= hours && hours < 24){

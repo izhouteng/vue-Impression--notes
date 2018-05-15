@@ -52,6 +52,9 @@ const store = new Vuex.Store({
 
      showTextState:true,  // 笔记列表 显示文字功能(yx-SelectSort组件)
 
+     tipsuccessInfo:{},  // successInfo 组件显示的内容
+     tipsuccessState:false, // successInfo 组件显隐状态
+
    },
    mutations,
    actions,
