@@ -386,17 +386,22 @@
          // 同步textarea实时修改,左侧笔记列表实时更新
          synchronous(){
              //切换路由对象的时候 提交更新后的title和textarea内容
+             let changeObj = this.allNoteList.filter(item => item.id == this.EditId)[0];
+
              if(this.EditTitle === ''){
                this.EditTitle = '无标题内容'
              }
              // this.EditTitle === '' || this.EditTextarea === '' &&
-             if(this.EditId !== ''){
-               // 提交vuex 修改数据
-               this.$store.commit('editChange',{
-                 id:this.EditId,
-                 title:this.EditTitle,
-                 content:this.EditTextarea,
-               })
+             // console.log(this.EditTitle !== changeObj.title && this.EditTextarea !== changeObj.content);
+             if(changeObj){
+                 if(this.EditId !== '' && (this.EditTitle != changeObj.title || this.EditTextarea != changeObj.content)){
+                   // 提交vuex 修改数据
+                   this.$store.commit('editChange',{
+                     id:this.EditId,
+                     title:this.EditTitle,
+                     content:this.EditTextarea,
+                   })
+                 }
              }
          },
 

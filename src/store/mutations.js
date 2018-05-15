@@ -19,6 +19,7 @@ export default {
             item.content = params.content;
          }
       });
+      console.log('title,textarea更新')
   },
 
   // 移动笔记
