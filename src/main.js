@@ -17,6 +17,10 @@ Vue.use(dayjs);
 import https from '@/server/index'
 Vue.use(https);
 
+// 更新笔记本列表
+import sortWay from '@/assets/js/sortWay'
+Vue.use(sortWay);
+
 
 import store from '@/store/index'
 

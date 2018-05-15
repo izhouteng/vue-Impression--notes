@@ -420,7 +420,7 @@
               //关闭loading动画
               setTimeout(() => {
                 this.$store.commit('closeLoadding');
-              },1000)
+              },2000)
             }).catch((err) => {
                alert('网络延迟,请刷新重试')
             })
@@ -454,6 +454,9 @@
               if(this.allNoteList.length > 0 && this.$store.state.notelistNumber){
                  this.$store.commit('showNoteList')
               }
+
+              /*-------路由跳转调用该方法,同步笔记列表最新时间-------*/
+              this.sortWay.sortWay.call(this,this.allNoteList);
 
               let userId = this.$route.params.id || this.allNoteList[0].id;
               this.state = userId;
@@ -489,19 +492,9 @@
                    this.allNoteList = this.$store.state.allList;
               }
 
-              // 路由发生变化的时候,对笔记列表创建时间进行排序
-              let sWay = this.$store.state.noteListSortway;
-              if(sWay === 'createLatest'){
-                this.allNoteList.sort(function(a,b){
-                  return b.beginTime - a.beginTime;
-                });
-              }
-              //创建日期(最早优先)
-              else if(sWay === 'createEarliest'){
-                this.allNoteList.sort(function(a,b){
-                  return a.beginTime - b.beginTime;
-                });
-              }
+              this.sortWay.sortWay.call(this,this.allNoteList);
+
+
 
               this.allNoteBook = this.$store.state.dataList; // 全部的第几阶段笔记
 

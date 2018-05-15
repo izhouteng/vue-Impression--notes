@@ -50,7 +50,7 @@
                   way:item.way,
                });
                this.$router.push({
-                  path:'/home/1111111'
+                  path:'/home/' + Math.random()
                });
              // 同步笔记列表时间
              this.getDateTimes.getDateTimes.call(this,this.$store.state.allList)
