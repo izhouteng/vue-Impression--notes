@@ -4,17 +4,28 @@
 import Vue from 'vue'
 export function sortWay(allNoteList){
   let sWay = this.$store.state.noteListSortway;
-  //创建日期最新优先
-  if(sWay === 'createLatest'){
+  //创建日期(最新优先) 更新日期(最新优先)
+  if(sWay === 'createLatest' || sWay === 'updataEarliest'){
     this.allNoteList.sort(function(a,b){
       return b.beginTime - a.beginTime;
     });
   }
-  //创建日期(最早优先)
-  else if(sWay === 'createEarliest'){
+  //创建日期(最早优先) 更新日期(最新优先)
+  else if(sWay === 'createEarliest' || sWay === 'updataLatest'){
     this.allNoteList.sort(function(a,b){
       return a.beginTime - b.beginTime;
     });
+  }
+  // 标题排序 (升序) 最短的排列越靠前
+  else if(sWay === 'titleAscending'){
+     this.allNoteList.sort(function(a,b){
+        return b.title.length - a.title.length;
+     })
+  }
+  else if(sWay === 'titleOrder'){
+    this.allNoteList.sort(function(a,b){
+      return a.title.length - b.title.length;
+    })
   }
 }
 

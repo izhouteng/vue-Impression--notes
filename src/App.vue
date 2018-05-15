@@ -1,6 +1,6 @@
 <template>
       <div id="app" v-cloak>
-        <div class="content clearfix">
+        <div class="content clearfix" @click="closeSelect">
           <yxDeleteNote></yxDeleteNote>
           <yxDeleteNoteBooks></yxDeleteNoteBooks>
           <yx-CreateBook></yx-CreateBook>
@@ -143,6 +143,12 @@
       //笔记本组件显示
       noteBookHander(){
          this.$store.commit('noteBookHander')
+      },
+      // 选项下拉菜单收起
+      closeSelect(state){
+         if(this.$store.state.selectDown){
+            this.$store.commit('closeSelectHander')
+         }
       }
     },
     watch:{

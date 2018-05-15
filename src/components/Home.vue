@@ -63,7 +63,7 @@
           <!-- 笔记条数和选项 -->
           <div class="noteNumbers clearfix">
             <div class="yinxnum">{{allNoteList.length}} 条笔记</div>
-            <div class="select" @click="selectHander">
+            <div class="select" @click.stop="selectHander">
               <span>选项</span>
             </div>
             <!--选项列表-->
@@ -86,7 +86,7 @@
             >
               <h2 class="n-title">{{item.title}}</h2>
               <div class="n-times">{{item.createTime}}</div>
-              <div class="n-wrap">
+              <div class="n-wrap" v-show="$store.state.showTextState">
                 {{item.content}}
               </div>
 
@@ -795,7 +795,7 @@
            },
            deep:true,
          }
-       },
+       }
 
     }
 </script>

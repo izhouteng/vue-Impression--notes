@@ -313,5 +313,14 @@ export default {
   changeSort(state,params){
      state.noteListSortway = params.way;
      state.selectDown = false; //隐藏排序选项列表
+  },
+  // 点击任何移除,收起选项下拉框
+  closeSelectHander(state){
+     state.selectDown = false;
+  },
+
+  // 修改vuex showTextState状态,作为Home组件vuex过滤条件
+  changeShowHander(state,params){
+     state.showTextState = params.st;
   }
 }

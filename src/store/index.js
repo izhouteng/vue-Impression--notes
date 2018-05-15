@@ -50,6 +50,8 @@ const store = new Vuex.Store({
 
      noteListSortway:'createLatest', //笔记本列表排序方式,默认 创建日期(最新优先)
 
+     showTextState:true,  // 笔记列表 显示文字功能(yx-SelectSort组件)
+
    },
    mutations,
    actions,

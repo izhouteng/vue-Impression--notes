@@ -12,15 +12,32 @@
           </li>
         </ul>
         <div class="MenuDivider"></div>
-        <div class="viewsel">
+        <div class="viewsel" @click.stop>
           <legend>查看选项</legend>
-          <div class="s-pit">显示图片</div>
-          <div class="s-pit">显示文字</div>
+          <div v-for="item in lookDate"
+               :key="item.id"
+               :class="item.checked ? 's-pit' : 's-pit n-pit'"
+               @click="showHander(item)"
+          >
+              {{item.title}}
+          </div>
         </div>
       </div>
 </template>
 
 <script>
+  let lookDate = [
+    {
+      title:'显示图片',
+      checked:true,
+      id:1,
+    },
+    {
+      title:'显示文字',
+      checked:true,
+      id:2
+    }
+  ];
   import sortData from '@/assets/js/sortdata'
     export default {
         name: "yx--select-sort",
@@ -29,6 +46,7 @@
               sortdata:sortData,
               sortway:"createLatest", //默认排序方式
               state:1,
+              lookDate,
            }
         },
       methods:{
@@ -38,6 +56,17 @@
                  let target = ev.target;
                  target.classList.add('item')
               }
+           }
+        },
+
+        // 显示文字
+        showHander(obj){
+           if(obj.id === 2){
+              obj.checked = !obj.checked;
+              // 同步vuex状态
+              this.$store.commit('changeShowHander',{
+                 st:obj.checked,
+              })
            }
         },
 
