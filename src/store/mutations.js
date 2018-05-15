@@ -306,6 +306,12 @@ export default {
             item.createTime = params.time;
          }
       })
-  }
+  },
   /***************************/
+
+  // 修改排序方式
+  changeSort(state,params){
+     state.noteListSortway = params.way;
+     state.selectDown = false; //隐藏排序选项列表
+  }
 }

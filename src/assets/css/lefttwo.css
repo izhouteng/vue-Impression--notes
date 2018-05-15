@@ -137,7 +137,7 @@
     padding: 12px 26px;
     height: 120px;
     overflow-y: hidden;
-    border: solid 3px transparent;
+    border: solid 2px transparent;
     box-sizing: border-box;
     position: relative;
     line-height: 17px;
@@ -181,6 +181,7 @@
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 3;
     overflow: hidden;
+    overflow-wrap:break-word
 }
 
 /* 鼠标移入笔记列表显示出来 */

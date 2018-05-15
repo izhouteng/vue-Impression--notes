@@ -6,6 +6,7 @@
               :key="item.id"
               :class="[index === state ? 'action' : '']"
               @mouseover="overHander($event,index)"
+              @click="clickHander(item,index)"
           >
             {{item.title}}
           </li>
@@ -26,8 +27,8 @@
         data(){
            return {
               sortdata:sortData,
-              sortway:"titleOrder", //默认排序方式
-              state:5,
+              sortway:"createLatest", //默认排序方式
+              state:1,
            }
         },
       methods:{
@@ -37,6 +38,22 @@
                  let target = ev.target;
                  target.classList.add('item')
               }
+           }
+        },
+
+        // 更换时间排序日期
+        clickHander(item,index){
+           if(index !== this.state){
+               this.state = index;
+               //将点击的排序方式同步到vuex状态,并更新陆游进行笔记列表的排序
+               this.$store.commit('changeSort',{
+                  way:item.way,
+               });
+               this.$router.push({
+                  path:'/home/1111111'
+               });
+             // 同步笔记列表时间
+             this.getDateTimes.getDateTimes.call(this,this.$store.state.allList)
            }
         }
       }

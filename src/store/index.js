@@ -48,6 +48,8 @@ const store = new Vuex.Store({
 
      selectDown:false, //选项列表组件的显隐
 
+     noteListSortway:'createLatest', //笔记本列表排序方式,默认 创建日期(最新优先)
+
    },
    mutations,
    actions,

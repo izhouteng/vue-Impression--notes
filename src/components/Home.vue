@@ -111,6 +111,7 @@
                 </div>
                 <div class="n-delete cont-icon" id="delicom" title="删除笔记" @click.stop="delNoteHandel(item)"></div>
               </div>
+              <div class="n-bot"></div>
             </router-link>
 
             <!--未找到搜索的笔记  动态计算高度----------------->
@@ -414,6 +415,7 @@
               // 请求成功之后
               this.allNoteList = this.$store.state.allList;  //全部的笔记
               this.inteContent();
+
               this.getDateTimes.getDateTimes.call(this,this.allNoteList);
               //关闭loading动画
               setTimeout(() => {
@@ -485,6 +487,20 @@
               else{
                    //全部的笔记 路由跳转实时同步vuex中的笔记列表
                    this.allNoteList = this.$store.state.allList;
+              }
+
+              // 路由发生变化的时候,对笔记列表创建时间进行排序
+              let sWay = this.$store.state.noteListSortway;
+              if(sWay === 'createLatest'){
+                this.allNoteList.sort(function(a,b){
+                  return b.beginTime - a.beginTime;
+                });
+              }
+              //创建日期(最早优先)
+              else if(sWay === 'createEarliest'){
+                this.allNoteList.sort(function(a,b){
+                  return a.beginTime - b.beginTime;
+                });
               }
 
               this.allNoteBook = this.$store.state.dataList; // 全部的第几阶段笔记
@@ -683,12 +699,13 @@
 
          //前往笔记本
          qWnoteBooks(){
-            // console.log(this.noteBookTitle)
             this.$store.commit('noteListTrue');
             this.$store.commit('closeHander');
             this.$store.commit('QWNOTEBOOK',{
                obj:this.noteBookTitle
             });
+            // 前往笔记本,同步笔记列表的时间
+            this.getDateTimes.getDateTimes.call(this,this.allNoteList);
             if(this.$store.state.joinNoteList.length >= 1){
                this.$router.push({
                   path:'/home/' + Math.random()
