@@ -60,6 +60,8 @@ const store = new Vuex.Store({
      undoRemin:false, // 清除提醒,撤销(已标记完成)
      setTimersRemin:false, // ivews时间组件
 
+     copyurlNotes:false, //复制笔记链接
+
    },
    mutations,
    actions,

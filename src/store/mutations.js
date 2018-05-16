@@ -133,6 +133,7 @@ export default {
   // 搜索框显示隐藏
   searchShow(state){
      state.searchBox = true;
+     state.quickShow = state.yinListopation = state.noteBookShow = false;
   },
   //回Home页,搜索框隐藏, 搜索关键字清空
   searchNone(state){
@@ -351,6 +352,7 @@ export default {
     state.changeRemin = false;
     state.undoRemin = false;
     state.setTimersRemin = false;
+    state.copyurlNotes = false;
   },
   // 设置提醒,同步allList数据
   setRemin(state,params){
@@ -437,5 +439,10 @@ export default {
   UndochangeDate(state){
     state.setTimersRemin = true;
     state.undoRemin = false;
+  },
+
+  // 复制笔记链接
+  moreHander(state){
+    state.copyurlNotes = !state.copyurlNotes;
   }
 }

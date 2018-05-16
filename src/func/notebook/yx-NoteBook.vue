@@ -51,6 +51,9 @@
           },
           // 进入详细的笔记本信息
           clickHander(obj,index){
+             // 如果当前笔记是全屏状态,那么应该让笔记列表显示
+              this.$store.commit('noteListTrue');
+              this.$store.commit('closeHander');
              //应该判断点击笔记本列表对象的chilren的长度,不能通过vuex状态判断,不靠谱
              this.$store.commit('notebookState',index);
              if(obj.children.length < 1){

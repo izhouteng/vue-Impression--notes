@@ -12,16 +12,13 @@
                    :class="shortcut ? 'editshake' : ''"
                    @click="addshakeHander"
               ></div>
-              <div class="definfo main" title="笔记信息">
-                <img src="@/assets/images/defbijixinxipng.png" alt="">
-                <img src="@/assets/images/bijixinxihover.png" alt="" style="display: none">
+              <div class="definfo main" title="笔记信息" @click="lookEditInfo">
+
               </div>
               <div class="editDefdelete main" title="删除笔记" @click="editDelHander"></div>
               <!--复制笔记链接-->
-              <div class="defmore main" title="更多">
-                <img src="@/assets/images/defgengduo.png" alt="">
-                <img src="@/assets/images/gengduo.png" alt="" style="display: none">
-                <div class="copynoteUrl">
+              <div class="defmore main" title="更多" @click.stop="moreHander">
+                <div class="copynoteUrl" v-show="$store.state.copyurlNotes">
                   <div class="copytxt">
                     复制笔记链接
                   </div>
@@ -192,6 +189,8 @@
                "pid":this.state,
                "shortcut":this.shortcut,
                "remind":false,
+               "remindTime":"",
+               "completeState":false,
                "label":this.count,
                "sel":false,
                "createTime":"",
@@ -199,7 +198,6 @@
                "size":"1KB",
                "url": "https://github.com/qiqingfu",
                "author": "9116895@qq.com",
-               "remindTime":"",
                "content":this.editTextarea,
                "beginTime":this.beginTime,  //同步创建笔记的时间
                "updateTime":'', //更新的时间暂时未空
@@ -262,6 +260,34 @@
           //enter事件保存标签
           editEnterHander(){
              this.inputBlur()
+          },
+          //复制笔记链接
+          moreHander(){
+            this.$store.commit('moreHander')
+          },
+          // 未创建,查看笔记信息
+          lookEditInfo(){
+            this.$store.commit('infoHander',{
+              obj:{
+                "title":this.inputValue,
+                "id":parseInt(Math.random()*10000000),
+                "pid":this.state,
+                "shortcut":this.shortcut,
+                "remind":false,
+                "remindTime":"",
+                "completeState":false,
+                "label":this.count,
+                "sel":false,
+                "createTime":"",
+                "Shared":false,
+                "size":"1KB",
+                "url": "https://github.com/qiqingfu",
+                "author": "9116895@qq.com",
+                "content":this.editTextarea,
+                "beginTime":this.beginTime,  //同步创建笔记的时间
+                "updateTime":'', //更新的时间暂时未空
+              }
+            })
           }
         },
 
@@ -312,5 +338,13 @@
   }
   .youbian {
     margin-left: 0;
+  }
+  .definfo {
+    width: 24px;
+    height: 24px;
+    background: url("../assets/images/defbijixinxipng.png") no-repeat;
+  }
+  .definfo:hover{
+    background: url("../assets/images/bijixinxihover.png") no-repeat;
   }
 </style>

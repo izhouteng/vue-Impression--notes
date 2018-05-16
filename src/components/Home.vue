@@ -29,6 +29,10 @@
       <!--提示组件-->
       <successinfo></successinfo>
 
+      <!--标签组件-->
+      <yxNotetags></yxNotetags>
+
+
       <!--搜索笔记-------------------------------------------------------------------->
       <div class="searchNote" v-show="$store.state.searchBox">
         <div class="searchChild">
@@ -177,11 +181,9 @@
             <div class="definfo main bj-n" title="笔记信息" @click="infoHander"></div>
             <div class="defdelete main" title="删除笔记" @click.stop="delNoteHandel(noteContent)"></div>
             <!--复制笔记链接-->
-            <div class="defmore main" title="更多">
-              <img src="@/assets/images/defgengduo.png" alt="">
-              <img src="@/assets/images/gengduo.png" alt="" style="display: none">
-              <div class="copynoteUrl">
-                <div class="copytxt">
+            <div class="defmore main" title="更多" @click.stop="moreHander">
+              <div class="copynoteUrl" v-if="$store.state.copyurlNotes">
+                <div class="copytxt" title="复制笔记链接">
                   复制笔记链接
                 </div>
               </div>
@@ -322,7 +324,7 @@
     import myTip from '@/components/prompt/tip'
     import yxSelectSort from '@/func/select/yx-SelectSort'
     import successinfo from '@/components/prompt/successInfo'
-    // 问题: 当我两个多个组件用到这个模块,怎么设置可以每个组件都共享
+    import yxNotetags from '@/func/note-tag/yx-NoteTag'
     let dayjs = require('dayjs');
     dayjs().format();
 
@@ -350,6 +352,7 @@
           undoremin,
           DatePicker,
           showtimes,
+          yxNotetags,
         },
         data(){
            return {
@@ -746,6 +749,10 @@
             }
          },
 
+         // 更多 复制笔记链接
+         moreHander(){
+           this.$store.commit('moreHander')
+         }
        },
 
 

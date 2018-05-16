@@ -108,6 +108,7 @@
       searchState(){
          this.$store.commit('searchShow');
          this.$store.commit('noteListTrue')
+
       },
 
       // 跳转到Home页,吧vuex中的404设为true
