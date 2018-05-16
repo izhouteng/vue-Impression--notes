@@ -98,7 +98,10 @@
                 <div class="n-shake cont-icon">
                   <img src="@/assets/images/cont_fenxiang1.png" alt="" title="分享">
                 </div>
-                <div class="n-remind cont-icon remins" title="设置提醒" :class="item.remind ? 'active' : ''"></div>
+                <div class="n-remind cont-icon remins"
+                     title="设置提醒" :class="item.remind ? 'active' : ''"
+
+                ></div>
                 <div class="n-collection cont-icon" :title="!item.shortcut ? '添加快捷方式' : '移除快捷方式'">
                   <img src="@/assets/images/shoucang_white_24x24.png" alt=""
                        v-if="!kJshow && !item.shortcut"
@@ -152,18 +155,8 @@
               <!--撤销 修改提醒 清除日期-->
               <undoremin></undoremin>
 
-
               <!--<setdate :open="open"></setdate>-->
-              <div class="setdates" v-if="$store.state.setTimersRemin" @click.stop>
-                <DatePicker type="date"
-                    placeholder="Select date"
-                    style="width: 200px"
-                    open
-                    @on-change="changeHander"
-                    format="yy/MM/dd"
-                >
-                </DatePicker>
-              </div>
+              <showtimes></showtimes>
 
             </div>
             <div class="tixingshijian" :class="noteContent.completeState ? 'wancheng' : ''">
@@ -337,6 +330,7 @@
     import setremin from '@/func/reminders/SetRemin'
     import changeremin from '@/func/reminders/changeremin'
     import undoremin from '@/func/reminders/UndoRemin'
+    import showtimes from '@/func/reminders/showTimes'
     import { DatePicker } from 'iview'
 
     export default {
@@ -355,6 +349,7 @@
           changeremin,
           undoremin,
           DatePicker,
+          showtimes,
         },
         data(){
            return {
@@ -751,17 +746,6 @@
             }
          },
 
-         // iview时间组件 正则格式时间格式
-         changeHander(t){
-           let bl = t.replace(/\/0+/g,function(r){
-              return '/'
-           });
-           // 给当前对象设置用户选择的时间
-            this.$store.commit('setTimes',{
-               obj:this.noteContent,
-               remint:bl,
-            })
-         }
        },
 
 
@@ -864,17 +848,5 @@
   }
   .bj-n:hover {
     background: url("../assets/images/bijixinxihover.png") no-repeat;
-  }
-
-  .setdates {
-    position: absolute;
-    left: -94px;
-    top: 10px;
-  }
-  .setdates .ivu-input{
-    display: none;
-  }
-  .setdates .ivu-icon {
-    display: none;
   }
 </style>

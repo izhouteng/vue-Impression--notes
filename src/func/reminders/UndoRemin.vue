@@ -44,7 +44,6 @@
       computed:{
           undohander(){
             this.UndoNoteDate = this.$store.state.noteContent;
-            console.log(this.UndoNoteDate)
           }
       }
     }

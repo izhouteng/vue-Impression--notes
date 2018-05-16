@@ -203,6 +203,7 @@
 }
 .nodescroll .n-fnc .remins {
    background: url("../images/tixing24x24.png") no-repeat;
+   position: relative;
 }
 .nodescroll .n-fnc .remins:hover {
    background: url("../images/reminder_solid_white_24x24.png") no-repeat;
