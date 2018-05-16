@@ -744,7 +744,8 @@
               if(!this.noteContent.completeState){
                  this.$store.commit('changeReminComputed'); //
               }else{
-                // 已标记完成
+                // 已标记完成,标记完成功能组件
+                this.$store.commit('UndoReminHander')
               }
 
             }

@@ -19,7 +19,6 @@ export default {
             item.content = params.content;
          }
       });
-      console.log('title,textarea更新')
   },
 
   // 移动笔记
@@ -389,7 +388,6 @@ export default {
       state.allList.forEach(item => {
          if(item === params.obj){
             item.completeState = true;
-            console.log(item)
          }
       });
       state.changeRemin = false;
@@ -410,6 +408,34 @@ export default {
   changeDate(state){
     state.changeRemin = false;
     state.setTimersRemin = true;
-  }
+  },
 
+  // 标记完成功能组件
+  UndoReminHander(state){
+     state.undoRemin = true;
+  },
+
+  // UndoRemin组件 ,撤销标记完成
+  undoReminHander(state,params){
+     state.allList.forEach(item => {
+       if(item === params.obj){
+          item.completeState = false; //标记是否完成
+       }
+     });
+    state.undoRemin = false; //撤销组件隐藏
+  },
+
+  // 已标记完成,清除提醒,应该把当前对象的标记完成取消
+  clearUndoHander(state,params){
+    let n = this.getters.getParamsObj(params.obj);
+    n.remind = false; //是否被提醒
+    n.completeState = false; //是否未完成状态
+    n.remindTime = ''; //提醒的时间
+    state.undoRemin = false;
+  },
+  // UndoRemin 修改日期
+  UndochangeDate(state){
+    state.setTimersRemin = true;
+    state.undoRemin = false;
+  }
 }
