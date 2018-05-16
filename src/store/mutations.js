@@ -38,7 +38,11 @@ export default {
          else if(item.id == params.gid){
             item.children.push(params.obj)
          }
-      })
+      });
+     state.tipsuccessInfo = {
+        objname:params.moveObj,
+        tip:'已将笔记移动到'
+     }
   },
 
   // 修改state,保存标签
@@ -225,6 +229,10 @@ export default {
      state.dataList = state.dataList.filter(item => item !== state.delNoteBookObj);
      state.allList = this.getters.tBallList;
      state.delNoteBookShow = false;
+     state.tipsuccessInfo = {
+       objname:state.delNoteBookObj.title,
+       tip:'已删除笔记本'
+    }
   },
 
   // 进入笔记本详细列表

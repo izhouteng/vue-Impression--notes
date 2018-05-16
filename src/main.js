@@ -21,6 +21,10 @@ Vue.use(https);
 import sortWay from '@/assets/js/sortWay'
 Vue.use(sortWay);
 
+// message
+import message from '@/assets/js/message'
+Vue.use(message);
+
 
 import store from '@/store/index'
 

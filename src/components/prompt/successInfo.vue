@@ -22,7 +22,7 @@
         data(){
           return {
              tipnoteName:'', // 删除的笔记名称
-             tip:'', // 删除提示
+             tip:'', // 提示类型
           }
         },
       methods:{

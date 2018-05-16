@@ -104,7 +104,7 @@
                 </div>
                 <div class="n-remind cont-icon remins"
                      title="设置提醒" :class="item.remind ? 'active' : ''"
-
+                     @click.stop
                 ></div>
                 <div class="n-collection cont-icon" :title="!item.shortcut ? '添加快捷方式' : '移除快捷方式'">
                   <img src="@/assets/images/shoucang_white_24x24.png" alt=""
@@ -261,7 +261,7 @@
                      v-for="(item,index) in filterNoteBooks"
                      :key="index"
                      :class="item.id === Pid ? 'active' : ''"
-                     @click="moveByNotes(item.id)"
+                     @click="moveByNotes(item,item.id)"
                      @mousedown.prevent
                 >
                   {{item.title}}
@@ -525,16 +525,18 @@
          },
 
          // 开始移动 移动到哪个阶段笔记本的id----------
-         moveByNotes(gId){
+         moveByNotes(noteBook,gId){
             // 向gid的children添加,从pid的children移出
            this.$store.commit('moveNotes',{
               gid:gId,
               pid:this.Pid,
               obj:this.noteContent,
+              moveObj:noteBook.title, //移动到的笔记本名称
            });
            this.moveNote = false; //关闭移动下拉框
            this.inteContent();  // 从vuex 获取最新的数据 同步到当前的组件
-
+           // 调用方法
+           this.message.message.call(this);
          },
 
          //关闭某些弹窗

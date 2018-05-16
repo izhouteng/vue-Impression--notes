@@ -39,7 +39,8 @@
                this.$store.commit('isDeleteBook');
                this.$router.push({
                   path:'/home/' + Math.random()
-               })
+               });
+              this.message.message.call(this);
             }else{
                console.log('最后一个笔记')
             }
