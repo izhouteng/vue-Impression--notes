@@ -345,6 +345,7 @@ export default {
     state.setRemin = false;
     state.changeRemin = false;
     state.undoRemin = false;
+    state.setTimersRemin = false;
   },
   // 设置提醒,同步allList数据
   setRemin(state,params){
@@ -355,6 +356,22 @@ export default {
      });
     // 通知我组件加载..
     state.setRemin = true;
+  },
+
+  // 通知我,加载时间组件
+  reminMehander(state){
+     state.setRemin = false;
+     state.setTimersRemin = true;
+  },
+  // 设置通知时间
+  setTimes(state,params){
+     state.allList.forEach(item => {
+       if(item === params.obj){
+          item.remindTime = params.remint;
+       }
+     });
+    state.setTimersRemin = false; //iview时间组件隐藏
+    state.timeShow = true;
   }
 
 }

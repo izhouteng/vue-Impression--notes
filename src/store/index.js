@@ -56,6 +56,8 @@ const store = new Vuex.Store({
      setRemin:false, //提醒已添加组件
      changeRemin:false, // 修改弹窗提醒
      undoRemin:false, // 清除提醒,撤销
+     setTimersRemin:false, // ivews时间组件
+     timeShow:false, // 日期显示 18/05/16
 
    },
    mutations,

@@ -48,15 +48,15 @@
   background: url("../images/chexiaotixingpng.png") no-repeat;
 }
 
-.dethead .deftimes .tixingshijian {
+.dethead .tixingshijian {
   position: relative;
+  float: left;
   color: #2dbe60;
   font-family: gotham, helvetica, arial, sans-serif;
-  font-size: 12px;
-  letter-spacing: 1px;
-  top: 5px;
-  left: 0px;
-  display: none;
+  font-size: 13px;
+  letter-spacing: 2px;
+  top: 8px;
+  left: 4px;
 }
 .dethead .deftimes .wancheng {
   color: #d9d9d9;

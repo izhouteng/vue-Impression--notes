@@ -198,6 +198,17 @@
 .nodescroll .n-fnc .cont-icon {
     float: left;
     margin: 6px 6px 0 0;
+    width: 24px;
+    height: 24px;
+}
+.nodescroll .n-fnc .remins {
+   background: url("../images/tixing24x24.png") no-repeat;
+}
+.nodescroll .n-fnc .remins:hover {
+   background: url("../images/reminder_solid_white_24x24.png") no-repeat;
+}
+.nodescroll .n-fnc .remins.active {
+  background: url("../images/reminder_solid_white_24x24.png") no-repeat;
 }
 
 /*未找到搜索的笔记提示内容*/

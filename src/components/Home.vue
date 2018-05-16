@@ -98,9 +98,7 @@
                 <div class="n-shake cont-icon">
                   <img src="@/assets/images/cont_fenxiang1.png" alt="" title="分享">
                 </div>
-                <div class="n-remind cont-icon">
-                  <img src="@/assets/images/tixing24x24.png" alt="" title="设置提醒">
-                </div>
+                <div class="n-remind cont-icon remins" title="设置提醒" :class="item.remind ? 'active' : ''"></div>
                 <div class="n-collection cont-icon" :title="!item.shortcut ? '添加快捷方式' : '移除快捷方式'">
                   <img src="@/assets/images/shoucang_white_24x24.png" alt=""
                        v-if="!kJshow && !item.shortcut"
@@ -145,7 +143,6 @@
                  @click.stop="remindHander"
                  :class="noteContent.remind ? 'active' : ''"
             >
-              <span class="tixingshijian">18/5/5</span>
               <!--提醒已添加 通知我弹窗-->
               <setremin></setremin>
 
@@ -155,6 +152,22 @@
               <!--撤销 修改提醒 清除日期-->
               <undoremin></undoremin>
 
+
+              <!--<setdate :open="open"></setdate>-->
+              <div class="setdates" v-if="$store.state.setTimersRemin">
+                <DatePicker type="date"
+                    placeholder="Select date"
+                    style="width: 200px"
+                    open
+                    @on-change="changeHander"
+                    format="yy/MM/dd"
+                >
+                </DatePicker>
+              </div>
+
+            </div>
+            <div class="tixingshijian" v-if="$store.state.timeShow">
+                {{noteContent.remindTime}}
             </div>
 
             <div class="defshake main" :title="!noteContent.shortcut ? '添加快捷方式' : '移除快捷方式'">
@@ -324,6 +337,8 @@
     import setremin from '@/func/reminders/SetRemin'
     import changeremin from '@/func/reminders/changeremin'
     import undoremin from '@/func/reminders/UndoRemin'
+    import { DatePicker } from 'iview'
+    import setdate from '@/func/reminders/SetDate'
 
     export default {
         name: "home",
@@ -340,6 +355,8 @@
           setremin,
           changeremin,
           undoremin,
+          DatePicker,
+          setdate,
 
 
         },
@@ -371,6 +388,7 @@
               delNextId:1,  //删除对象下一个兄弟的id
 
               searchValue:'', //搜索关键字
+              open:true,
            }
         },
        methods:{
@@ -727,6 +745,18 @@
               // 如果已经设置了提醒
 
             }
+         },
+
+         // iview时间组件
+         changeHander(t){
+           let bl = t.replace(/\/0+/g,function(r){
+              return '/'
+           });
+           // 给当前对象设置用户选择的时间
+            this.$store.commit('setTimes',{
+               obj:this.noteContent,
+               remint:bl,
+            })
          }
        },
 
@@ -805,7 +835,7 @@
     }
 </script>
 
-<style scoped>
+<style>
 
   .notWidth {
     margin-left: 0px;
@@ -826,5 +856,17 @@
   }
   .bj-n:hover {
     background: url("../assets/images/bijixinxihover.png") no-repeat;
+  }
+
+  .setdates {
+    position: absolute;
+    left: -94px;
+    top: 10px;
+  }
+  .setdates .ivu-input{
+    display: none;
+  }
+  .setdates .ivu-icon {
+    display: none;
   }
 </style>
