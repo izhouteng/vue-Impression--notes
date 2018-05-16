@@ -340,6 +340,12 @@ export default {
   },
 
 
+  /*-----------------将Home组件中展示的数据,同步到vuex状态-----------------------------*/
+  noteconten(state,obj){
+    state.noteContent = obj;
+  },
+
+
   // 点击任意一处,关闭通知提醒弹窗
   closeRemin(state){
     state.setRemin = false;
@@ -371,7 +377,39 @@ export default {
        }
      });
     state.setTimersRemin = false; //iview时间组件隐藏
-    state.timeShow = true;
+  },
+
+  // 设置提醒,但没有设置时间的组件
+  changeReminComputed(state){
+      state.changeRemin = true;
+  },
+
+  // ChangeRemin组件标记完成同步状态
+  TAGSUCCESS(state,params){
+      state.allList.forEach(item => {
+         if(item === params.obj){
+            item.completeState = true;
+            console.log(item)
+         }
+      });
+      state.changeRemin = false;
+  },
+
+  // 清除提醒
+  clearReminHander(state,params){
+     state.allList.forEach(item => {
+       if(item === params.obj){
+          item.remind = false; //清除提醒
+          item.remindTime = ''; //提醒时间清空
+       }
+     });
+    state.changeRemin = false;
+  },
+
+  // 修改日期,iview日期组件加载..
+  changeDate(state){
+    state.changeRemin = false;
+    state.setTimersRemin = true;
   }
 
 }

@@ -11,6 +11,8 @@ const store = new Vuex.Store({
    state:{
       dataList:[],  //数据列表
       allList:[], // 所有的笔记列表
+      noteContent:{}, //Home组件展示的数据对象
+
       noteDelShow:false, //删除组件的显示隐藏
       delNoteInfo:{}, //要删除的对象
       delnoteNextId:-1, //删除对象的下一个兄弟对象Id
@@ -54,10 +56,9 @@ const store = new Vuex.Store({
      tipsuccessState:false, // successInfo 组件显隐状态
 
      setRemin:false, //提醒已添加组件
-     changeRemin:false, // 修改弹窗提醒
-     undoRemin:false, // 清除提醒,撤销
+     changeRemin:false, // 修改弹窗提醒(未标记完成)
+     undoRemin:false, // 清除提醒,撤销(已标记完成)
      setTimersRemin:false, // ivews时间组件
-     timeShow:false, // 日期显示 18/05/16
 
    },
    mutations,

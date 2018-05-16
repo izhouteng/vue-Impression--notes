@@ -141,7 +141,7 @@
             <div class="deftimes main"
                  title="设置提醒"
                  @click.stop="remindHander"
-                 :class="noteContent.remind ? 'active' : ''"
+                 :class="noteContent.remind && !noteContent.completeState ? 'active' : ''"
             >
               <!--提醒已添加 通知我弹窗-->
               <setremin></setremin>
@@ -154,7 +154,7 @@
 
 
               <!--<setdate :open="open"></setdate>-->
-              <div class="setdates" v-if="$store.state.setTimersRemin">
+              <div class="setdates" v-if="$store.state.setTimersRemin" @click.stop>
                 <DatePicker type="date"
                     placeholder="Select date"
                     style="width: 200px"
@@ -166,7 +166,7 @@
               </div>
 
             </div>
-            <div class="tixingshijian" v-if="$store.state.timeShow">
+            <div class="tixingshijian" :class="noteContent.completeState ? 'wancheng' : ''">
                 {{noteContent.remindTime}}
             </div>
 
@@ -338,7 +338,6 @@
     import changeremin from '@/func/reminders/changeremin'
     import undoremin from '@/func/reminders/UndoRemin'
     import { DatePicker } from 'iview'
-    import setdate from '@/func/reminders/SetDate'
 
     export default {
         name: "home",
@@ -356,9 +355,6 @@
           changeremin,
           undoremin,
           DatePicker,
-          setdate,
-
-
         },
         data(){
            return {
@@ -476,6 +472,7 @@
                   this.titleValue = n.title;
                   this.textareaValue = n.content;
                   this.Pid = n.pid; //单条笔记的pid
+                  this.$store.commit('noteconten',this.noteContent); //将当前展示的对象同步到vuex状态中
                 }else{
                    // 重定向
                    this.$router.replace({
@@ -742,12 +739,18 @@
                   obj:this.noteContent,
                 })
             }else{
-              // 如果已经设置了提醒
+              // 如果已经设置了提醒,判断有没有已经设置时间
+              //并且未标记完成状态状态下进行展示
+              if(!this.noteContent.completeState){
+                 this.$store.commit('changeReminComputed'); //
+              }else{
+                // 已标记完成
+              }
 
             }
          },
 
-         // iview时间组件
+         // iview时间组件 正则格式时间格式
          changeHander(t){
            let bl = t.replace(/\/0+/g,function(r){
               return '/'
@@ -775,6 +778,10 @@
            return {
               width:this.tagVal.length * 12 + 26 + 'px'
            }
+          },
+          // 当前展示对象的时间长度
+          noteReminLen(){
+
           }
         },
 
