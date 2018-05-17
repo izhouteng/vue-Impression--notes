@@ -18,5 +18,5 @@ export default {
   // 遍历state.allList数据,找到和Home组件相同的对象
   getParamsObj:(Store) => (obj) => {
      return Store.allList.filter(item => item === obj)[0];
-  },
+  }
 }

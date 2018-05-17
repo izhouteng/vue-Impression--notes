@@ -5,6 +5,8 @@
           <yxDeleteNoteBooks></yxDeleteNoteBooks>
           <yx-CreateBook></yx-CreateBook>
           <yxInforMationBook></yxInforMationBook>
+          <!--删除标签-->
+          <yxDeleteTags></yxDeleteTags>
           <div class="loading" v-show="$store.state.loadingState">
               <img src="./assets/images/loadding.gif" alt="" class="loadingPic">
           </div>
@@ -59,6 +61,7 @@
   import yxDeleteNoteBooks from '@/func/delete/del-notebook/yx-DeleteNoteBooks' //删除笔记本组件
   import yxCreateBook from '@/func/create/yx-CreateBook'
   import yxInforMationBook from '@/func/info-book/yx-InforMationBook'
+  import yxDeleteTags from '@/func/delete/del-notetags/yx-DeleteTags'
 
   export default {
     name: 'App',
@@ -74,6 +77,7 @@
        yxDeleteNoteBooks,
       'yx-CreateBook':yxCreateBook,
        yxInforMationBook,
+       yxDeleteTags
     },
     methods:{
       // 新建鼠标移入移出事件

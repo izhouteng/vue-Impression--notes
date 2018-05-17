@@ -495,5 +495,51 @@ export default {
   closeTagShow(state){
     state.isJoinNotesTagList = false;
     state.tagNoteBookName = '';
+  },
+  // 笔记列表删除完了
+  tagDeleteAll(state){
+     state.noteFindTagList = true;
+  },
+
+  // 修改标签内容
+  changeEditHander(state,params){
+     state.allList.forEach(item => {
+       if(item.label.length > 0){
+          item.label.forEach((el,index) => {
+             if(el === params.tag){
+                item.label.splice(index,1,params.val)
+             }
+          })
+       }
+     });
+  },
+
+  //删除标签同步到vuex名字,供删除组件显示数据
+  deleteTagHander(state,tag){
+     state.deleteTagName = tag;
+     state.deleteTagComponentsShow = true;
+     state.noteTagState = false;
+  },
+
+  // 取消修改标签
+  calcelDelTag(state){
+     state.deleteTagComponentsShow = false;
+     state.noteTagState = true;
+     state.deleteTagName = '';
+  },
+  // 确定删除当前标签
+  deleteTags(state){
+    state.allList.forEach(item => {
+      let label = item.label;
+      if(label.length > 0){
+        label.forEach((el,i) => {
+          if(el === state.deleteTagName){
+             label.splice(i,1)
+          }
+        })
+      }
+    });
+    state.deleteTagComponentsShow = false;
+    state.noteTagState = true;
   }
 }

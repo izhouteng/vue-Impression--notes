@@ -66,6 +66,9 @@ const store = new Vuex.Store({
      tagNoteBookName:'', //进入的笔记标签列表名字
      isJoinNotesTagList:false, // 是否进入标签笔记列表
      tagAllList:[], // 标签笔记列表展示的数据
+     noteFindTagList:false, //当标记笔记列表被删除完
+     deleteTagName:'', //要删除的标签名字
+     deleteTagComponentsShow:false, //删除标签组件
 
    },
    mutations,

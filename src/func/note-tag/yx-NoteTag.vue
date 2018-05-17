@@ -21,20 +21,16 @@
                     <span class="z-cont">{{item.tag}}</span><span class="t-number">{{item.len}}</span>
                   </div>
                   <div class="nt-func" v-if="index===state">
-                    <span class="edittag" title="编辑标签"></span>
-                    <span class="deletetag" title="删除标签"></span>
+                    <span class="edittag" title="编辑标签" @click.stop="editTagHander(item)"></span>
+                    <span class="deletetag" title="删除标签" @click.stop="deleteTagHander(item)"></span>
                   </div>
               </div>
-              <!--<router-link tag="div" class="s-tag" :to="/home/+item.id">-->
-                <!--<span class="z-cont">{{item.tag}}</span><span class="t-number">1</span>-->
-                <!--<div class="nt-func">-->
-                  <!--<span class="edittag" title="编辑标签"></span>-->
-                  <!--<span class="deletetag" title="删除标签"></span>-->
-                <!--</div>-->
-              <!--</router-link>-->
-              <!--编辑标签-->
-              <div class="edit-tag">
-                <input type="text" value="" class="editVal">
+              <div class="edit-tag" v-show="item.tag === editContShow">
+                <input type="text" class="editVal"
+                       v-model="editValue"
+                       ref="editVal"
+                       @blur.stop="blurHander(item)"
+                >
                 <div class="saveedit"></div>
               </div>
             </div>
@@ -51,6 +47,8 @@
         return {
            tagDate:{},
            state:-1, //删除,编辑下标
+           editContShow:'', //用来和输入的input框控制显隐
+           editValue:'',  //和编辑标签进行双向数据绑定
         }
       },
     methods:{
@@ -62,10 +60,45 @@
       },
       //进入标签笔记
       JoinTagNotes(obj){
+         this.state = -1;
          this.$store.commit('joinTagNotes',obj.tag); //根据当前标签找到笔记对象
          this.$router.push({
-           path:'/home/' + this.$store.state.tagAllList[0].id,
+           path:'/home/1111111',
          })
+      },
+      //编辑标签
+      editTagHander(obj){
+          // 将被编辑的对象的tag内容同步在当前组件的editValue中,和input进行双向数据绑定
+          this.editValue = obj.tag; //用来和input双向数据绑定的
+          this.editContShow = obj.tag; //用tag控制显示隐藏
+          this.$nextTick(function(){
+            let bl = this.$refs.editVal;
+             bl[this.state].focus()
+          })
+      },
+      // 失去焦点事件
+      blurHander(obj){
+        // 判断空否
+         if(this.editValue !== this.editContShow){
+             if(this.editValue.trim()){
+               //提交commit 同步最新数据
+               this.$store.commit('changeEditHander',{
+                 tag:obj.tag,
+                 val:this.editValue,
+               })
+             }
+             else{
+               this.editValue = this.editContShow;
+             }
+         }
+         // 如果在不做任何修改的情况下,隐藏
+         else{
+            this.editContShow = '';
+         }
+      },
+      //删除标签
+      deleteTagHander(obj){
+        this.$store.commit('deleteTagHander',obj.tag)
       }
     },
     computed:{
@@ -114,6 +147,7 @@
             });
             i += count;
           }
+          // 将标签数据同步在editValue
           this.tagDate = _res;
         }
     }

@@ -129,7 +129,8 @@
             <!--未找到搜索的笔记  动态计算高度----------------->
             <notsearch></notsearch>
             <my-tip></my-tip>
-
+            <!--未找到标签笔记-->
+            <notFindtag></notFindtag>
           </div>
         </div>
       </div>
@@ -331,6 +332,7 @@
     import yxSelectSort from '@/func/select/yx-SelectSort'
     import successinfo from '@/components/prompt/successInfo'
     import yxNotetags from '@/func/note-tag/yx-NoteTag'
+    import notFindtag from '@/components/prompt/not-findtag'
     let dayjs = require('dayjs');
     dayjs().format();
 
@@ -359,6 +361,7 @@
           DatePicker,
           showtimes,
           yxNotetags,
+          notFindtag,
         },
         data(){
            return {
@@ -503,7 +506,6 @@
               }
               else {
                    //全部的笔记 路由跳转实时同步vuex中的笔记列表
-                   console.log('删除完了走这里');
                    this.allNoteList = this.$store.state.allList;
               }
 
@@ -841,7 +843,6 @@
          '$store.state.notelistNumber':{
            handler(){
              // 如果为false,说明当前笔记本列表为空,那么判断当前组件的allNoteList为不为空,如果不为空,则清空
-             console.log(this.$store.state.notelistNumber);
              if(this.$store.state.notelistNumber){
                  this.allNoteList = [];
              }
