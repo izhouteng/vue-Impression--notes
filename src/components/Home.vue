@@ -495,24 +495,26 @@
 
               if(this.$store.state.findNotesList.length > 0){
                    this.allNoteList = this.$store.state.findNotesList;
+                   this.$store.commit('deleteNoteState','findlist')
               }
               // 判断vuex状态管理中的 笔记本列表是否有
               else if(this.$store.state.joinNoteList.length > 0){
                    this.allNoteList = this.$store.state.joinNoteList;
+                   this.$store.commit('deleteNoteState','joinlist')
               }
               // 进入标签笔记列表,判断vuex状态中的标签列表是否存在
               else if(this.$store.state.tagAllList.length > 0 || this.$store.state.tagNoteBookName.length > 0){
                    this.allNoteList = this.$store.state.tagAllList;
+                   this.$store.commit('deleteNoteState','taglist')
               }
               else {
                    //全部的笔记 路由跳转实时同步vuex中的笔记列表
                    this.allNoteList = this.$store.state.allList;
+                   this.$store.commit('deleteNoteState','alllist')
               }
 
               //选项列表数据
               this.sortWay.sortWay.call(this,this.allNoteList);
-
-
 
               this.allNoteBook = this.$store.state.dataList; // 全部的第几阶段笔记
 
@@ -654,7 +656,7 @@
             this.$store.commit('delClickHander',{
                obj:obj,
                id:this.delNextId,
-            })
+            });
          },
 
          // searchDown  搜索笔记本列表

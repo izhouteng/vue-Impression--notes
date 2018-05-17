@@ -541,5 +541,10 @@ export default {
     });
     state.deleteTagComponentsShow = false;
     state.noteTagState = true;
+  },
+
+  /*********deleteNoteState 删除笔记本时状态************/
+  deleteNoteState(state,s){
+    state.deleteNotesState = s;
   }
 }

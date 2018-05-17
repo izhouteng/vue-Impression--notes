@@ -132,7 +132,7 @@
          // 清空vuex中的标签笔记列表
            this.$store.commit('clearTagList');
           // 去除标签组件信息展示
-           this.$store.commit('closeTagShow')
+           this.$store.commit('closeTagShow');
       },
 
       //收藏组件显示和隐藏

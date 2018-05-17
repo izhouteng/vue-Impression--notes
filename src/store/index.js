@@ -70,6 +70,8 @@ const store = new Vuex.Store({
      deleteTagName:'', //要删除的标签名字
      deleteTagComponentsShow:false, //删除标签组件
 
+     deleteNotesState:'', //删除笔记列表的状态(allList,noteBookList,tagList)
+
    },
    mutations,
    actions,
