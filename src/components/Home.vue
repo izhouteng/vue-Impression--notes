@@ -66,6 +66,9 @@
 
           <!--进入笔记本的时候 显示的笔记本名称-->
           <notebookInfo></notebookInfo>
+          <div class="tagNames" v-if="$store.state.isJoinNotesTagList">
+             标签:{{$store.state.tagNoteBookName}}
+          </div>
 
 
           <!-- 笔记条数和选项 -->
@@ -420,7 +423,6 @@
               // 请求成功之后
               this.allNoteList = this.$store.state.allList;  //全部的笔记
               this.inteContent();
-              console.log(this.allNoteList);
               this.getDateTimes.getDateTimes.call(this,this.allNoteList);
               //关闭loading动画
               setTimeout(() => {
@@ -494,6 +496,10 @@
               // 判断vuex状态管理中的 笔记本列表是否有
               else if(this.$store.state.joinNoteList.length > 0){
                    this.allNoteList = this.$store.state.joinNoteList;
+              }
+              // 进入标签笔记列表,判断vuex状态中的标签列表是否存在
+              else if(this.$store.state.tagAllList.length > 0){
+                   this.allNoteList = this.$store.state.tagAllList;
               }
               else{
                    //全部的笔记 路由跳转实时同步vuex中的笔记列表
@@ -748,7 +754,7 @@
                  this.$store.commit('changeReminComputed'); //
               }else{
                 // 已标记完成,标记完成功能组件
-                this.$store.commit('UndoReminHander')
+                this.$store.commit('UndoReminHander');
               }
 
             }

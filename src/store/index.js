@@ -63,6 +63,9 @@ const store = new Vuex.Store({
      copyurlNotes:false, //复制笔记链接
 
      noteTagState:false, //标签组件
+     tagNoteBookName:'', //进入的笔记标签列表名字
+     isJoinNotesTagList:false, // 是否进入标签笔记列表
+     tagAllList:[], // 标签笔记列表展示的数据
 
    },
    mutations,

@@ -14,7 +14,7 @@
   left: 0;
   top: 0;
   background: rgba(255,255,255,.8);
-  z-index: 30000;
+  z-index: 300;
 }
 
 .dethead {
@@ -1036,9 +1036,6 @@
 .youbian .s-tag:hover .t-number{
   color: #ffffff;
 }
-.youbian .s-tag:hover .nt-func{
-  display: block;
-}
 .youbian .z-cont {
   margin-right: 8px;
 }
@@ -1047,11 +1044,9 @@
 }
 .youbian .nt-func {
   height: 20px;
-  position: absolute;
-  left: 60px;
-  top: 0px;
-  display: none;
+  display: inline-block;
 }
+
 .youbian .edittag {
   display: inline-block;
   width: 16px;

@@ -11,22 +11,27 @@
           <div class="nt-tag">
             <div class="sp-z"></div>
 
-            <div class="tag-page" v-for="item in tagDate" :key="item.randomId">
+            <div class="tag-page" v-for="(item,index) in tagDate" :key="item.id">
               <!--展示标签-->
-              <!--<div class="s-tag">-->
-                <!--<span class="z-cont">das</span><span class="t-number">1</span>-->
+              <div class="changeedit"
+                   @mouseover="overHander(index)"
+                   @mouseout="outHander"
+              >
+                  <div class="s-tag" title="进入标签笔记" @click="JoinTagNotes(item)">
+                    <span class="z-cont">{{item.tag}}</span><span class="t-number">{{item.len}}</span>
+                  </div>
+                  <div class="nt-func" v-if="index===state">
+                    <span class="edittag" title="编辑标签"></span>
+                    <span class="deletetag" title="删除标签"></span>
+                  </div>
+              </div>
+              <!--<router-link tag="div" class="s-tag" :to="/home/+item.id">-->
+                <!--<span class="z-cont">{{item.tag}}</span><span class="t-number">1</span>-->
                 <!--<div class="nt-func">-->
                   <!--<span class="edittag" title="编辑标签"></span>-->
                   <!--<span class="deletetag" title="删除标签"></span>-->
                 <!--</div>-->
-              <!--</div>-->
-              <router-link tag="div" class="s-tag" :to="/home/+item.id">
-                <span class="z-cont">{{item.tag}}</span><span class="t-number">1</span>
-                <div class="nt-func">
-                  <span class="edittag" title="编辑标签"></span>
-                  <span class="deletetag" title="删除标签"></span>
-                </div>
-              </router-link>
+              <!--</router-link>-->
               <!--编辑标签-->
               <div class="edit-tag">
                 <input type="text" value="" class="editVal">
@@ -45,25 +50,71 @@
       data(){
         return {
            tagDate:{},
+           state:-1, //删除,编辑下标
         }
       },
+    methods:{
+      overHander(index){
+         this.state = index;
+      },
+      outHander(){
+        this.state = -1;
+      },
+      //进入标签笔记
+      JoinTagNotes(obj){
+         this.$store.commit('joinTagNotes',obj.tag); //根据当前标签找到笔记对象
+         this.$router.push({
+           path:'/home/' + this.$store.state.tagAllList
+         })
+      }
+    },
     computed:{
         filterstag(){
+           let arr = [];
            let tagArr = [];
            // 从数据中去到标签的id和数据,同步到当前组件的data中
            let bl = this.$store.state.allList;
            bl.forEach(item => {
-              if(item.label.length >= 1){
-                 item.label.forEach(el => {
-                    tagArr.push({
-                      id:item.id,
-                      tag:el,
-                      randomId:Math.random(),
-                    })
+             let label = item.label;
+              if(label.length >= 1){
+                 tagArr.push({
+                   obj:item,
+                   tag:label
                  })
               }
            });
-          this.tagDate = tagArr;
+           // 将tagArr中的内容抽离出需要的部分
+           let newArr = [];
+           for(let i = 0; i < tagArr.length; i++){
+             for(let j = 0; j < tagArr[i].tag.length; j++){
+                newArr.push({
+                  obj:tagArr[i].obj,
+                  tag:tagArr[i].tag[j]
+                })
+             }
+           }
+
+           //给对象先进行排序,再找相同的元素
+           newArr.sort(function(a,b){
+              return a.tag.charCodeAt() - b.tag.charCodeAt()
+           });
+          /*----真他妈难搞-----*/
+          let _res = []; //
+          for (let i = 0; i < newArr.length;) {
+            let count = 0;
+            for (let j = i; j < newArr.length; j++) {
+              if (newArr[i].tag == newArr[j].tag) {
+                count++;
+              }
+            }
+            _res.push({
+               tag:newArr[i].tag,
+               len:count,
+               id:Math.random(),
+            });
+            i += count;
+          }
+          this.tagDate = _res;
         }
     }
   }

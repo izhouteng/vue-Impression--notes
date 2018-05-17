@@ -100,6 +100,10 @@ export default {
      if(state.joinNoteList.length >= 0){
         state.joinNoteList = state.joinNoteList.filter(item => item !== state.delNoteInfo);
      }
+     // 标签组件列表删除对象
+     if(state.tagAllList.length > 0){
+       state.tagAllList = state.tagAllList.filter(item => item !== state.delNoteInfo);
+     }
 
      //将删除的对象同步到tipsuccessInfo中
       state.tipsuccessInfo = {
@@ -461,5 +465,34 @@ export default {
   noteTagShow(state){
     state.noteTagState = !state.noteTagState;
     state.yinListopation = state.noteTagState;
+  },
+
+  // 进入标签,找到当前标签名字的笔记对象
+  joinTagNotes(state,tag){
+     state.tagNoteBookName = tag;
+     // 先清空上一个标签的笔记列表
+     state.tagAllList = [];
+     state.allList.forEach(item => {
+       if(item.label.length >= 1){
+          let bl = item.label.some(el => el === tag);
+          if(bl){
+            state.tagAllList.push(item)
+          }
+       }
+     });
+     //透明度去除
+     state.yinListopation = false;
+     state.noteTagState = false;
+     // 进入笔记列表
+     state.isJoinNotesTagList = true;
+  },
+
+  // 清空标签笔记列表
+  clearTagList(state){
+    state.tagAllList = [];
+  },
+  // 去除标签组件在Home list展示
+  closeTagShow(state){
+    state.isJoinNotesTagList = false;
   }
 }

@@ -9,6 +9,20 @@
     cursor: pointer;
     /*display: none;  搜索笔记的时候,默认为隐藏*/
 }
+.yinxList .tagNames {
+  width: 355px;
+  padding: 24px 20px 24px 24px;
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  background: #ffffff;
+  color: #878787;
+  font-size: 21px;
+  text-overflow:ellipsis;
+  letter-spacing:0.5px;
+  overflow:hidden;
+  padding-right: 6px;
+}
 /*默认首页显示*/
 .cuthide {
     padding: 27px 24px;

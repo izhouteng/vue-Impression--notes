@@ -124,7 +124,11 @@
            this.$store.commit('noteListTrue');
           // 让yinList 笔记内容信息展示盒模型的margin-left为300多
            this.$store.commit('closeQuickbox');
-           this.$store.commit('closeHander') //显示展开图标
+           this.$store.commit('closeHander'); //显示展开图标
+         // 清空vuex中的标签笔记列表
+           this.$store.commit('clearTagList');
+          // 去除标签组件信息展示
+           this.$store.commit('closeTagShow')
       },
 
       //收藏组件显示和隐藏
