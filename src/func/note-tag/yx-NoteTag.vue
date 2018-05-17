@@ -64,7 +64,7 @@
       JoinTagNotes(obj){
          this.$store.commit('joinTagNotes',obj.tag); //根据当前标签找到笔记对象
          this.$router.push({
-           path:'/home/' + this.$store.state.tagAllList
+           path:'/home/' + this.$store.state.tagAllList[0].id,
          })
       }
     },

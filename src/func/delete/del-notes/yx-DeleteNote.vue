@@ -41,9 +41,18 @@
                this.routeId = this.$store.state.delNoteInfo.id;
              }
 
-             this.$router.push({
-                path:'/home/'+this.routeId,
-             });
+          /**
+           * 一定要加 this.$store.state.joinNoteList.length > 0
+           * 如果不加的情况下,当笔记本中有一条笔记,那么删除之后会跳转路由 path:'/home/+this.routeId',跳转到刚才删除笔记的id
+           * 路由发生跳转的情况下,会执行Home组件的inteContent()函数,刚开始会获取路由原对象,会获取到刚才删除的这个id,通过这个id根据路由元对              象信息从vuex中获取到要展示的数据,因为这个对象已经删除掉了,所以id会找不到。
+           * 如果没有过滤到这个对象,就会重定向到/home/,那么就会展示出所有的笔记列表
+           */
+          if(this.routeId && this.$store.state.joinNoteList.length > 0){
+                 this.$router.push({
+                   path:'/home/'+ this.routeId,
+                 });
+             }
+             console.log(this.$store.state.joinNoteList);
              // 确定删除的时候,将删除的对象同步到vuex,供successInfo组件显示
            // 每次删除的时候,先再mutations中隐藏掉这个组件显示的数据,再延迟提交mutations显示,再隐藏
            // 通过call()来调用vue插件方法
@@ -51,6 +60,7 @@
 
            //笔记本列表删除完了
           if(this.$store.state.joinNoteList.length <= 0){
+              console.log('提交deleteall');
               this.$store.commit('deleteAll');
           }
         }

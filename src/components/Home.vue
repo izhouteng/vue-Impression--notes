@@ -468,7 +468,7 @@
               let userId = this.$route.params.id || this.allNoteList[0].id;
               this.state = userId;
               if(userId){
-
+                // 根据路由元对象信息从vuex中获取到要展示的数据
                 let n = this.allNoteList.filter(item => item.id == userId)[0];
                 if(n){
                   this.noteContent = n;
@@ -500,13 +500,14 @@
               // 进入标签笔记列表,判断vuex状态中的标签列表是否存在
               else if(this.$store.state.tagAllList.length > 0 || this.$store.state.tagNoteBookName.length > 0){
                    this.allNoteList = this.$store.state.tagAllList;
-                   console.log(1)
               }
-              else{
+              else {
                    //全部的笔记 路由跳转实时同步vuex中的笔记列表
+                   console.log('删除完了走这里');
                    this.allNoteList = this.$store.state.allList;
               }
 
+              //选项列表数据
               this.sortWay.sortWay.call(this,this.allNoteList);
 
 
@@ -840,12 +841,14 @@
          '$store.state.notelistNumber':{
            handler(){
              // 如果为false,说明当前笔记本列表为空,那么判断当前组件的allNoteList为不为空,如果不为空,则清空
+             console.log(this.$store.state.notelistNumber);
              if(this.$store.state.notelistNumber){
                  this.allNoteList = [];
              }
            },
            deep:true,
-         }
+         },
+
        },
         directives:{
            focus:{
