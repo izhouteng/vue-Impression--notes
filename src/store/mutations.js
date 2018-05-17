@@ -494,5 +494,6 @@ export default {
   // 去除标签组件在Home list展示
   closeTagShow(state){
     state.isJoinNotesTagList = false;
+    state.tagNoteBookName = '';
   }
 }

@@ -498,8 +498,9 @@
                    this.allNoteList = this.$store.state.joinNoteList;
               }
               // 进入标签笔记列表,判断vuex状态中的标签列表是否存在
-              else if(this.$store.state.tagAllList.length > 0){
+              else if(this.$store.state.tagAllList.length > 0 || this.$store.state.tagNoteBookName.length > 0){
                    this.allNoteList = this.$store.state.tagAllList;
+                   console.log(1)
               }
               else{
                    //全部的笔记 路由跳转实时同步vuex中的笔记列表
@@ -867,7 +868,7 @@
      position: absolute;
      left: 0;
      top: 0;
-     z-index: 12000;
+     z-index: 800;
      width: 100%;
      height: 100%;
   }
