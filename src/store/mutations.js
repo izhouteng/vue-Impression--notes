@@ -25,6 +25,7 @@ export default {
   moveNotes(state,params){
       // 从哪个数组中移出的
       params.obj.pid = params.gid;
+      state.tipsuccessState = false;
 
       state.dataList.forEach(item => {
          if(item.id == params.pid){
@@ -198,10 +199,11 @@ export default {
 
   //当点击textarea 和 title区域,隐藏快捷方式栏
   closeQuickbox(state){
-      if(state.quickShow || state.noteBookShow){
+      if(state.quickShow || state.noteBookShow || state.noteTagState){
         state.quickShow = false;
         state.noteBookShow = false;
         state.yinListopation = false;
+        state.noteTagState = false;
       }
   },
 
@@ -226,6 +228,7 @@ export default {
   },
   //确定删除
   isDeleteBook(state){
+     state.tipsuccessState = false;
      state.dataList = state.dataList.filter(item => item !== state.delNoteBookObj);
      state.allList = this.getters.tBallList;
      state.delNoteBookShow = false;
@@ -452,5 +455,11 @@ export default {
   // 复制笔记链接
   moreHander(state){
     state.copyurlNotes = !state.copyurlNotes;
+  },
+
+  //标签组件加载
+  noteTagShow(state){
+    state.noteTagState = !state.noteTagState;
+    state.yinListopation = state.noteTagState;
   }
 }

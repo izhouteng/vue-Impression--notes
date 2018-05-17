@@ -39,6 +39,7 @@
           <input type="text" class="searchValue" placeholder="搜索笔记"
                  v-model="searchValue"
                  @keydown.enter="searchDown"
+                 v-focus
           >
           <img src="@/assets/images/qingchusousuoneirong.png" alt=""
                class="clearSearch"
@@ -135,12 +136,14 @@
       <!--左侧区域-->
       <!--:style=""-->
       <!--$store.state.quickShow-->
+      <!--:style="this.$store.state.yinListopation?'opacity:0.2':''"-->
       <!--notWidth  添加class -->
       <div class="yinxDet clearfix" id="yinxdet"
            v-show="$store.state.Not404"
            :class="$store.state.yinxdetWidth ? 'notWidth' : ''"
-           :style="this.$store.state.yinListopation?'opacity:0.2':''"
       >
+        <!--透明度遮罩层-->
+        <div class="opationWindow" v-show="$store.state.yinListopation" @click="closeOpationsHander"></div>
         <!--标题功能栏-->
         <div class="dethead" @mousedown.prevent>
           <div class="detfunc">
@@ -754,6 +757,11 @@
          // 更多 复制笔记链接
          moreHander(){
            this.$store.commit('moreHander')
+         },
+
+         //关闭遮罩层
+         closeOpationsHander(){
+            this.$store.commit('closeQuickbox');
          }
        },
 
@@ -831,7 +839,14 @@
            },
            deep:true,
          }
-       }
+       },
+        directives:{
+           focus:{
+             inserted:function(el){
+               el.focus();
+             }
+           }
+        }
 
     }
 </script>

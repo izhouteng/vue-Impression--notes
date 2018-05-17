@@ -5,12 +5,11 @@ export function message(){
 
     this.timer = setTimeout(() => {
       this.$store.commit('successShow');
-      let n = 7000;
       clearTimeout(this.a);
       this.a = setTimeout(() => {
         this.$store.commit('closetipsuccess');
-      },n);
-    },300);
+      },6000);
+    },500);
 }
 
 export default {

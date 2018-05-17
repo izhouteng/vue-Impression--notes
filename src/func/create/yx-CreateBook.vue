@@ -7,7 +7,7 @@
       </div>
       <div style="height: 58px;"></div>
       <div class="n-note">
-        <input type="text" placeholder="给笔记本起个名称吧" v-model="noteBookName" ref="createValue">
+        <input type="text" placeholder="给笔记本起个名称吧" v-model="noteBookName" ref="createValue" v-focus>
       </div>
       <div style="height: 66px"></div>
       <div class="btn clearfix" @mousedown.prevent>
@@ -55,6 +55,14 @@
 
          }
       }
+    },
+    // 自定义指令
+    directives:{
+        focus:{
+          inserted:function(el){
+            el.focus();
+          }
+        }
     }
   }
 </script>

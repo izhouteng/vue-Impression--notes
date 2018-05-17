@@ -33,19 +33,10 @@
             </div>
             <!-- 收藏 笔记 笔记本 标签 -->
             <div class="yinxlb">
-              <div class="stars" title="收藏" @click="startHander">
-                <!--<img src="./assets/images/shoucang1.png" alt="">-->
-                <!--<img src="./assets/images/shoucang2png.png" alt="" style="display:none" title="收藏">-->
-              </div>
-              <div class="notesbook" title="笔记">
-                <img src="./assets/images/biji3.png" alt="" v-if="false">
-                <img src="./assets/images/biji2.png" alt="" @click="goHome">
-              </div>
+              <div class="stars" title="收藏" @click="startHander"></div>
+              <div class="notesbook" title="笔记" @click="goHome"></div>
               <div class="notethis" title="笔记本" @click="noteBookHander"></div>
-              <div class="yinxltag">
-                <img src="./assets/images/biaoqian1.png" alt="">
-                <img src="./assets/images/biaoqian2.png" alt="" style="display:none" title="标签">
-              </div>
+              <div class="yinxltag" title="标签" @click="tagClickHander"></div>
             </div>
 
             <!-- 左侧底部图标 -->
@@ -151,6 +142,10 @@
             this.$store.commit('closeSelectHander')
          }
          this.$store.commit('closeRemin');
+      },
+      //标签组件加载...
+      tagClickHander(){
+        this.$store.commit('noteTagShow')
       }
     },
     watch:{

@@ -92,6 +92,7 @@
                          v-show="tagShow"
                          @blur="inputBlur"
                          @keydown.enter="editEnterHander"
+                         v-focus
                   >
                 </div>
               </div>

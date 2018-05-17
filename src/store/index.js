@@ -62,6 +62,8 @@ const store = new Vuex.Store({
 
      copyurlNotes:false, //复制笔记链接
 
+     noteTagState:false, //标签组件
+
    },
    mutations,
    actions,

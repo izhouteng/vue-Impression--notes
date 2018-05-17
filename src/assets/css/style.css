@@ -50,7 +50,10 @@
     width: 36px;
     height: 36px;
     margin-top:14px;
-    /*background: url("../images/biji3.png") no-repeat;*/
+    background: url("../images/biji3.png") no-repeat;
+}
+.notesbook:hover{
+  background: url("../images/biji2.png") no-repeat;
 }
 .notesbook:hover{
   /*background: url("../images/biji2.png") no-repeat;*/
@@ -68,6 +71,10 @@
     width: 36px;
     height: 36px;
     margin-top: 14px;
+    background: url("../images/biaoqian1.png") no-repeat;
+}
+.yinxltag:hover{
+  background: url("../images/biaoqian2.png") no-repeat;
 }
 .yinxbotpic {
     height: 72px;
