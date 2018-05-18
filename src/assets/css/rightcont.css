@@ -1,22 +1,10 @@
 .yinxDet {
-    /*float: left;*/
+    float: left;
     position: relative;
     height: 100%;
     /*overflow: hidden;  这个不能设置overflow hidden  会隐藏掉设置提醒弹窗 */
     cursor: pointer;
-    margin-left: 356px;
 }
-/*左侧滑窗出现,遮罩层也出现*/
-.yinxDet .opationWindow {
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  left: 0;
-  top: 0;
-  background: rgba(255,255,255,.8);
-  z-index: 300;
-}
-
 .dethead {
     height: 53px;
     /*border-bottom: solid 1px #cccccc;*/
@@ -33,48 +21,23 @@
 }
 .yinxDet .defmore {
     position: relative;
-    width: 24px;
-    height: 24px;
-    background: url("../images/defgengduo.png") no-repeat;
-}
-.yinxDet .defmore:hover{
-  background: url("../images/gengduo.png") no-repeat;
-}
-.dethead .defdelete {
-   width: 24px;
-   height: 24px;
-   background: url("../images/defshanchu.png") no-repeat;
-}
-.dethead .defdelete:hover {
-   background: url("../images/shanchubiji.png") no-repeat;
 }
 
-  /*闹钟提醒*/
+/*闹钟提醒*/
 .dethead .deftimes {
     position: relative;
-    width: 24px;
-    height: 24px;
-    background: url("../images/defshizhong.png") no-repeat;
 }
-.dethead .deftimes:hover {
-  background: url("../images/chexiaotixingpng.png") no-repeat;
-}
-/*如果设置提醒点击了,就添加这个class*/
-.dethead .deftimes.active {
-  background: url("../images/chexiaotixingpng.png") no-repeat;
-}
-
-.dethead .tixingshijian {
+.dethead .deftimes .tixingshijian {
   position: relative;
-  float: left;
   color: #2dbe60;
   font-family: gotham, helvetica, arial, sans-serif;
-  font-size: 13px;
-  letter-spacing: 2px;
-  top: 8px;
-  left: 4px;
+  font-size: 12px;
+  letter-spacing: 1px;
+  top: 5px;
+  left: 0px;
+  display: none;
 }
-.dethead .tixingshijian.wancheng {
+.dethead .deftimes .wancheng {
   color: #d9d9d9;
   text-decoration:line-through
 }
@@ -89,6 +52,7 @@
     z-index: 888;
     background: #ffffff;
     box-shadow: 0 6px 20px rgba(0, 0, 0, 0.04), -6px 8px 15px rgba(0, 0, 0, 0.04), 6px 8px 15px rgba(0, 0, 0, 0.04);
+    display: none;
 }
 .dethead .reminderAdded .target,
 .dethead .changeTixing .target,
@@ -131,6 +95,7 @@
     box-shadow: 0 6px 20px rgba(0, 0, 0, 0.04), -6px 8px 15px rgba(0, 0, 0, 0.04), 6px 8px 15px rgba(0, 0, 0, 0.04);
     z-index: 999;
     background: #ffffff;
+    display: none;
 }
 .dethead .complete {
     margin-top: 24px;
@@ -162,6 +127,7 @@
     box-shadow: 0 6px 20px rgba(0, 0, 0, 0.04), -6px 8px 15px rgba(0, 0, 0, 0.04), 6px 8px 15px rgba(0, 0, 0, 0.04);
     z-index: 999;
     background: #ffffff;
+    display: none;
 }
 .dethead .complete {
     margin-top: 24px;
@@ -189,25 +155,22 @@
     width: 134px;
     height: 56px;
     position: absolute;
-    left: 8px;
-    top: 24px;
+    left: -4px;
     box-shadow: 0 6px 20px rgba(0, 0, 0, 0.04), -6px 8px 15px rgba(0, 0, 0, 0.04), 6px 8px 15px rgba(0, 0, 0, 0.04);
     background: #ffffff;
     z-index: 110;
     border: 3px solid rgba(217, 217, 217, 0.4);
     border-top: 1px solid rgba(217, 217, 217, 0.4);
+    display: none;
 }
 .yinxDet .copytxt {
     height: 32px;
     width: 100%;
-    color: #000000;
+    background: #2dbe60;
+    color: #ffffff;
     text-align: center;
     line-height: 32px;
     margin-top: 12px;
-}
-.yinxDet .copytxt:hover{
-    background: #2dbe60;
-    color: #ffffff;
 }
 
 .yinxDet .upgrade {
@@ -223,20 +186,10 @@
     line-height: 28px;
     color: #ffffff;
 }
-.detup:hover{
-  background: rgb(218,115,11);
-}
 /*共享 发送消息 发送邮件*/
 .defshared {
     position: relative;
 
-}
-.defshared:hover .gongx{
-   border-color: #2dbe60;
-   color: #2dbe60;
-}
-.defshared:hover .target{
-   border-color: #2dbe60;
 }
 .defshared .gongx {
     float: left;
@@ -267,9 +220,7 @@
     border: solid 1px #2dbe60;
     border-radius: 4px;
     box-sizing: border-box;
-}
-.yinxDet .defscreen:hover{
-  background: url("../images/defquanping.png") no-repeat center center #2dbe60;
+
 }
 .yinxDet .cancel {
     width: 58px;
@@ -283,7 +234,7 @@
 }
 
 /*写笔记完成*/
-.yinxDet .writeNotesOk , .yinxDet .writeCancel{
+.yinxDet .writeNotesOk {
     width: 58px;
     height: 28px;
     color: #ffffff;
@@ -294,14 +245,6 @@
     border-radius: 4px;
     margin-right: 4px;
     /*display: none;*/
-}
-
- /*取消按钮*/
-.yinxDet .writeNotesOk:hover{
-  background: rgb(40,169,85);
-}
-.yinxDet .writeCancel:hover{
-   background: rgb(40,169,85);
 }
 
 /*发送邮件 发送消息弹窗*/
@@ -383,6 +326,7 @@
     z-index: 99;
     background: #ffffff;
     box-shadow: 0 6px 20px rgba(0, 0, 0, 0.04), -6px 8px 15px rgba(0, 0, 0, 0.04), 6px 8px 15px rgba(0, 0, 0, 0.04);
+    display: none;
 }
 .yidongBJB .findnotes {
     height: 68px;
@@ -401,27 +345,11 @@
     box-sizing: border-box;
     border-radius: 2px;
 }
-.yidongBJB .findValue::placeholder{
-  text-align: center;
-}
  /*创建笔记本*/
 .yidongBJB .chuanjian {
     height: 50px;
     border-bottom: solid 1px #ececec;
     margin: 0 16px;
-}
-.chuanjian .chuangjianIco {
-  width: 24px;
-  height: 24px;
-  background: url("../images/chuangjianbijiben.png") no-repeat;
-  float: left;
-  margin: 14px 7px 0px 12px;
-}
-.yidongBJB .chuanjian:hover {
-   color: #2dbe60;
-}
-.yidongBJB .chuanjian:hover .chuangjianIco{
-   background: url("../images/hoverxinjianbiji.png") no-repeat;
 }
 .yidongBJB .chuanjian img {
     float: left;
@@ -445,9 +373,7 @@
     background: url("../images/bijibenxuanzhongdebiaoshi.png") no-repeat 300px 14px;
     color: #2dbe60;
 }
-.yidongBJB .mynotesbook:hover{
-  color: rgba(43,181,92,0.9);
-}
+
 
 
 
@@ -478,20 +404,6 @@
 }
 .addtag .tianjiaBQ {
     margin-left: 14px;
-    margin-top: -4px;
-}
-.addtag .tianjiaBQ .tagValue {
-  outline: 0;
-  border: 1px solid #e9eaec;
-  border-radius: 4px;
-  height: 22px;
-  line-height: 22px;
-  margin: 2px 4px 2px 0;
-  padding: 0 8px;
-  background: #f7f7f7;
-  font-size: 12px;
-  vertical-align:middle;
-  overflow: hidden;
 }
 
 /*编辑*/
@@ -558,10 +470,9 @@
 
 /*搜索笔记---------------------------------------------------------------------------*/
 .youbian {
-    /*float: left;*/
+    float: left;
     position: relative;
     overflow: hidden;
-    margin-left: 72px;
     /*群聊 等等滑窗移出需要隐藏*/
 }
 /*组件根容器div,需要浮动*/
@@ -569,19 +480,18 @@
   float: left;
 }
 .youbian .searchNote {
-    height: 165px;
+    height: 228px;
     position: relative;
     padding: 0 64px;
     box-sizing: border-box;
     cursor: pointer;
-    border-bottom: solid 1px #ececec;
-    /*display: none;*/
+    display: none;
 }
 .youbian .searchChild {
+    border-bottom: solid 1px #ececec;
     width: 100%;
     height: 100%;
     position: relative;
-    top: -71px;
 }
 .youbian .searchChild .searchValue {
     height: 52px;
@@ -607,6 +517,7 @@
     position: absolute;
     right: 12px;
     top: 136px;
+    display: none;
 }
 /*修改placehodle样式*/
 .youbian .searchChild .searchValue::placeholder{
@@ -631,13 +542,13 @@
 .youbian .header {
     height: 110px;
     border-bottom: 1px solid #ececec;
-    padding: 24px 24px 12px 24px;
+    padding: 22px 24px 12px 24px;
     color: #878787;
     position: relative;
 }
 .youbian .title {
-    font-family: Arial,helvetica, arial, sans-serif;
-    font-size: 14px;
+    font-family: gotham, helvetica, arial, sans-serif;
+    font-size: 21px;
     text-transform: uppercase;
     letter-spacing:0.5px;
     font-weight: normal;
@@ -648,14 +559,12 @@
     top: 25px;
 }
 .youbian .worktoking .message ,
-.youbian .bijibenHDC .bijibenInfo .message,
-.youbian .yx-nt-tag .bijibenInfo .message
+.youbian .bijibenHDC .bijibenInfo .message
 {
     margin-top: 22px;
 }
 .youbian .worktoking .messageValue,
-.youbian .bijibenHDC .bijibenInfo .messageValue,
-.youbian .yx-nt-tag .bijibenInfo .messageValue
+.youbian .bijibenHDC .bijibenInfo .messageValue
 {
     height: 34px;
     border: solid 1px #c4c4c4;
@@ -674,10 +583,9 @@
 }
 
 /*需要动态计算高度*/
-.youbian .worktoking .workWrap
-{
+.youbian .worktoking .workWrap {
     height: 100%;
-    position: relative;
+   position: relative;
 }
 .youbian .workWrap .tishineirong {
     height: 100%;
@@ -705,7 +613,7 @@
 /*<!--快捷方式滑窗口--------------------------------------------------------------->*/
 .youbian .quick {
     position: absolute;
-    /*left: -465px;*/
+    left: -465px;
     top: 0px;
     height: 100%;
     width: 456px;
@@ -756,31 +664,33 @@
     overflow-y: auto;
     width: 100%;
     height: 100%;
+    display: none;
 }
 .quick .quickList .item {
-    padding: 7px 0px;
+    padding: 9px 0px;
     color: #4a4a4a;
     font-family: caecilia, times, serif;
     font-size: 16px;
     position: relative;
 }
+/*鼠标移入*/
+/*.quick .quickList .item:hover{*/
+    /*background: rgb(66,197,112);*/
+
+/*}*/
 .quick .item .beforeicon {
     width: 16px;
     height: 16px;
     background: url("../images/kuaijiefangshiyouneirongdetubiao.png") no-repeat 0px 0px;
     float: left;
     margin-left: 33px;
-    margin-top: 4px;
 }
 .quick .item .q_t {
     float: left;
-    width: 70%;
-    height: 20px;
+    white-space:normal;
+    overflow: hidden;
     color: #4a4a4a;
     margin-left: 5px;
-    overflow:hidden;
-    text-overflow:ellipsis;
-    white-space:nowrap
 }
 
 .quick .item .delete {
@@ -808,8 +718,9 @@
 }
 
 /*笔记本滑动窗-----------------------------------*/
-.youbian .bijibenHDC ,.youbian .yx-nt-tag{
+.youbian .bijibenHDC {
     position: absolute;
+    left: -462px;
     top: 0px;
     right: 0px;
     bottom: 0px;
@@ -820,9 +731,7 @@
     border-right: 3px solid rgba(236, 236, 236, 0.7);
     cursor: pointer;
 }
-.youbian .bijibenHDC .bijibenInfo,
-.youbian .yx-nt-tag .bijibenInfo
-{
+.youbian .bijibenHDC .bijibenInfo {
     height: 122px;
     border-bottom: solid 1px #ececec;
     padding: 22px 24px 12px 24px;
@@ -833,9 +742,7 @@
     letter-spacing:0.5px;
     color: #878787;
 }
-.youbian .bijibenHDC .xinjian,
-.youbian .yx-nt-tag .xinjian
-{
+.youbian .bijibenHDC .xinjian {
     position: absolute;
     right: 22px;
     top: 24px;
@@ -850,7 +757,6 @@
     font-weight: normal;
     letter-spacing: 0.5px;
     position: relative;
-    overflow-y: auto;
 }
 .youbian .bijibenList .notList {
     position: absolute;
@@ -862,13 +768,15 @@
 }
 /*有笔记本信息显示*/
 .youbian .liebiao {
-
+    /*display: none;*/
 }
 .youbian .liebiao .list_main {
     height: 60px;
     width: 100%;
-    padding: 0 24px;
+    padding: 0 12px;
     box-sizing: border-box;
+    background: rgb(64,188,108);
+    /*鼠标移入笔记 这里添加背景颜色为 64 188 108*/
 }
 .youbian .liebiao .list_main .bijixinxi {
     height: 100%;
@@ -879,10 +787,11 @@
 }
 .youbian .liebiao .list_main .noteTitle {
     white-space:normal;
-    color: #4a4a4a;
+    /*color: #4a4a4a;*/
+    color: #fff;
     overflow: hidden;
     text-overflow:ellipsis;
-    height: 30px;
+    height: 18px;
     padding-top: 10px;
 }
 .youbian .liebiao .list_main .number {
@@ -890,242 +799,12 @@
     font-size: 11px;
     font-weight: 500;
     padding-top: 6px;
-    color: #878787;
+    color: #c9f2d0;
 }
 .youbian .liebiao .list_main .delnotes {
     position: absolute;
-    right: 0px;
+    right: 16px;
     top: 14px;
-    width: 24px;
-    height: 24px;
-    background: url("../images/1shanchubiji.png") no-repeat;
-}
-.youbian .liebiao .list_main .delnotes:hover{
-    background: url("../images/deletehover_solid_white_24x24.png") no-repeat;
 }
 
-#delicom {
-   background: url("../images/delete_white_24x24.png") no-repeat;
-   width: 24px;
-   height: 24px;
-}
-#delicom:hover{
-  background: url("../images/deletehover_solid_white_24x24.png") no-repeat;
-}
-.edit-textarea textarea {
-  font-size: 16px;
-}
-.edit-textarea textarea::placeholder{
-    font-family: gotham, helvetica, arial, sans-serif;
-    color: #c4c4c4;
-    font-size: 13px;
-}
-.editDefshake {
-   width: 24px;
-   height: 24px;
-   background: url("../images/defshoucang.png") no-repeat;
-}
-.editshake{
-  background: url("../images/shanchukuaijiefangshiwujiaoxing.png") no-repeat;
-}
-.editDefshake:hover{
-    background: url("../images/shanchukuaijiefangshiwujiaoxing.png") no-repeat;
-}
-.editDefdelete {
-  width: 24px;
-  height: 24px;
-  background: url("../images/defshanchu.png") no-repeat;
-}
-.editDefdelete:hover{
-  background: url("../images/shanchubiji.png") no-repeat;
-}
 
-.youbian .deleteTip {
-     height: 34px;
-     width: 100%;
-     position: absolute;
-     left: 0px;
-     top: 16px;
-     z-index: 999111;
-}
-.deleteTip .d-tip-cont {
-    height: 34px;
-    width: 624px;
-    background: #26be5b;
-    margin: 0 auto;
-    border-radius: 4px;
-    cursor: pointer;
-}
-.deleteTip .s-cont {
-    width: 574px;
-    position: absolute;
-    left: 0;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    margin: auto;
-    text-align: center;
-    vertical-align: middle;
-}
-.deleteTip .duigou {
-  display: inline-block;
-  width: 20px;
-  height: 20px;
-  margin-right: 6px;
-  background: #1d9351;
-  border-radius: 50%;
-  text-align: center;
-  padding-top: 6px;
-  position: relative;
-  top: 6px;
-}
-.deleteTip .shanchuTip {
-  display: inline-block;
-  color: #ffffff;
-  font-family: gotham, helvetica, arial, sans-serif;
-  font-size: 11px;
-  position: relative;
-  top: 2px;
-}
-.deleteTip .shanchuTip span {
-   text-decoration: underline;
-   margin-left: 2px;
-}
-
-/*标签组件样式*/
-.youbian .yx-nt-tag {
-  z-index: 1200;
-  left: 0px;
-  float: left;
-  background: #ffffff;
-  display: block;
-}
-.youbian .tag-cont {
-   width: 100%;
-   height: 100%;
-   overflow-y: scroll;
-   position: relative;
-}
-.youbian .tag-cont .nt-tag {
-   margin-left: 36px;
-   height: 100%;
-}
-.youbian .sp-z {
-  height: 38px;
-  width: 100%;
-}
-.youbian .tag-page {
-  height: 24px;
-  width: 372px;
-  margin: 12px 0;
-  position: relative;
-}
-.youbian .s-tag {
-  padding: 2px 14px 1px 12px;
-  /*1px solid #ababab*/
-  border: solid 1px #28a955;
-  background: #f8f8f8;
-  display: inline-block;
-  border-radius: 4px;
-  white-space:nowrap;
-  position: relative;
-}
-.youbian .s-tag:hover{
-  background: #28a955;
-  color: #ffffff;
-}
-.youbian .s-tag:hover .t-number{
-  color: #ffffff;
-}
-.youbian .z-cont {
-  margin-right: 8px;
-}
-.youbian .t-number{
-  color: #28a955;
-}
-.youbian .nt-func {
-  height: 20px;
-  display: inline-block;
-}
-
-.youbian .edittag {
-  display: inline-block;
-  width: 16px;
-  height: 16px;
-  margin: 2px 9px 0 13px;
-  background: url("../images/bianjibiaoqian.png") no-repeat;
-}
-.youbian .edittag:hover{
-  background: url("../images/bianjibiaoqianhovershi.png") no-repeat;
-}
-.youbian .deletetag {
-  display: inline-block;
-  width: 16px;
-  height: 16px;
-  background: url("../images/delete_tag_gary.png") no-repeat;
-}
-.youbian .deletetag:hover{
-  background: url("../images/delete-tag-green.png") no-repeat;
-}
-
-/*编辑框*/
-.youbian .edit-tag {
-  position: absolute;
-  left: 0px;
-  top: 0px;
-}
-.youbian .edit-tag .editVal {
-  width: 372px;
-  border: solid 1px #d1d1d1;
-  background: #f8f8f8;
-  color: #4a4a4a;
-  font-size: 12px;
-  border-radius: 4px;
-  outline: none;
-  line-height: 22px;
-}
-.youbian .saveedit {
-  width: 14px;
-  height: 14px;
-  position: absolute;
-  right: -20px;
-  top: 4px;
-  border-radius: 50%;
-  background: url("../images/deleteico.png") no-repeat 2px 3px #888888;
-}
-.youbian .saveedit:hover {
-  background: url("../images/deleteico.png") no-repeat 2px 3px #2dbe60;
-}
-
-/*当标签为空的时候新建标签提示*/
-.youbian .tag-cont .xJtagPic {
-     position: absolute;
-     left: 0px;
-     top: 0px;
-     width: 100%;
-     height: 100%;
-     background: #ffffff;
-}
-.youbian .tag-cont .xJn-cont {
-  width: 100%;
-  padding: 0 45px;
-  box-sizing: border-box;
-  position: absolute;
-  text-align: center;
-  top: 214px;
-  font-family: caecilia, times, serif;
-}
-.youbian .tag-cont .ico {
-  width: 93px;
-  height: 64px;
-  background: url("../images/biaoqiantishiIco.png") no-repeat center;
-  display: inline-block;
-}
-.youbian .tag-cont .tipmecces {
-    font-family: gotham, helvetica, arial, sans-serif;
-    color: #878787;
-    font-size: 13px;
-    word-wrap:break-word;
-    line-height: 20px;
-    margin-top: 5px;
-}

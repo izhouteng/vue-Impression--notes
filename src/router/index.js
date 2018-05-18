@@ -3,28 +3,21 @@ import VueRouter from 'vue-router'
 
 Vue.use(VueRouter);
 
-import Home from '@/components/Home'
-// import Edit from '@/components/Edit'
-const Edit = () => import('@/components/Edit');
+import noteinfo from '@/views/noteInfo'
 
-let routes = [
-  {
-    path:'/home/:id?',
-    component:Home,
-  },
-  {
-    path:'/edit',
-    component:Edit,
-  },
-  {
-    path:'*',
-    redirect:'/home'
-  }
-];
-
-let router = new VueRouter({
+const router = new VueRouter({
    mode:'history',
-   routes,
+   routes:[
+     {
+       path:'/home/:userId?',
+       component:noteinfo
+     },
+     // 重定向路由信息
+     {
+       path:'*',
+       redirect:'/home'
+     }
+   ]
 });
 
 export default router;

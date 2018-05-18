@@ -2,26 +2,12 @@
 .yinxList {
     float: left;
     position: relative;
-    width: 356px;
+    width: 350px;
     height: 100%;
     border-right: solid 1px #ececec;
     box-sizing: border-box;
     cursor: pointer;
     /*display: none;  搜索笔记的时候,默认为隐藏*/
-}
-.yinxList .tagNames {
-  width: 355px;
-  padding: 24px 20px 24px 24px;
-  position: absolute;
-  left: 0px;
-  top: 0px;
-  background: #ffffff;
-  color: #878787;
-  font-size: 21px;
-  text-overflow:ellipsis;
-  letter-spacing:0.5px;
-  overflow:hidden;
-  padding-right: 6px;
 }
 /*默认首页显示*/
 .cuthide {
@@ -48,9 +34,6 @@
     font-weight: normal;
     border: 0;
 }
-.yinxList .yinxcut a {
-  color: #ffffff;
-}
 .noteNumbers {
     margin-top: 21px;
     padding: 0 24px;
@@ -74,9 +57,11 @@
 
 /*进入笔记本的时候 显示的笔记本名称*/
 .noteNames {
-    /*width: 350px;*/
+    width: 350px;
     height: 150px;
     background: #393d41;
+    position: relative;
+    display: none;
 }
 .noteNames .noteinfoPic {
     position: absolute;
@@ -97,12 +82,14 @@
 /* 选项列表 */
 .selList {
     width: 205px;
+    /* height: 374px; */
     box-shadow: 0px 6px 20px rgba(0, 0, 0, 0.04), -6px 8px 15px rgba(0, 0, 0, 0.04), 6px 8px 15px rgba(0, 0, 0, 0.04);
     position: absolute;
     right: -138px;
     top: 24px;
-    z-index: 5200;
+    z-index: 50;
     background: #ffffff;
+    display: none;
 }
 .sortingWay {
     font-size: 11px;
@@ -126,15 +113,10 @@
     font-size: 11px;
     color: #ababab;
 }
-.viewsel .s-pit {
+.viewsel div {
     color: #606060;
     padding: 8px 54px 10px 20px;
     background: url('../images/box_checked_green_24x24.png') no-repeat 162px 4px;
-}
-.viewsel .n-pit {
-  color: #606060;
-  padding: 8px 54px 10px 20px;
-  background: url("../../assets/images/checkebox1.png") no-repeat 162px 4px;
 }
 
 /* 笔记本列表区域 */
@@ -154,14 +136,14 @@
     padding: 12px 26px;
     height: 120px;
     overflow-y: hidden;
-    border: solid 2px transparent;
+    border-bottom: solid 1px #ececec;
     box-sizing: border-box;
     position: relative;
     line-height: 17px;
     transition: 0.1s;
 }
 .nodescroll .n-conts.sel {
-  border-color: rgb(217,217,217);
+  border: solid 3px rgb(217,217,217);
   box-sizing: border-box;
 }
 .nodescroll .n-conts:hover {
@@ -183,9 +165,8 @@
     width: 60%;
 }
 .nodescroll .n-times {
-    font-size: 13px;
+    font-size: 11px;
     color: #878787;
-    font-weight: 400;
     padding: 4px 0;
 }
 .nodescroll .n-wrap {
@@ -198,7 +179,6 @@
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 3;
     overflow: hidden;
-    overflow-wrap:break-word
 }
 
 /* 鼠标移入笔记列表显示出来 */
@@ -212,29 +192,20 @@
 .nodescroll .n-fnc .cont-icon {
     float: left;
     margin: 6px 6px 0 0;
-    width: 24px;
-    height: 24px;
-}
-.nodescroll .n-fnc .remins {
-   background: url("../images/tixing24x24.png") no-repeat;
-   position: relative;
-}
-.nodescroll .n-fnc .remins:hover {
-   background: url("../images/reminder_solid_white_24x24.png") no-repeat;
-}
-.nodescroll .n-fnc .remins.active {
-  background: url("../images/reminder_solid_white_24x24.png") no-repeat;
 }
 
 /*未找到搜索的笔记提示内容*/
 .nodescroll .notFound {
     width: 100%;
     height: 100%;
+    overflow-y: scroll;
     overflow-x:hidden;
     font-family: caecilia, times, serif;
     word-wrap:break-word;
     font-size: 16px;
     font-weight: 400;
+    display: none;
+    /**隐藏**/
 }
 .nodescroll .notFound .count{
     box-sizing: border-box;

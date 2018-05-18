@@ -1,22 +1,42 @@
 export default {
-   // 同步allList 和 dataList数据
-   tBallList(Store){
-     let arr = [];
-     Store.dataList.forEach(item => {
-        item.children.forEach(e => {
-           arr.push(e)
-        })
-     });
-     return arr;
-   },
-
-  // vuex中的allList有没有快捷方式为true的,如果有返回true,没有返回false
-  shortcutHander(Store){
-     return Store.allList.some(item => item.shortcut);
+  // 所有的笔记列表
+  // 计算state
+  allList(Store){
+    let arr = [];
+    Store.noteList.forEach((item) => {
+      item.children.forEach((el) => {
+        if(el){
+          arr.push(el)
+        }
+      })
+    });
+    if(arr.length > 0){
+      return arr;
+    }
   },
 
-  // 遍历state.allList数据,找到和Home组件相同的对象
-  getParamsObj:(Store) => (obj) => {
-     return Store.allList.filter(item => item === obj)[0];
+  /**
+   *
+   * @param Store
+   * @param getter
+   * @returns {function(*)}
+   * @id  string
+   * @item.id  number
+   * 根据 动态id 过滤textarea内容对象
+   */
+  getNoteinfo:(Store,getter) => (id) => {
+    return getter.allList.filter(item => item.id == id)
+  },
+
+  /**
+   *
+   * @param Store
+   * @param getter
+   * @returns {function(*)}
+   * @id 计算当前id的数据是否收藏,为true还是False
+   */
+  isShade:(Store,getter) => (id) => {
+     let s = getter.allList.filter(item => item.id)
+     console.log(s);
   }
 }
