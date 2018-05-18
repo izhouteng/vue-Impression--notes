@@ -28,7 +28,8 @@
       },
       //确认删除
       deleteTagok(){
-         this.$store.commit('deleteTags')
+           this.$store.commit('deleteTags');
+           console.log(this.$store.state.tagAllList)
       }
     }
   }

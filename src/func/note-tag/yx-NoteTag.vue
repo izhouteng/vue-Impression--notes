@@ -2,7 +2,6 @@
       <div class="yx-nt-tag" v-if="$store.state.noteTagState">
         <div class="bijibenInfo">
           <h2>标签</h2>
-          <img src="@/assets/images/xinjianbiaoqianya.png" alt="" class="xinjian">
           <div class="message">
             <input type="text" class="messageValue" placeholder="查找标签">
           </div>
@@ -34,6 +33,15 @@
                 <div class="saveedit"></div>
               </div>
             </div>
+
+              <!--当标签为空的时候-->
+              <div class="xJtagPic" v-if="!this.$store.state.tagAllList.length">
+                <div class="xJn-cont">
+                  <div class="ico"></div>
+                  <p style="font-weight: 700">点击笔记,去新建个自己的专属标签吧!</p>
+                  <p class="tipmecces">添加标签,查找更容易</p>
+                </div>
+              </div>
 
           </div>
         </div>
@@ -69,6 +77,8 @@
         if(this.$store.state.searchBox){
           this.$store.commit('hideSearchShow')
         }
+        // 进入标签隐藏第几阶段笔记组件信息
+        this.$store.commit('closeJdShowTag')
       },
       //编辑标签
       editTagHander(obj){
@@ -151,6 +161,8 @@
             });
             i += count;
           }
+          // 将所有的笔记tag列表,同步到vuex状态中
+          this.$store.commit('tagdataList',_res);
           // 将标签数据同步在editValue
           this.tagDate = _res;
         }

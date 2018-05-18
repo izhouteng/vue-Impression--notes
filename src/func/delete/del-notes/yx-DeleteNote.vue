@@ -35,9 +35,10 @@
         yesDelHander(){
           //确定删除的时候就根据删除对象的下一个id进行修改路由
            this.$store.commit('isdelHander');
-             if(this.$store.state.delnoteNextId > 0){
+             if(this.$store.state.delnoteNextId){
                this.routeId = this.$store.state.delnoteNextId;
              }else{
+               console.log('当前删除对象的id');
                this.routeId = this.$store.state.delNoteInfo.id;
              }
 
@@ -58,8 +59,9 @@
           }
           // 从笔记本列表中删除笔记
           else if(deleteState === 'joinlist'){
-              console.log('从笔记本列表中删除');
-              if(this.routeId){
+              // 如果路由需要跳转,那么当前删除的对象必须有下个兄弟元素才行,否则提交mutations修改state中的一个标识,
+              // 让home组件进行watch,如果watch到就清空清空当前笔记,并且显示删除完了的提示组件
+              if(this.routeId !== this.$store.state.delNoteInfo.id){
                 this.$router.push({
                   path:'/home/'+ this.routeId,
                 });
@@ -69,16 +71,23 @@
                  this.$store.commit('deleteAll');
               }
           }
+          // 删除标签笔记
+          else if(deleteState === 'taglist'){
+              if(this.routeId !== this.$store.state.delNoteInfo.id){
+                this.$router.push({
+                  path:'/home/'+ this.routeId,
+                });
+              }
+              //笔记本列表删除完了
+              if(this.$store.state.tagAllList.length <= 0){
+                this.$store.commit('deleteAll');
+              }
+          }
 
              // 确定删除的时候,将删除的对象同步到vuex,供successInfo组件显示
              // 每次删除的时候,先再mutations中隐藏掉这个组件显示的数据,再延迟提交mutations显示,再隐藏
             // 通过call()来调用vue插件方法
             this.message.message.call(this);
-
-          /**
-           * 明天完善在标签中删除的不同场景
-           */
-
         }
       }
     }

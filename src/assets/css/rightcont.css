@@ -1004,6 +1004,7 @@
    width: 100%;
    height: 100%;
    overflow-y: scroll;
+   position: relative;
 }
 .youbian .tag-cont .nt-tag {
    margin-left: 36px;
@@ -1096,3 +1097,35 @@
   background: url("../images/deleteico.png") no-repeat 2px 3px #2dbe60;
 }
 
+/*当标签为空的时候新建标签提示*/
+.youbian .tag-cont .xJtagPic {
+     position: absolute;
+     left: 0px;
+     top: 0px;
+     width: 100%;
+     height: 100%;
+     background: #ffffff;
+}
+.youbian .tag-cont .xJn-cont {
+  width: 100%;
+  padding: 0 45px;
+  box-sizing: border-box;
+  position: absolute;
+  text-align: center;
+  top: 214px;
+  font-family: caecilia, times, serif;
+}
+.youbian .tag-cont .ico {
+  width: 93px;
+  height: 64px;
+  background: url("../images/biaoqiantishiIco.png") no-repeat center;
+  display: inline-block;
+}
+.youbian .tag-cont .tipmecces {
+    font-family: gotham, helvetica, arial, sans-serif;
+    color: #878787;
+    font-size: 13px;
+    word-wrap:break-word;
+    line-height: 20px;
+    margin-top: 5px;
+}

@@ -510,6 +510,11 @@ export default {
     state.isJoinNotesTagList = false;
     state.tagNoteBookName = '';
   },
+  // 去除第几阶段笔记信息
+  closeJdShowTag(state){
+     state.joinNoteBookObj = {};
+  },
+
   // 笔记列表删除完了
   tagDeleteAll(state){
      state.noteFindTagList = true;
@@ -556,9 +561,13 @@ export default {
     state.deleteTagComponentsShow = false;
     state.noteTagState = true;
   },
+  // 将标签列表同步到vuex状态,根据这个的长度,判断出标签列表是否删除完了
+  tagdataList(state,tags){
+     state.tagAllList = tags;
+  },
 
   /*********deleteNoteState 删除笔记本时状态************/
   deleteNoteState(state,s){
     state.deleteNotesState = s;
-  }
+  },
 }

@@ -57,7 +57,10 @@
         <div class="yinxTitle">
 
           <!--首页显示        如果搜索到笔记就不显示-->
-              <div class="cuthide" v-show="!$store.state.searchBox" v-if="!this.$store.state.joinNoteBookObj.title">
+              <div class="cuthide"
+                   v-show="!$store.state.searchBox"
+                   v-if="!this.$store.state.joinNoteBookObj.title"
+              >
                 <h2 class="notTitle">笔记</h2>
                 <div class="yinxcut">
                   <a href="https://www.yinxiang.com/webclipper/" target="_blank">网页剪藏</a>
@@ -639,8 +642,7 @@
                     // 新建笔记 待添加 标签 收藏 以及及时删除------------------------
                   }
                   else if(this.allNoteList.length === 1){
-                      // console.log(this.allNoteList);
-                      // this.delNextId = this.allNoteList[0].id;
+                      this.delNextId = '';
                   }
             });
             /*----------------------------------------------------*/
