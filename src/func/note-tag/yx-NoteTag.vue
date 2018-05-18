@@ -3,7 +3,7 @@
         <div class="bijibenInfo">
           <h2>标签</h2>
           <div class="message">
-            <input type="text" class="messageValue" placeholder="查找标签">
+            <input type="text" class="messageValue" placeholder="查找标签" v-focus v-model="searchTag">
           </div>
         </div>
         <div class="tag-cont">
@@ -57,6 +57,7 @@
            state:-1, //删除,编辑下标
            editContShow:'', //用来和输入的input框控制显隐
            editValue:'',  //和编辑标签进行双向数据绑定
+           searchTag:'', //双向绑定搜索的标签
         }
       },
     methods:{
@@ -165,7 +166,22 @@
           this.$store.commit('tagdataList',_res);
           // 将标签数据同步在editValue
           this.tagDate = _res;
+        },
+
+        // 过滤搜索的标签数据
+        searchHander(){
+           return this.$store.state.tagAllList.filter(item => {
+              return item.tag.match(this.searchTag)
+           })
+        },
+    },
+    directives:{
+        // 自定义指令获取搜索的焦点
+      focus:{
+        inserted:function(el){
+           el.focus();
         }
+      }
     }
   }
 </script>

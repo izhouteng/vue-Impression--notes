@@ -76,6 +76,9 @@ const store = new Vuex.Store({
      /*------每次删除笔记本,当前删除的状态------*/
      deleteNotesState:'', //删除笔记列表的状态(allList,noteBookList,tagList)
 
+     /*------分享------*/
+     shareState:false, //分享组件状态
+
    },
    mutations,
    actions,

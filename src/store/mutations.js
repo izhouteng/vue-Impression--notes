@@ -171,6 +171,7 @@ export default {
      // : 加过渡动画
      state.noteBookShow = false;
      state.noteTagState = false;
+     state.shareState = false;
   },
 
 
@@ -211,11 +212,12 @@ export default {
 
   //当点击textarea 和 title区域,隐藏快捷方式栏
   closeQuickbox(state){
-      if(state.quickShow || state.noteBookShow || state.noteTagState){
+      if(state.quickShow || state.noteBookShow || state.noteTagState || state.shareState){
         state.quickShow = false;
         state.noteBookShow = false;
         state.yinListopation = false;
         state.noteTagState = false;
+        state.shareState = false;
       }
   },
 
@@ -573,4 +575,19 @@ export default {
   deleteNoteState(state,s){
     state.deleteNotesState = s;
   },
+
+  //分享组件加载..
+  shareBlock(state){
+    state.shareState = !state.shareState;
+    state.yinListopation = state.shareState;
+    //关闭其他组件的显示
+    if(state.quickShow || state.noteBookShow || state.noteTagState){
+      state.quickShow = state.noteBookShow = state.noteTagState = false;
+    }
+
+  },
+  //分享组件隐藏
+  shareNone(state){
+    state.shareState = false;
+  }
 }

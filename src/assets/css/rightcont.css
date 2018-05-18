@@ -622,7 +622,7 @@
 /*工作群聊滑窗-------------- left -460px -------------------------------- z-index 888+*/
 .youbian .worktoking {
     position: absolute;
-    left: -460px;
+    left: 0px;
     top: 0px;
     right: 0px;
     bottom: 0px;

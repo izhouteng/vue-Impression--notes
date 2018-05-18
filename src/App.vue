@@ -28,9 +28,9 @@
                 <img src="./assets/images/sousuo1.png" alt="" v-show="!searchshow ">
                 <img src="./assets/images/sousuo2.png" alt="" v-show="searchshow" title="搜索" @click="searchState">
               </div>
-              <div class="newshare">
-                <img src="./assets/images/fenxiang1.png" alt="">
-                <img src="./assets/images/fenxiang2.png" alt="" style="display:none" title="分享">
+              <div class="newshare" @mouseover="shareOverHander" @mouseout="shareOutHander">
+                <img src="./assets/images/fenxiang1.png" alt="" v-show="!share">
+                <img src="./assets/images/fenxiang2.png" alt="" v-show="share" title="分享" @click="shareClickHander">
               </div>
             </div>
             <!-- 收藏 笔记 笔记本 标签 -->
@@ -70,6 +70,7 @@
         xJ:true,   //新建显隐
         navShow:true, // 导航显隐
         searchshow:false, //搜索显隐
+        share:false, // 分享显隐
       }
     },
     components:{
@@ -102,8 +103,11 @@
       // 让搜索框通过vuex中的状态让它显示出来,并且网页剪辑隐藏
       searchState(){
          this.$store.commit('searchShow');
-         this.$store.commit('noteListTrue')
-
+         this.$store.commit('noteListTrue');
+         //预防,如果在群聊组件展示中点击了搜索的情况下
+          if(this.$store.state.shareState){
+              this.$store.commit('shareNone')
+          }
       },
 
       // 跳转到Home页,吧vuex中的404设为true
@@ -154,6 +158,18 @@
       //标签组件加载...
       tagClickHander(){
         this.$store.commit('noteTagShow')
+      },
+      // 分享移入
+      shareOverHander(){
+         this.share = true;
+      },
+      // 分享移出
+      shareOutHander(){
+        this.share = false;
+      },
+      //分享点击
+      shareClickHander(){
+         this.$store.commit('shareBlock')
       }
     },
     watch:{
