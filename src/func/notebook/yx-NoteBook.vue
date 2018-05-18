@@ -70,8 +70,11 @@
                 })
              }
              // 进入笔记列表,获取最新的笔记创建时间
-             this.getDateTimes.getDateTimes.call(this,booklist)
-
+             this.getDateTimes.getDateTimes.call(this,booklist);
+             // 如果当搜索框为显示的时候再关闭
+              if(this.$store.state.searchBox){
+                this.$store.commit('hideSearchShow')
+              }
           },
 
           //创建笔记本

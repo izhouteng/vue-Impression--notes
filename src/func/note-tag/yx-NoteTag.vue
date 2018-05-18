@@ -64,7 +64,11 @@
          this.$store.commit('joinTagNotes',obj.tag); //根据当前标签找到笔记对象
          this.$router.push({
            path:'/home/1111111',
-         })
+         });
+        // 如果当搜索框显示的时候,再提交commit关闭
+        if(this.$store.state.searchBox){
+          this.$store.commit('hideSearchShow')
+        }
       },
       //编辑标签
       editTagHander(obj){

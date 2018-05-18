@@ -516,6 +516,7 @@
               //选项列表数据
               this.sortWay.sortWay.call(this,this.allNoteList);
 
+
               this.allNoteBook = this.$store.state.dataList; // 全部的第几阶段笔记
 
               // 根据Pid过滤不同阶段的笔记

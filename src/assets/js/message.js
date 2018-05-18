@@ -8,7 +8,7 @@ export function message(){
       clearTimeout(this.a);
       this.a = setTimeout(() => {
         this.$store.commit('closetipsuccess');
-      },6000);
+      },5000);
     },500);
 }
 

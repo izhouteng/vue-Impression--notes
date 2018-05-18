@@ -215,6 +215,11 @@
                  path:'/home/'+obj.id
               })
             }
+
+              // 如果当搜索框为显示的时候再关闭
+              if(this.$store.state.searchBox){
+                this.$store.commit('hideSearchShow')
+              }
           },
 
             handleAdd () {

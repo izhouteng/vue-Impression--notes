@@ -131,6 +131,7 @@ export default {
      state.joinNoteList = [];
      state.joinNoteBookObj = {};
      state.noteBookBg = -1;
+     state.quickShow = state.noteBookShow = state.noteTagState = state.yinListopation = false;
   },
 
 
@@ -142,13 +143,17 @@ export default {
   // 搜索框显示隐藏
   searchShow(state){
      state.searchBox = true;
-     state.quickShow = state.yinListopation = state.noteBookShow = false;
+     state.quickShow = state.yinListopation = state.noteBookShow = state.noteTagState = false;
   },
   //回Home页,搜索框隐藏, 搜索关键字清空
   searchNone(state){
     state.searchBox = false;
     state.searchValue = '';
     state.noteBookBg = -1;   // 回Home页,让笔记本bg-color为未选中
+  },
+  // 隐藏搜框显示
+  hideSearchShow(state){
+     state.searchBox = false;
   },
   //未搜索到笔记
   isNot404False(state){
@@ -163,6 +168,9 @@ export default {
   startShow(state){
      state.quickShow = !state.quickShow;
      state.yinListopation = state.quickShow;
+     // : 加过渡动画
+     state.noteBookShow = false;
+     state.noteTagState = false;
   },
 
 
@@ -215,6 +223,9 @@ export default {
   noteBookHander(state){
      state.noteBookShow = !state.noteBookShow;
      state.yinListopation = state.noteBookShow;
+     // : 添加过渡动画
+     state.quickShow = false; //quick components
+     state.noteTagState = false; // tagcomponents
   },
 
 
@@ -465,6 +476,9 @@ export default {
   noteTagShow(state){
     state.noteTagState = !state.noteTagState;
     state.yinListopation = state.noteTagState;
+    // 过渡动画
+    state.noteBookShow = false;
+    state.quickShow = false;
   },
 
   // 进入标签,找到当前标签名字的笔记对象
