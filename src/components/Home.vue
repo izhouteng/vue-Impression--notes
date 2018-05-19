@@ -37,7 +37,7 @@
       </div>
 
       <!-- 笔记列表区域 ------------------------------------------------------->
-      <div class="yinxList" @mousedown.prevent v-show="$store.state.dataListShow">
+      <div class="yinxList" @mousedown.prevent="BlurFn" v-show="$store.state.dataListShow">
         <div class="yinxTitle">
 
           <!--首页显示        如果搜索到笔记就不显示-->
@@ -188,7 +188,7 @@
             <div class="detup mains">
               升级
             </div>
-            <div class="defshared clearfix mains">
+            <div class="defshared clearfix mains" @click="messageHander">
               <span class="gongx">共享</span>
               <div class="target"></div>
               <div class="shakeDown">
@@ -212,12 +212,14 @@
             >
               完成
             </div>
+            <yxGroupMessage :state="messageState" :data="noteContent" @close-hander="closeHanderMessage">
+              <div class="topJiant" slot="tagget"></div>
+            </yxGroupMessage>
           </div>
         </div>
 
         <!--具体操作交互栏-->
         <div class="stages">
-
           <!--移动笔记和标签-->
           <div class="liangge" @mousedown.prevent>
             <div class="movenotes">
@@ -330,6 +332,7 @@
     import undoremin from '@/func/reminders/UndoRemin'
     import showtimes from '@/func/reminders/showTimes'
     import { DatePicker } from 'iview'
+    import yxGroupMessage from '@/func/group/message/yx-group-message'
 
     export default {
         name: "home",
@@ -351,13 +354,14 @@
           yxNotetags,
           notFindtag,
           yxGroup,
+          yxGroupMessage,
         },
         data(){
            return {
               allNoteBook:[], //全部的第几阶段笔记本
               noteBookTitle:{}, // 显示的第几阶段笔记(单个)
               allNoteList:[], //全部的笔记
-              noteContent:{}, // title 和 textarea展示内容的对象
+              noteContent:{}, // title 和 textarea展示内容的对象  也是Home组件消息弹窗的数据
               titleValue:'',  //标题
               textareaValue:'', //内容
               EditTitle:'',     //修改后的标题
@@ -381,6 +385,7 @@
 
               searchValue:'', //搜索关键字
               open:true,
+              messageState:false, // 弹窗显隐
            }
         },
        methods:{
@@ -769,6 +774,17 @@
             this.$store.commit('showShakeMessage',{
                obj:obj,
             })
+         },
+
+         // Home组件的消息弹窗
+         messageHander(){
+            this.messageState = true;
+            // 如果App组件弹窗显示,会关闭
+            this.$store.commit('closeMessageHander')
+         },
+         // 关闭弹窗
+         closeHanderMessage(){
+            this.messageState = false;
          }
        },
 
@@ -880,5 +896,9 @@
   }
   .bj-n:hover {
     background: url("../assets/images/bijixinxihover.png") no-repeat;
+  }
+  .upgrade .g-message {
+    left: -290px;
+    top: 38px;
   }
 </style>

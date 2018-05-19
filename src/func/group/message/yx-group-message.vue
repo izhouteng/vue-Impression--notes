@@ -1,13 +1,15 @@
 <template>
-   <div class="g-message" v-if="$store.state.messageShow">
-      <div class="header">
+  <!--$store.state.messageShow-->
+   <div class="g-message" v-if="state">
+      <div class="headers">
         <div class="recipient">
           <span class="recpeople">收件人：</span>
           <span class="resemile">9116895@qq.com</span>
         </div>
         <div class="closeMessage">
-          <img src="../../../assets/images/closeMessage.png" alt="" @click.stop="closeMessage">
+          <img src="../../../assets/images/closeMessage.png" alt="" @click="closeMessage">
         </div>
+        <slot name="tagget"></slot>
       </div>
 
      <div class="logos">
@@ -20,7 +22,7 @@
        <p class="s-title">共享笔记</p>
        <div class="c-cont">
         <div class="notepic"></div>
-         <div class="shownote">{{$store.state.shareMesObj.title}}</div>
+         <div class="shownote">{{data.title}}</div>
          <div class="c-text">可以编辑和共享</div>
          <div class="henggang">
             <div class="yuan">
@@ -43,11 +45,23 @@
     // 这是群聊消息弹窗
     export default {
         name: "yx-group-message",
-        methods:{
-          closeMessage(){
-             this.$store.commit('closeMessageHander')
+        props:{
+           data:{
+             type:Object,
+             default:function(){
+               return {};
+             }
+           },
+          state:{
+             type:Boolean,
+             default:false,
           }
+        },
+      methods:{
+        closeMessage(){
+           this.$emit('close-hander')
         }
+      }
     }
 </script>
 
@@ -64,7 +78,7 @@
     border-radius: 2px;
     cursor: pointer;
   }
-  .header {
+  .headers {
     width: 100%;
     height: 43px;
     line-height: 43px;
@@ -206,5 +220,13 @@
   }
   .goMes:hover {
     cursor: no-drop;
+  }
+  .topJiant {
+    width: 13px;
+    height: 6px;
+    position: absolute;
+    right: 42px;
+    top: -7px;
+    background: url("../../../assets/images/shangjianjiaohao.png") no-repeat 0px 0px;
   }
 </style>

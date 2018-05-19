@@ -218,6 +218,7 @@
 .yinxDet .upgrade {
     float: right;
     font-size: 11px;
+    position: relative;
 }
 .detup {
     width: 62px;

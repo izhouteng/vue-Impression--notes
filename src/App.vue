@@ -7,7 +7,7 @@
           <yxInforMationBook></yxInforMationBook>
           <!--删除标签-->
           <yxDeleteTags></yxDeleteTags>
-          <yxMessage></yxMessage>
+          <yxMessage :data="bouncedDate" :state="messageShow" @close-hander="closeMessageHander"></yxMessage>
           <div class="loading" v-show="$store.state.loadingState">
               <img src="./assets/images/loadding.gif" alt="" class="loadingPic">
           </div>
@@ -31,7 +31,7 @@
               </div>
               <div class="newshare" @mouseover="shareOverHander" @mouseout="shareOutHander">
                 <img src="./assets/images/fenxiang1.png" alt="" v-show="!share">
-                <img src="./assets/images/fenxiang2.png" alt="" v-show="share" title="分享" @click="shareClickHander">
+                <img src="./assets/images/fenxiang2.png" alt="" v-show="share" title="分享" @click="shareHander">
               </div>
             </div>
             <!-- 收藏 笔记 笔记本 标签 -->
@@ -53,7 +53,8 @@
           <router-view></router-view>
         </div>
         <!--聊天框-->
-
+        {{mesdate}}
+        {{messtate}}
   </div>
 </template>
 
@@ -74,6 +75,8 @@
         navShow:true, // 导航显隐
         searchshow:false, //搜索显隐
         share:false, // 分享显隐
+        bouncedDate:{}, // 消息弹窗数据
+        messageShow:false, //弹窗组件的显隐
       }
     },
     components:{
@@ -108,10 +111,7 @@
       searchState(){
          this.$store.commit('searchShow');
          this.$store.commit('noteListTrue');
-         //预防,如果在群聊组件展示中点击了搜索的情况下
-          if(this.$store.state.shareState){
-              this.$store.commit('shareNone')
-          }
+
       },
 
       // 跳转到Home页,吧vuex中的404设为true
@@ -171,9 +171,22 @@
       shareOutHander(){
         this.share = false;
       },
-      //分享点击
-      shareClickHander(){
-         this.$store.commit('shareBlock')
+      // 分享组件显示
+      shareHander(){
+        this.$store.commit('shareBlock')
+      },
+      //关闭消息弹窗
+      closeMessageHander(){
+         this.$store.commit('closeMessageHander')
+      }
+    },
+    computed:{
+      //消息组件状态
+      mesdate(){
+         this.bouncedDate = this.$store.state.messageDate;
+      },
+      messtate(){
+        this.messageShow = this.$store.state.messageShow;
       }
     },
     watch:{

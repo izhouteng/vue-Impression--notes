@@ -228,6 +228,7 @@ export default {
      // : 添加过渡动画
      state.quickShow = false; //quick components
      state.noteTagState = false; // tagcomponents
+     state.shareState = false;
   },
 
 
@@ -484,6 +485,7 @@ export default {
     // 过渡动画
     state.noteBookShow = false;
     state.quickShow = false;
+    state.shareState = false;
   },
 
   // 进入标签,找到当前标签名字的笔记对象
@@ -584,20 +586,15 @@ export default {
     if(state.quickShow || state.noteBookShow || state.noteTagState){
       state.quickShow = state.noteBookShow = state.noteTagState = false;
     }
+  },
 
-  },
-  //分享组件隐藏
-  shareNone(state){
-    state.shareState = false;
-  },
-  // 开启消息弹窗
+  // 分享数据
   showShakeMessage(state,params){
-    state.messageShow = true;
-    state.shareMesObj = params.obj;
+     state.messageDate = params.obj;
+     state.messageShow = true;
   },
-  //关闭消息弹窗
+  // 消息弹窗状态
   closeMessageHander(state){
      state.messageShow = false;
-     state.shareMesObj = {};
   }
 }

@@ -20,7 +20,10 @@
 
 <script>
     export default {
-        name: "yx--group"
+        name: "yx--group",
+        methods:{
+
+        }
     }
 </script>
 
