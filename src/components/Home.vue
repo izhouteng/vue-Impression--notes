@@ -768,6 +768,10 @@
          //关闭遮罩层
          closeOpationsHander(){
             this.$store.commit('closeQuickbox');
+            // 判断vuex状态中的标签列表是否为空,如果不为空就清空
+            if(this.$store.state.tagAllList.length > 0){
+                this.$store.commit('clearTagList')
+            }
          },
          //分享
          shareHander(obj){

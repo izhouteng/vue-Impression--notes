@@ -38,7 +38,6 @@
              if(this.$store.state.delnoteNextId){
                this.routeId = this.$store.state.delnoteNextId;
              }else{
-               console.log('当前删除对象的id');
                this.routeId = this.$store.state.delNoteInfo.id;
              }
 
