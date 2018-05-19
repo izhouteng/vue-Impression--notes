@@ -90,7 +90,7 @@
 
               <!-- 笔记列表 分享 闹钟 收藏 删除 -->
               <div class="n-fnc">
-                <div class="n-shake cont-icon">
+                <div class="n-shake cont-icon" @click.stop="shareHander(item)">
                   <img src="@/assets/images/cont_fenxiang1.png" alt="" title="分享">
                 </div>
                 <div class="n-remind cont-icon remins"
@@ -765,6 +765,12 @@
          //关闭遮罩层
          closeOpationsHander(){
             this.$store.commit('closeQuickbox');
+         },
+         //分享
+         shareHander(obj){
+            this.$store.commit('showShakeMessage',{
+               obj:obj,
+            })
          }
        },
 

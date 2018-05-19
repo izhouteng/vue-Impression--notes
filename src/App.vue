@@ -48,10 +48,10 @@
               </div>
             </div>
           </div>
-
           <router-view></router-view>
-
         </div>
+        <!--聊天框-->
+        <yxMessage></yxMessage>
   </div>
 </template>
 
@@ -62,6 +62,7 @@
   import yxCreateBook from '@/func/create/yx-CreateBook'
   import yxInforMationBook from '@/func/info-book/yx-InforMationBook'
   import yxDeleteTags from '@/func/delete/del-notetags/yx-DeleteTags'
+  import yxMessage from '@/func/group/message/yx-group-message'
 
   export default {
     name: 'App',
@@ -78,7 +79,8 @@
        yxDeleteNoteBooks,
       'yx-CreateBook':yxCreateBook,
        yxInforMationBook,
-       yxDeleteTags
+       yxDeleteTags,
+       yxMessage
     },
     methods:{
       // 新建鼠标移入移出事件
@@ -194,6 +196,7 @@
   .content {
     width: 100%;
     height: 100%;
+    position: relative;
   }
   .loading {
     position: relative;

@@ -589,5 +589,15 @@ export default {
   //分享组件隐藏
   shareNone(state){
     state.shareState = false;
+  },
+  // 开启消息弹窗
+  showShakeMessage(state,params){
+    state.messageShow = true;
+    state.shareMesObj = params.obj;
+  },
+  //关闭消息弹窗
+  closeMessageHander(state){
+     state.messageShow = false;
+     state.shareMesObj = {};
   }
 }

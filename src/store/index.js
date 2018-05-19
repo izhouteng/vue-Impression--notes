@@ -78,6 +78,8 @@ const store = new Vuex.Store({
 
      /*------分享------*/
      shareState:false, //分享组件状态
+     messageShow:false, //消息弹窗
+     shareMesObj:{}, //分享组件显示的数据
 
    },
    mutations,
