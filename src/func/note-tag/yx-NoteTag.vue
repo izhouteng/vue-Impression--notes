@@ -42,10 +42,9 @@
                   <p class="tipmecces">添加标签,查找更容易</p>
                 </div>
               </div>
-
+            {{filterstag}}
           </div>
         </div>
-        {{filterstag}}
       </div>
 </template>
 
@@ -114,38 +113,38 @@
       //删除标签
       deleteTagHander(obj){
         this.$store.commit('deleteTagHander',obj.tag)
-      }
+      },
     },
     computed:{
         filterstag(){
-           let arr = [];
-           let tagArr = [];
-           // 从数据中去到标签的id和数据,同步到当前组件的data中
-           let bl = this.$store.state.allList;
-           bl.forEach(item => {
-             let label = item.label;
-              if(label.length >= 1){
-                 tagArr.push({
-                   obj:item,
-                   tag:label
-                 })
-              }
-           });
-           // 将tagArr中的内容抽离出需要的部分
-           let newArr = [];
-           for(let i = 0; i < tagArr.length; i++){
-             for(let j = 0; j < tagArr[i].tag.length; j++){
-                newArr.push({
-                  obj:tagArr[i].obj,
-                  tag:tagArr[i].tag[j]
-                })
-             }
-           }
+          let arr = [];
+          let tagArr = [];
+          // 从数据中去到标签的id和数据,同步到当前组件的data中
+          let bl = this.$store.state.allList;
+          bl.forEach(item => {
+            let label = item.label;
+            if(label.length >= 1){
+              tagArr.push({
+                obj:item,
+                tag:label
+              })
+            }
+          });
+          // 将tagArr中的内容抽离出需要的部分
+          let newArr = [];
+          for(let i = 0; i < tagArr.length; i++){
+            for(let j = 0; j < tagArr[i].tag.length; j++){
+              newArr.push({
+                obj:tagArr[i].obj,
+                tag:tagArr[i].tag[j]
+              })
+            }
+          }
 
-           //给对象先进行排序,再找相同的元素
-           newArr.sort(function(a,b){
-              return a.tag.charCodeAt() - b.tag.charCodeAt()
-           });
+          //给对象先进行排序,再找相同的元素
+          newArr.sort(function(a,b){
+            return a.tag.charCodeAt() - b.tag.charCodeAt()
+          });
           /*----真他妈难搞-----*/
           let _res = []; //
           for (let i = 0; i < newArr.length;) {
@@ -156,9 +155,9 @@
               }
             }
             _res.push({
-               tag:newArr[i].tag,
-               len:count,
-               id:Math.random(),
+              tag:newArr[i].tag,
+              len:count,
+              id:Math.random(),
             });
             i += count;
           }
@@ -166,14 +165,15 @@
           this.$store.commit('tagdataList',_res);
           // 将标签数据同步在editValue
           this.tagDate = _res;
-        },
-
-        // 过滤搜索的标签数据
-        searchHander(){
-           return this.$store.state.tagAllList.filter(item => {
-              return item.tag.match(this.searchTag)
-           })
-        },
+      }
+    },
+    // 要在Tag组件侦听标签组件的变化,如果显示就像vuex中同步标签数据。
+    watch:{
+       '$store.state.noteTagState':function(){
+          if(this.$store.state.noteTagState){
+            this.$store.commit('tagdataList',this.tagDate);
+          }
+       }
     },
     directives:{
         // 自定义指令获取搜索的焦点

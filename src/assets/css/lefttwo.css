@@ -209,6 +209,12 @@
     z-index: 51;
     display: block;
 }
+.n-fnc .n-shake {
+  background: url("../images/cont_fenxiang1.png") no-repeat;
+}
+.n-fnc .n-shake:hover {
+  background: url("../images/shubiaoyirufenxiang.png") no-repeat;
+}
 .nodescroll .n-fnc .cont-icon {
     float: left;
     margin: 6px 6px 0 0;

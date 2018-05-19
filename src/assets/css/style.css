@@ -12,7 +12,7 @@
     border-right: solid 1px #ececec;
     height: 100%;
     background: #f8f8f8;
-    position: absolute;
+    position: relative;
     float: left;
 }
 .yinxt {

@@ -7,6 +7,7 @@
           <yxInforMationBook></yxInforMationBook>
           <!--删除标签-->
           <yxDeleteTags></yxDeleteTags>
+          <yxMessage></yxMessage>
           <div class="loading" v-show="$store.state.loadingState">
               <img src="./assets/images/loadding.gif" alt="" class="loadingPic">
           </div>
@@ -48,10 +49,11 @@
               </div>
             </div>
           </div>
+
           <router-view></router-view>
         </div>
         <!--聊天框-->
-        <yxMessage></yxMessage>
+
   </div>
 </template>
 
@@ -159,7 +161,7 @@
       },
       //标签组件加载...
       tagClickHander(){
-        this.$store.commit('noteTagShow')
+        this.$store.commit('noteTagShow');
       },
       // 分享移入
       shareOverHander(){
@@ -196,7 +198,6 @@
   .content {
     width: 100%;
     height: 100%;
-    position: relative;
   }
   .loading {
     position: relative;

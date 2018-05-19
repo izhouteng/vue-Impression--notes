@@ -479,7 +479,7 @@ export default {
     state.noteTagState = !state.noteTagState;
     state.yinListopation = state.noteTagState;
     if(!state.noteTagState){
-      state.tagAllList = []
+       state.tagAllList = []
     }
     // 过渡动画
     state.noteBookShow = false;
