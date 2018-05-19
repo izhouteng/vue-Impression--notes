@@ -78,7 +78,10 @@
           this.$store.commit('hideSearchShow')
         }
         // 进入标签隐藏第几阶段笔记组件信息
-        this.$store.commit('closeJdShowTag')
+        this.$store.commit('closeJdShowTag');
+        // 如果点击进入标签,预防当前状态处于查看快捷方式
+        this.$store.commit('noteListTrue'); //margin-left为原始值,笔记本列表显示
+        this.$store.commit('closeHander'); //显示展开图标
       },
       //编辑标签
       editTagHander(obj){
