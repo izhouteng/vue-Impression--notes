@@ -463,10 +463,13 @@
               this.sortWay.sortWay.call(this,this.allNoteList);
 
               let userId = this.$route.params.id || this.allNoteList[0].id;
+              let routeState = this.$store.state.allList.some(item => item.id == userId);
+
               this.state = userId;
               if(userId){
                 // 根据路由元对象信息从vuex中获取到要展示的数据
                 let n = this.allNoteList.filter(item => item.id == userId)[0];
+
                 if(n){
                   this.noteContent = n;
                   this.titleValue = n.title;
@@ -480,6 +483,7 @@
                    })
                 }
               }
+
 
               window.document.title = this.noteContent.title;
 
@@ -619,6 +623,7 @@
 
          // 删除笔记点击事件
          delNoteHandel(obj){
+           if(obj.id === 123456) return;
             //保存当前删除对象的下一个兄弟对象id
            // 问题: 删除完笔记列表,新建一个笔记再次删除会报错id问题
             this.allNoteList.forEach((item,i) => {
@@ -698,6 +703,7 @@
             this.$store.commit('closeHander'); //显示展开图标
             this.$store.commit('noteListTrue'); //margin-left为原始值,笔记本列表显示
             this.synchronous(); //点击完成也同步左右两边的数据
+
          },
 
          //点击内容,隐藏快捷栏
@@ -823,7 +829,17 @@
                 // 从locaLStorage中取数据
                 this.$store.dispatch('success',{data:Storage});
                 this.allNoteList = this.$store.state.allList;
-                this.inteContent();
+                let id = this.$route.params.id;
+
+                //防止胡乱修改路由动态id
+                let n = this.allNoteList.some(item => item.id == id);
+                if(n){
+                  this.inteContent();
+                }else{
+                  this.$router.push({
+                    path:'/home'
+                  })
+                }
                 this.$store.commit('closeLoadding'); //关闭加载loading
                 // this.getDateTimes(); //localStorage中获取之后同步时间
                 this.getDateTimes.getDateTimes.call(this,this.allNoteList)

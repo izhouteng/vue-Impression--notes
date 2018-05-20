@@ -39,12 +39,13 @@
 .stars{
     width: 36px;
     height: 36px;
-    /* border: solid 1px red; */
     background: url("../images/shoucang1.png") no-repeat;
 }
 .stars:hover{
-
   background: url("../images/shoucang2png.png") no-repeat;
+}
+.stars.active {
+  background: url("../images/kuaijiefangshiclick.png") no-repeat;
 }
 .notesbook {
     width: 36px;
@@ -55,8 +56,8 @@
 .notesbook:hover{
   background: url("../images/biji2.png") no-repeat;
 }
-.notesbook:hover{
-  /*background: url("../images/biji2.png") no-repeat;*/
+.notesbook.active{
+  background: url("../images/biji1.png") no-repeat;
 }
 .notethis {
     width: 36px;
@@ -67,6 +68,9 @@
 .notethis:hover{
   background: url("../images/bijiben2.png") no-repeat;
 }
+.notethis.active {
+  background: url("../images/notebookclickhander.png") no-repeat;
+}
 .yinxltag {
     width: 36px;
     height: 36px;
@@ -75,6 +79,9 @@
 }
 .yinxltag:hover{
   background: url("../images/biaoqian2.png") no-repeat;
+}
+.yinxltag.active {
+  background: url("../images/biaoqianclick.png") no-repeat;
 }
 .yinxbotpic {
     height: 72px;

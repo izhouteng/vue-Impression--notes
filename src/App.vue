@@ -36,10 +36,15 @@
             </div>
             <!-- 收藏 笔记 笔记本 标签 -->
             <div class="yinxlb">
-              <div class="stars" title="收藏" @click="startHander"></div>
-              <div class="notesbook" title="笔记" @click="goHome"></div>
-              <div class="notethis" title="笔记本" @click="noteBookHander"></div>
-              <div class="yinxltag" title="标签" @click="tagClickHander"></div>
+              <!--<div class="stars" title="收藏" @click="startHander"></div>-->
+              <!--<div class="notesbook active" title="笔记" @click="goHome"></div>-->
+              <!--<div class="notethis" title="笔记本" @click="noteBookHander"></div>-->
+              <!--<div class="yinxltag" title="标签" @click="tagClickHander"></div>-->
+              <div v-for="(item,index) in navList"
+                   :class="[item.class,state === index ? 'active' : '']"
+                   :title="item.title"
+                   :key="item.id" @click="navClickHander(item,index)"
+              ></div>
             </div>
 
             <!-- 左侧底部图标 -->
@@ -55,6 +60,7 @@
         <!--聊天框-->
         {{mesdate}}
         {{messtate}}
+        {{navState}}
   </div>
 </template>
 
@@ -66,17 +72,27 @@
   import yxInforMationBook from '@/func/info-book/yx-InforMationBook'
   import yxDeleteTags from '@/func/delete/del-notetags/yx-DeleteTags'
   import yxMessage from '@/func/group/message/yx-group-message'
+  import navdataList from '@/assets/js/navDatelist'
+
+  //设置提醒组件
+  import setremin from '@/func/reminders/SetRemin'
+  import changeremin from '@/func/reminders/changeremin'
+  import undoremin from '@/func/reminders/UndoRemin'
+  import showtimes from '@/func/reminders/showTimes'
+
 
   export default {
     name: 'App',
     data(){
       return {
+        navList:navdataList, //笔记导航
         xJ:true,   //新建显隐
         navShow:true, // 导航显隐
         searchshow:false, //搜索显隐
         share:false, // 分享显隐
         bouncedDate:{}, // 消息弹窗数据
         messageShow:false, //弹窗组件的显隐
+        state:1,
       }
     },
     components:{
@@ -85,9 +101,70 @@
       'yx-CreateBook':yxCreateBook,
        yxInforMationBook,
        yxDeleteTags,
-       yxMessage
+       yxMessage,
+       setremin,
+       changeremin,
+       undoremin,
+       showtimes,
     },
     methods:{
+      navClickHander(obj,index){
+         //收藏
+         if(obj.click === 'startHander'){
+           this.$store.commit('startShow')
+         }
+         // 回到Home
+         else if(obj.click === 'goHome'){
+             this.$store.commit('savefilterNote',{
+               obj:[],
+             });
+             //删除vuex中管理的 搜索框隐藏
+             this.$store.commit('searchNone');
+             this.$store.commit('isNot404Yes');
+             this.$store.commit('noteBookList'); //清空第几阶段展示的信息
+             //定位到/home/1
+             let n = this.$store.state.allList;
+             if(n.length > 0){
+               this.$router.push({
+                 path:'/home/11111111'
+               });
+               this.getDateTimes.getDateTimes.call(this,n)
+             }
+
+             //让显示笔记列表的盒模型显示出来
+             this.$store.commit('noteListTrue');
+             // 让yinList 笔记内容信息展示盒模型的margin-left为300多
+             this.$store.commit('closeQuickbox');
+             this.$store.commit('closeHander'); //显示展开图标
+             // 清空vuex中的标签笔记列表
+             this.$store.commit('clearTagList');
+             // 去除标签组件信息展示
+             this.$store.commit('closeTagShow');
+         }
+         //笔记本
+         else if(obj.click === 'noteBookHander'){
+           this.$store.commit('noteBookHander')
+         }
+         //标签
+         else if(obj.click === 'tagClickHander'){
+           this.$store.commit('noteTagShow');
+         }
+         // 选中标识
+          let selectState = this.$store.state.deleteNotesState;  //当前导航所在的状态
+          if(this.$store.state.quickShow){
+             this.$store.commit('changeNavState',0);
+          }
+          else if(this.$store.state.noteBookShow){
+             this.$store.commit('changeNavState',2);
+          }
+          else if(this.$store.state.noteTagState || this.$store.state.isJoinNotesTagList){
+             this.$store.commit('changeNavState',3)
+          }
+          else{
+            this.$store.commit('changeNavState',1);
+          }
+
+      },
       // 新建鼠标移入移出事件
       overxJ(){
           this.xJ = false;
@@ -187,6 +264,9 @@
       },
       messtate(){
         this.messageShow = this.$store.state.messageShow;
+      },
+      navState(){
+         this.state = this.$store.state.navState;
       }
     },
     watch:{

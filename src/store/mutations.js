@@ -174,7 +174,6 @@ export default {
      state.shareState = false;
   },
 
-
   //点击快捷方式的详细信息,隐藏Home组件笔记列表
   noteListshow(state){
      state.dataListShow = false;
@@ -208,6 +207,7 @@ export default {
   closeHander(state){
     state.unfoldShow = false;
     state.information = false;
+    state.navState = 1;
   },
 
   //当点击textarea 和 title区域,隐藏快捷方式栏
@@ -219,6 +219,7 @@ export default {
         state.noteTagState = false;
         state.shareState = false;
       }
+      state.navState = 1;
   },
 
   //第几阶段笔记本列表显示和隐藏
@@ -596,5 +597,10 @@ export default {
   // 消息弹窗状态
   closeMessageHander(state){
      state.messageShow = false;
+  },
+
+  //修改navState
+  changeNavState(state,index){
+     state.navState = index;
   }
 }

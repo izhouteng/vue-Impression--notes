@@ -80,6 +80,8 @@ const store = new Vuex.Store({
      shareState:false, //分享组件的状态
      messageDate:{}, // 消息弹窗的数据
      messageShow:false, //左下角消息弹窗
+
+     navState:1, //app组件导航
    },
    mutations,
    actions,
