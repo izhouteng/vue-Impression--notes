@@ -484,7 +484,7 @@
                 }
               }
 
-
+              console.log(this.noteContent);
               window.document.title = this.noteContent.title;
 
               // 同步标签 此时this.count和this.noteContent引用的是同一个对象label
@@ -837,7 +837,7 @@
                   this.inteContent();
                 }else{
                   this.$router.push({
-                    path:'/home'
+                    path:'/home/123456'
                   })
                 }
                 this.$store.commit('closeLoadding'); //关闭加载loading

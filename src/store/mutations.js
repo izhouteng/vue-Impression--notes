@@ -583,6 +583,7 @@ export default {
   shareBlock(state){
     state.shareState = !state.shareState;
     state.yinListopation = state.shareState;
+
     //关闭其他组件的显示
     if(state.quickShow || state.noteBookShow || state.noteTagState){
       state.quickShow = state.noteBookShow = state.noteTagState = false;

@@ -45,6 +45,7 @@
         methods:{
           //删除笔记本 提交vuex
           deleteNoteBook(obj){
+            if(obj.id === 'f7') return;
             this.$store.commit('deleteNoteBook',{
                obj:obj,
             })

@@ -30,6 +30,9 @@
 .newshare {
     padding-top: 12px;
 }
+.newshare.active {
+  background: url("../images/fenxianghovera.png") no-repeat 0 12px;
+}
 
 .yinxlb{
     padding: 68px 0 0 15px;
