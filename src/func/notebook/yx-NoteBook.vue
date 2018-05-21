@@ -77,7 +77,8 @@
                 this.$store.commit('hideSearchShow')
               }
              // 如果当前处于标签笔记列表中.进入笔记本要去掉显示标签tag
-              this.$store.commit('closeTagShow')
+              this.$store.commit('closeTagShow');
+
           },
 
           //创建笔记本

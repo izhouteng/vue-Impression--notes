@@ -19,7 +19,6 @@ export function clientAuto(){
     const yinxdet = document.querySelector('#yinxdet');
 
 
-
     const textarea = document.querySelector('.textArea textarea');
     const stages = document.querySelector('.stages');
   // 动态计算高度 内容编辑区域高度

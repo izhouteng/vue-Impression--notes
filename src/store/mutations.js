@@ -274,6 +274,10 @@ export default {
     state.noteBookBg = params.obj.id; //同步笔记本的id
     state.joinNoteBookObj = params.obj;
     state.joinNoteList = params.obj.children;
+    if(state.isJoinNotesTagList){
+       // console.log('进入笔记本列表,标签组件显示呢')
+      state.isJoinNotesTagList = false;
+    }
   },
 
   // 搜索关键字同步到vuex

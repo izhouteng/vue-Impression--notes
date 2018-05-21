@@ -82,6 +82,7 @@ const store = new Vuex.Store({
      messageShow:false, //左下角消息弹窗
 
      navState:1, //app组件导航
+     // isJoinNotesTagList
    },
    mutations,
    actions,

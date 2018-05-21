@@ -52,7 +52,7 @@
               </div>
 
           <!--进入笔记本的时候 显示的笔记本名称-->
-          <notebookInfo></notebookInfo>
+          <notebookInfo ref="noteBookinfoScroll"></notebookInfo>
           <div class="tagNames" v-if="$store.state.isJoinNotesTagList">
              标签:{{$store.state.tagNoteBookName}}
           </div>
@@ -484,7 +484,6 @@
                 }
               }
 
-              console.log(this.noteContent);
               window.document.title = this.noteContent.title;
 
               // 同步标签 此时this.count和this.noteContent引用的是同一个对象label
@@ -882,7 +881,21 @@
            },
            deep:true,
          },
-
+          // 监听vuex中的笔记本对象状态
+         '$store.state.joinNoteBookObj':{
+            handler(){
+              // 进入笔记本列表的情况下
+              if(this.$store.state.joinNoteBookObj){
+                  let scrollList = this.$refs.homeScroll;
+                  if(this.$refs.noteBookinfoScroll.$el.nodeName){
+                    let n = this.$refs.noteBookinfoScroll.$el;
+                      console.log(scrollList.offsetHeight);
+                      console.log(n.offsetHeight);
+                      console.log(document.documentElement.clientHeight)
+                  }
+              }
+            }
+         }
        },
         directives:{
            focus:{
