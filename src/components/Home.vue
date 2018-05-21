@@ -422,9 +422,7 @@
               this.inteContent();
               this.getDateTimes.getDateTimes.call(this,this.allNoteList);
               //关闭loading动画
-              setTimeout(() => {
-                this.$store.commit('closeLoadding');
-              },2000)
+              this.$store.commit('closeLoadding');
             }).catch((err) => {
                alert('网络延迟,请刷新重试')
             })
