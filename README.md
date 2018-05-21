@@ -26,7 +26,7 @@ vue-cli + vue.js + vuex + vue-router + axios + webpack + iview + es6
 
 ## 首页界面  
 
-
+https://github.com/qiqingfu/vue-Impression--notes/blob/master/image/home.png
 
 
 
