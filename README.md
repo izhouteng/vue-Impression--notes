@@ -1,21 +1,22 @@
-#### 基于vue写了一个简易印象笔记  
+ > 基于Vue开发的印象笔记应用  
+ 
+####开发背景：  
+ 
+	我个人比较喜欢用印象笔记来写技术笔记和总结，感受到这款应用带来的便捷和高效以及很棒的用户体验。  
+	
+	我利用业余时间研究了它这款应用的交互以及数据渲染的方式，就自己用Vue以自己的理解来逐步实现，Vuex在其中起到了关键的作用。
+	
+	
+###### [项目地址](https://www.baidu.com)
 
-#### 如果测试有问题请给指出，多谢。
 
-## Build Setup
+#### 技术栈  
+	vue-cli，vue.js，vuex，vue-router，axios，localstorage，webpack，iview，day.js，正则
+	
 
-``` bash
-# install dependencies
-npm install
+#### 项目职责  
 
-# serve with hot reload at localhost:8080
-npm run dev
-
-# build for production with minification
-npm run build
-
-# build for production and view the bundle analyzer report
-npm run build --report
-```
-
-For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
+  - 运用Vue框架对界面进行布局和组件划分,封装通用型功能组件。
+  - 通过axios获取数据,存储本地localstorage。
+  - 运用JS及vue框架实现页面功能交互。
+  - 应用vuex对数据状态进行管理。
