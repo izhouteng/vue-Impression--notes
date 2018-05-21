@@ -63,6 +63,23 @@ vue-cli + vue.js + vuex + vue-router + axios + webpack + iview + es6
   - 一些收获是文字无法描述的，只有实际写过才能深有体会，对交互改变数据，数据驱动视图有更深的体会。加油。
 
 
+## 项目部分截图
+
+![新建笔记](https://github.com/qiqingfu/vue-Impression--notes/blob/master/image/1_%E6%96%B0%E5%BB%BA%E7%AC%94%E8%AE%B0.gif)
+
+![设置提醒和添加快捷方式](https://github.com/qiqingfu/vue-Impression--notes/blob/master/image/2_%E8%AE%BE%E7%BD%AE%E6%8F%90%E9%86%92%E5%92%8C%E6%B7%BB%E5%8A%A0%E5%BF%AB%E6%8D%B7%E6%96%B9%E5%BC%8F.gif)
+
+![查看笔记信息和删除笔记](https://github.com/qiqingfu/vue-Impression--notes/blob/master/image/3_%E6%9F%A5%E7%9C%8B%E7%AC%94%E8%AE%B0%E4%BF%A1%E6%81%AF%E5%92%8C%E5%88%A0%E9%99%A4%E7%AC%94%E8%AE%B0.gif)
+
+![选项菜单功能](https://github.com/qiqingfu/vue-Impression--notes/blob/master/image/4_%E5%AE%9E%E6%97%B6%E5%90%8C%E6%AD%A5title%E5%92%8Ctextarea%E7%9A%84%E4%BF%AE%E6%94%B9%E5%92%8C%E9%80%89%E9%A1%B9%E5%88%97%E8%A1%A8%E7%9A%84%E5%8A%9F%E8%83%BD.gif)
+
+![移动笔记添加标签](https://github.com/qiqingfu/vue-Impression--notes/blob/master/image/5_%E7%A7%BB%E5%8A%A8%E7%AC%94%E8%AE%B0%E5%92%8C%E8%BF%9B%E5%85%A5%E7%AC%94%E8%AE%B0%E6%9C%AC%E4%BB%A5%E5%8F%8A%E6%B7%BB%E5%8A%A0%E6%A0%87%E7%AD%BE%E5%88%A0%E9%99%A4%E6%A0%87%E7%AD%BE.gif)
+
+![搜索笔记](https://github.com/qiqingfu/vue-Impression--notes/blob/master/image/6_%E6%90%9C%E7%B4%A2%E7%AC%94%E8%AE%B0%E5%BF%AB%E6%8D%B7%E6%96%B9%E5%BC%8F%E7%BB%84%E4%BB%B6%E5%8A%9F%E8%83%BD.gif)
+
+![删除笔记本新建笔记本](https://github.com/qiqingfu/vue-Impression--notes/blob/master/image/7_%E5%88%A0%E9%99%A4%E7%AC%94%E8%AE%B0%E6%9C%AC%E6%96%B0%E5%BB%BA%E7%AC%94%E8%AE%B0%E6%9C%AC.gif)
+
+
 
 
 
