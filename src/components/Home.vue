@@ -879,21 +879,6 @@
            },
            deep:true,
          },
-          // 监听vuex中的笔记本对象状态
-         '$store.state.joinNoteBookObj':{
-            handler(){
-              // 进入笔记本列表的情况下
-              if(this.$store.state.joinNoteBookObj){
-                  let scrollList = this.$refs.homeScroll;
-                  if(this.$refs.noteBookinfoScroll.$el.nodeName){
-                    let n = this.$refs.noteBookinfoScroll.$el;
-                      console.log(scrollList.offsetHeight);
-                      console.log(n.offsetHeight);
-                      console.log(document.documentElement.clientHeight)
-                  }
-              }
-            }
-         }
        },
         directives:{
            focus:{

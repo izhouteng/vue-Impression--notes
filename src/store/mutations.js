@@ -497,7 +497,7 @@ export default {
   joinTagNotes(state,tag){
      state.tagNoteBookName = tag;
      // 先清空上一个标签的笔记列表
-     state.tagAllList = [];
+     state.tagAllList = state.joinNoteList = [];
      state.allList.forEach(item => {
        if(item.label.length >= 1){
           let bl = item.label.some(el => el === tag);
