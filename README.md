@@ -68,6 +68,9 @@ vue-cli + vue.js + vuex + vue-router + axios + webpack + iview + es6
   - 一些收获是文字无法描述的，只有实际写过才能深有体会，对交互改变数据，数据驱动视图有更深的体会。加油。
 
 
+## [遇到的问题及解决方法](https://github.com/qiqingfu/vue-Impression--notes/issues)
+
+
 ## 项目部分截图
 
 ##### 新建笔记页
