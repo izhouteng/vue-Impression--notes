@@ -10,10 +10,10 @@
           <div class="nt-tag">
             <div class="sp-z"></div>
 
-            <div class="tag-page" v-for="(item,index) in tagDate" :key="item.id">
+            <div class="tag-page" v-for="(item,index) in findTagList" :key="item.id">
               <!--展示标签-->
               <div class="changeedit"
-                   @mouseover="overHander(index)"
+                   @mouseover="overHander(item)"
                    @mouseout="outHander"
               >
                   <div class="s-tag" title="进入标签笔记" @click="JoinTagNotes(item)">
@@ -52,7 +52,7 @@
   export default {
       data(){
         return {
-           tagDate:{},
+           tagDate:[],
            state:-1, //删除,编辑下标
            editContShow:'', //用来和输入的input框控制显隐
            editValue:'',  //和编辑标签进行双向数据绑定
@@ -168,6 +168,11 @@
           this.$store.commit('tagdataList',_res);
           // 将标签数据同步在editValue
           this.tagDate = _res;
+      },
+      findTagList(){
+          return this.tagDate.filter(item => {
+            return item.tag.match(this.searchTag)
+          })
       }
     },
     // 要在Tag组件侦听标签组件的变化,如果显示就像vuex中同步标签数据。
