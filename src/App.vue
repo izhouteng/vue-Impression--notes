@@ -14,9 +14,7 @@
           <!-- 左侧操作栏 -->
           <div class="yinxleft" id="navl" v-show="navShow" @mousedown.prevent>
             <div class="yinxt">
-              <a href="http://weibo.com/Qr1Yee" target="_blank">
-                <img src="./assets/images/leftToppic.png" alt="" title="微博">
-              </a>
+              <img src="./assets/images/leftToppic.png" alt="">
             </div>
             <!-- 新建搜索分享 -->
             <div class="yinxfcn">

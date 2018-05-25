@@ -148,7 +148,7 @@
           newArr.sort(function(a,b){
             return a.tag.charCodeAt() - b.tag.charCodeAt()
           });
-          /*----真他妈难搞-----*/
+
           let _res = []; //
           for (let i = 0; i < newArr.length;) {
             let count = 0;
