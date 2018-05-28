@@ -19,16 +19,17 @@
                   <div class="s-tag" title="进入标签笔记" @click="JoinTagNotes(item)">
                     <span class="z-cont">{{item.tag}}</span><span class="t-number">{{item.len}}</span>
                   </div>
-                  <div class="nt-func" v-if="index===state">
-                    <span class="edittag" title="编辑标签" @click.stop="editTagHander(item)"></span>
+                <!--v-if="index===state"-->
+                  <div class="nt-func" v-if="item === state">
+                    <span class="edittag" title="编辑标签" @click.stop="editTagHander(item,index)"></span>
                     <span class="deletetag" title="删除标签" @click.stop="deleteTagHander(item)"></span>
                   </div>
               </div>
               <div class="edit-tag" v-show="item.tag === editContShow">
                 <input type="text" class="editVal"
                        v-model="editValue"
-                       ref="editVal"
                        @blur.stop="blurHander(item)"
+                       ref="editVal"
                 >
                 <div class="saveedit"></div>
               </div>
@@ -84,13 +85,14 @@
         this.$store.commit('closeHander'); //显示展开图标
       },
       //编辑标签
-      editTagHander(obj){
+      editTagHander(obj,index){
           // 将被编辑的对象的tag内容同步在当前组件的editValue中,和input进行双向数据绑定
           this.editValue = obj.tag; //用来和input双向数据绑定的
           this.editContShow = obj.tag; //用tag控制显示隐藏
+          //修正
+          let bl = this.$refs.editVal;
           this.$nextTick(function(){
-            let bl = this.$refs.editVal;
-             bl[this.state].focus()
+            bl[index].focus()
           })
       },
       // 失去焦点事件
@@ -183,11 +185,11 @@
           }
        }
     },
-    directives:{
-        // 自定义指令获取搜索的焦点
-      focus:{
-        inserted:function(el){
-           el.focus();
+    directives: {
+      focus: {
+        // 指令的定义
+        inserted: function (el) {
+          el.focus()
         }
       }
     }
