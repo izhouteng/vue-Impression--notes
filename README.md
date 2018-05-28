@@ -7,7 +7,7 @@
 从遇到问题到分析问题然后再解决问题的那种快感...
 
 
-#### [在线访问](https://www.baidu.com)
+#### [在线访问](http://evernote.wykiss.cn)
 
 ```__注:访问使用Chrome/firefox浏览器。```  
 
@@ -96,7 +96,7 @@ vue-cli + vue.js + vuex + vue-router + axios + webpack + iview + es6
 
 
 
-##### [更多功能体验,点击这里](https:www.baidu.com)
+##### [更多功能体验,点击这里](http://evernote.wykiss.cn)
   
 
 
