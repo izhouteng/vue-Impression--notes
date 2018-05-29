@@ -71,7 +71,12 @@ vue-cli + vue.js + vuex + vue-router + axios + webpack + iview + es6
 ## [遇到的问题及解决方法](https://github.com/qiqingfu/vue-Impression--notes/issues)
 
 
-## 根据不同场景渲染不同笔记列表数据  
+#### 根据不同场景渲染不同笔记列表数据  
+![根据不同场景渲染不同笔记列表数据](https://github.com/qiqingfu/vue-Impression--notes/blob/master/image/%E6%A0%B9%E6%8D%AE%E5%9C%BA%E6%99%AF%E6%B8%B2%E6%9F%93%E4%B8%8D%E5%90%8C%E7%AC%94%E8%AE%B0%E5%88%97%E8%A1%A8%E6%95%B0%E6%8D%AE.png)
+
+
+#### 根据不同场景删除笔记数据,Home组件为什么要侦听vuex中的notelistNumber状态的变化?
+![根据不同场景删除笔记数据](https://github.com/qiqingfu/vue-Impression--notes/blob/master/image/%E5%88%A0%E9%99%A4%E7%AC%94%E8%AE%B0.png) 
 
 
 ## 项目部分截图
