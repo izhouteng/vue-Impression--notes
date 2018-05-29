@@ -71,6 +71,9 @@ vue-cli + vue.js + vuex + vue-router + axios + webpack + iview + es6
 ## [遇到的问题及解决方法](https://github.com/qiqingfu/vue-Impression--notes/issues)
 
 
+## 根据不同场景渲染不同笔记列表数据  
+
+
 ## 项目部分截图
 
 ##### 新建笔记页
