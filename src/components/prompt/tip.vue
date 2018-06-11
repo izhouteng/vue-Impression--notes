@@ -11,6 +11,7 @@
 </template>
 
 <script>
+  // 进入笔记本时,如果笔记本列表为空,提示的消息和数据。
     export default {
 
     }

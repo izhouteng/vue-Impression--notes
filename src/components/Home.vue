@@ -461,7 +461,6 @@
               this.sortWay.sortWay.call(this,this.allNoteList);
 
               let userId = this.$route.params.id || this.allNoteList[0].id;
-              let routeState = this.$store.state.allList.some(item => item.id == userId);
 
               this.state = userId;
               if(userId){
@@ -490,17 +489,17 @@
 
               if(this.$store.state.findNotesList.length > 0){
                    this.allNoteList = this.$store.state.findNotesList;
-                   this.$store.commit('deleteNoteState','findlist')
+                   this.$store.commit('deleteNoteState','findlist');
               }
               // 判断vuex状态管理中的 笔记本列表是否有
               else if(this.$store.state.joinNoteList.length > 0){
                    this.allNoteList = this.$store.state.joinNoteList;
-                   this.$store.commit('deleteNoteState','joinlist')
+                   this.$store.commit('deleteNoteState','joinlist');
               }
               // 进入标签笔记列表,判断vuex状态中的标签列表是否存在
               else if(this.$store.state.tagAllList.length > 0 || this.$store.state.tagNoteBookName.length > 0){
                    this.allNoteList = this.$store.state.tagAllList;
-                   this.$store.commit('deleteNoteState','taglist')
+                   this.$store.commit('deleteNoteState','taglist');
               }
               else {
                    //全部的笔记 路由跳转实时同步vuex中的笔记列表
@@ -811,10 +810,6 @@
               width:this.tagVal.length * 12 + 26 + 'px'
            }
           },
-          // 当前展示对象的时间长度
-          noteReminLen(){
-
-          }
         },
 
         // 钩子函数 请求数据同步vuex

@@ -55,14 +55,17 @@
              // 如果当前笔记是全屏状态,那么应该让笔记列表显示
               this.$store.commit('noteListTrue');
               this.$store.commit('closeHander');
-             //应该判断点击笔记本列表对象的chilren的长度,不能通过vuex状态判断,不靠谱
+
+             //笔记本背景颜色的下标
              this.$store.commit('notebookState',index);
+
              if(obj.children.length < 1){
                this.$store.commit('deleteAll')
              }
              this.$store.commit('inNotelist',{
                 obj:obj,
              });
+
              // 跳转路由到详细笔记本列表中的第一个id
              let booklist = this.$store.state.joinNoteList;
              if(booklist.length > 0){

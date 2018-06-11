@@ -11,7 +11,7 @@ import 'iview/dist/styles/iview.css';
 Vue.use(iView);
 
 // 组件用过call()执行的同步笔记列表时间
-import dayjs from '@/assets/js/getDateTimes' 
+import dayjs from '@/assets/js/getDateTimes'
 Vue.use(dayjs);
 
 import https from '@/server/index'
