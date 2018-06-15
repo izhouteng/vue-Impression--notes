@@ -268,7 +268,7 @@
           },
           //复制笔记链接
           moreHander(){
-            this.$store.commit('moreHander')
+            this.$store.commit('moreHander');
           },
           // 未创建,查看笔记信息
           lookEditInfo(){
@@ -300,9 +300,8 @@
         computed:{
            //根据state id 过滤出要展示的第几阶段笔记本
              filterNote(){
-              let n = this.noteBookList.filter(item => item.id === this.state)[0]
+              let n = this.noteBookList.filter(item => item.id === this.state)[0];
               this.showNoteBook = n;
-              // console.log(this.showNoteBook)
             },
 
           // 过滤笔记本
@@ -321,8 +320,8 @@
 
 
         created(){
+            // 初始化笔记本数据
             let n = this.$store.state.dataList;
-            // 判断vuex中的数据有没有,如果没有就跳转到Home页
             if(n.length > 0){
                this.noteBookList = n;
             }else if(n.length < 1){

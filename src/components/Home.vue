@@ -52,7 +52,7 @@
               </div>
 
           <!--进入笔记本的时候 显示的笔记本名称-->
-          <notebookInfo ref="noteBookinfoScroll"></notebookInfo>
+          <notebookInfo></notebookInfo>
           <div class="tagNames" v-if="$store.state.isJoinNotesTagList">
              标签:{{$store.state.tagNoteBookName}}
           </div>
@@ -125,9 +125,6 @@
 
       <!--最右侧笔记本内容信息区域-------------------------------->
       <!--左侧区域-->
-      <!--:style=""-->
-      <!--$store.state.quickShow-->
-      <!--:style="this.$store.state.yinListopation?'opacity:0.2':''"-->
       <!--notWidth  添加class -->
       <div class="yinxDet clearfix" id="yinxdet"
            v-show="$store.state.Not404"
@@ -391,12 +388,14 @@
        methods:{
          // 同步textarea实时修改,左侧笔记列表实时更新
          synchronous(){
+
              //切换路由对象的时候 提交更新后的title和textarea内容
              let changeObj = this.allNoteList.filter(item => item.id == this.EditId)[0];
 
              if(this.EditTitle === ''){
                this.EditTitle = '无标题内容'
              }
+
              // this.EditTitle === '' || this.EditTextarea === '' &&
              // console.log(this.EditTitle !== changeObj.title && this.EditTextarea !== changeObj.content);
              if(changeObj){
@@ -434,8 +433,8 @@
           // 初始化noteContent
           inteContent(){
               // 只需要修改路由对象,会自动更新全部这个组件需要的所有数据
-               // 默认滚动条高度0  当可以获取到这个元素的时候再进行重置0
-               // QQ浏览器 Error in callback for watcher "$route": "TypeError: editSroll.scrollTo is not a function"
+              // 默认滚动条高度0  当可以获取到这个元素的时候再进行重置0
+
               let editSroll = this.$refs.editScroll;
               let homeScroll = this.$refs.homeScroll; //笔记列表滚动条
               if(editSroll){
@@ -457,8 +456,9 @@
                  this.$store.commit('showNoteList')
               }
 
-              /*-------路由跳转调用该方法,同步笔记列表最新时间-------*/
+              // 笔记本列表选项排序
               this.sortWay.sortWay.call(this,this.allNoteList);
+
 
               let userId = this.$route.params.id || this.allNoteList[0].id;
 
@@ -568,8 +568,6 @@
            })
          },
          handleClose2 (tag,index) {
-           // const index = this.count.indexOf(name);
-           // this.count.splice(index, 1);
              this.$store.commit('delTaglabel',{
                 obj:this.noteContent,
                 tag:tag,
@@ -581,6 +579,7 @@
          BlurFn(){
             //保存数据 提交mutations 修改当前对象的标签
             let isHsh = this.noteContent.label.some(el => el === this.tagVal);  //判断标签有没有重复的
+
             if(this.tagVal.length && !isHsh){
                this.$store.commit('saveLabel',{
                   obj:this.noteContent,
@@ -669,6 +668,8 @@
            this.$store.commit('savefilterNote',{
               obj:arr,
            });
+
+
            //判断搜索笔记有没有 -> 如果没有搜索到笔记
            if(arr.length < 1){
                // this.Not404 = false;  //路由跳转到allList的第一个id
@@ -681,6 +682,7 @@
                   path:'/home/'+arr[0].id
                 })
            }
+
          },
          // 清空搜索关键字
          clearSearchVal(){
@@ -699,7 +701,6 @@
             this.$store.commit('closeHander'); //显示展开图标
             this.$store.commit('noteListTrue'); //margin-left为原始值,笔记本列表显示
             this.synchronous(); //点击完成也同步左右两边的数据
-
          },
 
          //点击内容,隐藏快捷栏
@@ -716,11 +717,15 @@
             });
             // 前往笔记本,同步笔记列表的时间
             this.getDateTimes.getDateTimes.call(this,this.allNoteList);
+
+
+            // home组件前往笔记本,需要刷新路由,同步笔记本数据
             if(this.$store.state.joinNoteList.length >= 1){
                this.$router.push({
                   path:'/home/' + Math.random()
                })
             }
+
          },
 
          // 新建笔记

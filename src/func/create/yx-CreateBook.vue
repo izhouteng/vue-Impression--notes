@@ -36,6 +36,7 @@
       createOk(){
          if(this.noteBookName.trim()){
            let id = (Math.random()*123456789 + '1').slice(0,7);
+
            let BookObj = {
               "title":this.noteBookName,
               "id":'f' + id,

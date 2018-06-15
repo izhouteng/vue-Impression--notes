@@ -309,7 +309,6 @@ export default {
   //创建笔记本同步数据
   addBooks(state,params){
      state.dataList.push(params.obj);
-     state.allList = this.getters.tBallList;
   },
   // 笔记本背景颜色下标
   notebookState(state,index){

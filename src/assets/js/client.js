@@ -43,14 +43,6 @@ export function clientAuto(){
 }
 
   export function editclient() {
-//     const yinxdet = document.getElementById('yinxdet');
-//     const yinxleft = document.querySelector('.yinxleft');
-//
-//     function size() {
-//        yinxdet.style.width = document.documentElement.clientWidth + 'px'
-//     }
-//     window.onresize = size;
-//     size();
 }
 
 export default {
