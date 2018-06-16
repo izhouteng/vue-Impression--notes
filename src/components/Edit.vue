@@ -252,7 +252,6 @@
              let o = {};
              if(this.inputValue.trim() === '写下笔记标题'){
                 o = {title:'无标题内容'};
-                // console.log(this.$route.params)
              }else{
                o = {title:this.inputValue};
              }
@@ -270,11 +269,21 @@
           moreHander(){
             this.$store.commit('moreHander');
           },
+
+
           // 未创建,查看笔记信息
           lookEditInfo(){
+
+            let title = '';
+            if(this.inputValue === '写下笔记标题'){
+                title = '无标题内容';
+            }else {
+                title = this.inputValue;
+            }
+
             this.$store.commit('infoHander',{
               obj:{
-                "title":this.inputValue,
+                "title":title,
                 "id":parseInt(Math.random()*10000000),
                 "pid":this.state,
                 "shortcut":this.shortcut,

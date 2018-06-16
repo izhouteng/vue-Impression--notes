@@ -21,25 +21,40 @@ export default {
       });
   },
 
-  // 移动笔记
+  /*
+  * move notes in noteBook
+  * state @ vuex
+  * params @ typeof object
+  *   {
+  *     @ gid  @string
+  *     @ pid  @string
+  *     @ obj  @object
+  *     @ moveObj @string
+  *   }
+  * */
   moveNotes(state,params){
       // 从哪个数组中移出的
       params.obj.pid = params.gid;
+
       state.tipsuccessState = false;
 
+      // @ 从移出的笔记本中删除这条笔记
       state.dataList.forEach(item => {
-         if(item.id == params.pid){
+         if(item.id === params.pid){
             item.children.forEach((el,index) => {
                if(el === params.obj){
                  item.children.splice(index,1)
                }
             })
          }
-         // 移动到哪个数组中
-         else if(item.id == params.gid){
+
+         //@ 将笔记移动到哪个笔记本中
+         else if(item.id === params.gid){
             item.children.push(params.obj)
          }
       });
+
+      // @ 提示框组件数据信息
      state.tipsuccessInfo = {
         objname:params.moveObj,
         tip:'已将笔记移动到'
