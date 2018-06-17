@@ -285,7 +285,7 @@
           </div>
         </div>
 
-        <!--/***********/-->
+        <!--文本编辑框-->
         <div class="editCount" ref="editScroll" @click="closeQuick">
 
           <div class="root">
@@ -296,7 +296,6 @@
                 <textarea v-model="textareaValue"></textarea>
             </div>
           </div>
-
         </div>
 
         <!--遮罩层-->
@@ -330,6 +329,7 @@
     import showtimes from '@/func/reminders/showTimes'
     import { DatePicker } from 'iview'
     import yxGroupMessage from '@/func/group/message/yx-group-message'
+
 
     export default {
         name: "home",
@@ -861,32 +861,30 @@
             this.moveNote = false;
           },
          // 监听标题信息
-         titleValue(){
-            this.EditTitle = this.titleValue;
-            this.EditId = this.$route.params.id || this.allNoteList[0].id.toString(); // 字符串类型的id
+         titleValue(newTitle){
+           this.EditTitle = newTitle;
+           this.EditId = this.$route.params.id || this.allNoteList[0].id.toString(); // 字符串类型的id
          },
          // 监听textarea内容
-         textareaValue(){
-             this.EditTextarea = this.textareaValue;
+         textareaValue(newTextarea){
+             this.EditTextarea = newTextarea;
              this.EditId = this.$route.params.id || this.allNoteList[0].id.toString();
          },
 
-         //监听vuex数据状态
+         /*
+         * 同步vuex最新的数据到本地存储
+         * */
          '$store.state.dataList':{
-            handler(){
-                localStorage.setItem('yinxiang',JSON.stringify(this.$store.state.dataList));
+            handler(changeData){
+                localStorage.setItem('yinxiang',JSON.stringify(changeData));
             },
            deep:true,
          },
-         '$store.state.notelistNumber':{
-           handler(){
-             // 如果为false,说明当前笔记本列表为空,那么判断当前组件的allNoteList为不为空,如果不为空,则清空
-             if(this.$store.state.notelistNumber){
-                 this.allNoteList = [];
-             }
-           },
-           deep:true,
-         },
+         '$store.state.notelistNumber'(newState){
+              if(newState){
+                this.allNoteList = [];
+              }
+         }
        },
         directives:{
            focus:{

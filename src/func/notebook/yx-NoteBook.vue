@@ -59,6 +59,9 @@
              //笔记本背景颜色的下标
              this.$store.commit('notebookState',index);
 
+             /*
+             * 进入这条笔记本,如果当前笔记本的笔记列表的长度为0,说明当前笔记本为空
+             * */
              if(obj.children.length < 1){
                this.$store.commit('deleteAll')
              }
