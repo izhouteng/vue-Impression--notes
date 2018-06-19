@@ -5,20 +5,15 @@ export function clientAuto(){
 
   //Home组件顶部功能栏  (设置提醒,移除快捷方式,笔记信息,删除笔记,更多,升级,共享,全屏)
     const dethead = document.querySelector('.dethead');
-
   // App组件导航栏, (新建,搜索,群聊,快捷方式..)
     const yinxleft = document.querySelector('.yinxleft');
-
   // Home组件中的 笔记列表(网页简藏,几条笔记,选项...)
     const yinxList = document.querySelector('.yinxList');
 
 
     const nodescroll = document.querySelector('#nodescroll');
     const yinxTitle = document.querySelector('.yinxTitle');
-
     const yinxdet = document.querySelector('#yinxdet');
-
-
     const textarea = document.querySelector('.textArea textarea');
     const stages = document.querySelector('.stages');
   // 动态计算高度 内容编辑区域高度
@@ -34,12 +29,19 @@ export function clientAuto(){
       yinxDet.style.height = clientH - searchNote.offsetHeight + 'px';
       searchNote.style.width = clientW - yinxleft.offsetWidth + 'px';  //计算搜索的动态宽度
       notFound.style.height = clientH - yinxTitle.offsetHeight + 'px';
-
-      // Home组件顶部导航栏的宽度应该根据 yinxleft的显示和隐藏自动计算高度
-
     }
-    window.onresize = resize;
+    window.onresize = function(){
+      ttrottle(resize);
+    };
     resize();
+
+    //函数节流
+    function ttrottle(methods, context){
+      clearTimeout(methods.tId);
+      methods.tId = setTimeout(() => {
+        methods.call(context)
+      },10)
+    }
 }
 
   export function editclient() {

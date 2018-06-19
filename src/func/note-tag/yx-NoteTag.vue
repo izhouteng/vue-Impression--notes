@@ -43,7 +43,8 @@
                   <p class="tipmecces">添加标签,查找更容易</p>
                 </div>
               </div>
-            {{filterstag}}
+
+
           </div>
         </div>
       </div>
@@ -53,7 +54,6 @@
   export default {
       data(){
         return {
-           tagDate:[],
            state:-1, //删除,编辑下标
            editContShow:'', //用来和输入的input框控制显隐
            editValue:'',  //和编辑标签进行双向数据绑定
@@ -67,10 +67,19 @@
       outHander(){
         this.state = -1;
       },
-      //进入标签笔记
+
+
+      /*
+      * join notetag info,
+      * @ obj 当前的标签数据
+      *  @ tag
+      *  @ id
+      *  @ len
+      * */
       JoinTagNotes(obj){
          this.state = -1;
          this.$store.commit('joinTagNotes',obj.tag); //根据当前标签找到笔记对象
+
          this.$router.push({
            path:'/home/1111111',
          });
@@ -120,12 +129,25 @@
         this.$store.commit('deleteTagHander',obj.tag)
       },
     },
+
+    /*
+    * 通过计算属性 filterstag,从vuex中的笔记列表中过滤标签笔记数据
+    * */
     computed:{
         filterstag(){
-          let arr = [];
+
           let tagArr = [];
-          // 从数据中去到标签的id和数据,同步到当前组件的data中
           let bl = this.$store.state.allList;
+
+         /*
+         * bl @ vuex alllist everyone notedata
+         * 1. 遍历每条笔记,通过判断这个笔记的label数组的长度,得到这条笔记有没有标签内容
+         * 2. 如果笔记内容有标签
+         *    tagArr[]存储
+         *    @ obj 当前的笔记对象
+         *    @ tag  对应的label数组
+         * */
+
           bl.forEach(item => {
             let label = item.label;
             if(label.length >= 1){
@@ -135,7 +157,20 @@
               })
             }
           });
-          // 将tagArr中的内容抽离出需要的部分
+
+          /*
+          * 1.遍历 tagArr中的每一个对象
+          * 2. 遍历tagArr对象中的tag对应的标签数组中的每一个标签和对应的对象
+          * 3.newArr[
+          *   @obj 笔记对象
+          *   @tag 对应的每一个标签
+          * ]
+          * {obj: {…}, tag: "Vue"}
+            {obj: {…}, tag: "Vue"}
+            {obj: {…}, tag: "vue-cli"}
+            {obj: {…}, tag: "印象笔记"}
+            这样的格式
+          * */
           let newArr = [];
           for(let i = 0; i < tagArr.length; i++){
             for(let j = 0; j < tagArr[i].tag.length; j++){
@@ -146,16 +181,27 @@
             }
           }
 
-          //给对象先进行排序,再找相同的元素
+          /*
+          * 对newArr数组中的每一个对象的tag对应的标签名进行排序
+          * */
           newArr.sort(function(a,b){
             return a.tag.charCodeAt() - b.tag.charCodeAt()
           });
 
-          let _res = []; //
+
+          /*
+          * _res 存储要展示的数据格式
+          * @ count 记录所有笔记中相同的标签的个数
+          * @ tag 标签名
+          * @ len 相同标签的个数
+          * @ id 每个对象保持唯一的id
+          * */
+          let _res = [];
+
           for (let i = 0; i < newArr.length;) {
             let count = 0;
             for (let j = i; j < newArr.length; j++) {
-              if (newArr[i].tag == newArr[j].tag) {
+              if (newArr[i].tag === newArr[j].tag) {
                 count++;
               }
             }
@@ -164,24 +210,32 @@
               len:count,
               id:Math.random(),
             });
+
             i += count;
           }
-          // 将所有的笔记tag列表,同步到vuex状态中
-          this.$store.commit('tagdataList',_res);
+
           // 将标签数据同步在editValue
-          this.tagDate = _res;
+          return _res;
       },
+
+      /*
+      *   search tag notes list
+      *   通过计算属性filterstag数组中的数据,进行搜索标签进行数据的展示
+      * */
       findTagList(){
-          return this.tagDate.filter(item => {
+          return this.filterstag.filter(item => {
             return item.tag.match(this.searchTag)
           })
       }
     },
-    // 要在Tag组件侦听标签组件的变化,如果显示就像vuex中同步标签数据。
+
+    /*
+    * 侦听标签组件的显示和隐藏,进行数据的同步
+    * */
     watch:{
        '$store.state.noteTagState':function(){
           if(this.$store.state.noteTagState){
-            this.$store.commit('tagdataList',this.tagDate);
+            this.$store.commit('tagdataList',this.filterstag);
           }
        }
     },

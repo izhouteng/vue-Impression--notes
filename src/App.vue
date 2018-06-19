@@ -122,7 +122,7 @@
                this.$router.push({
                  path:'/home/11111111'
                });
-               this.getDateTimes.getDateTimes.call(this,n)
+               this.getDateTimes.getDateTimes.call(this,n);
              }
 
              //让显示笔记列表的盒模型显示出来
@@ -145,13 +145,17 @@
          }
          // 选中标识
           let selectState = this.$store.state.deleteNotesState;  //当前导航所在的状态
-          if(this.$store.state.quickShow){
+          let quickshow = this.$store.state.quickShow;
+          let noteBookShow = this.$store.state.noteBookShow;
+          let noteTagState = this.$store.state.noteTagState || this.$store.state.isJoinNotesTagList;
+
+          if(quickshow){
              this.$store.commit('changeNavState',0);
           }
-          else if(this.$store.state.noteBookShow){
+          else if(noteBookShow){
              this.$store.commit('changeNavState',2);
           }
-          else if(this.$store.state.noteTagState || this.$store.state.isJoinNotesTagList){
+          else if(noteTagState){
              this.$store.commit('changeNavState',3)
           }
           else{

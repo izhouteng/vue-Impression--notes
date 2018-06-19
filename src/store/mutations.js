@@ -507,7 +507,11 @@ export default {
     state.shareState = false;
   },
 
-  // 进入标签,找到当前标签名字的笔记对象
+  /*
+  * @state, @tag 标签名称
+  * 将vuex中 alllist笔记列表中的标签和tag进行匹配
+  * 如果匹配上就将这条笔记对象 push 到vuex中的tagAllList数组中。
+  * */
   joinTagNotes(state,tag){
      state.tagNoteBookName = tag;
      // 先清空上一个标签的笔记列表
@@ -520,10 +524,13 @@ export default {
           }
        }
      });
-     //透明度去除
+     /*
+     * @yinListopation opations change none
+     * @noteTagState, tag components is false; close
+     * @ isJoinNotesTagList, join tag list, tip vuex change true。
+     * */
      state.yinListopation = false;
      state.noteTagState = false;
-     // 进入笔记列表
      state.isJoinNotesTagList = true;
   },
 
