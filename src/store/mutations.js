@@ -511,11 +511,20 @@ export default {
   * @state, @tag 标签名称
   * 将vuex中 alllist笔记列表中的标签和tag进行匹配
   * 如果匹配上就将这条笔记对象 push 到vuex中的tagAllList数组中。
+  *
+  * @ state.tagAllList = state.joinNoteList = []; 是引用类型的
+  * @ state.tagAllList 当前标签笔记展示的数据,先清空再同步
+  * @ state.joinNoteList = []; 笔记本列表展示的数据
+  * @ 当进入标签的时候, state.joinNoteList也会同步当前标签展示的数据,那么home组件中的判断就直接定格 joinlist 状态了
+  * @ 应该单独清空,不能同时引用一个数数组
   * */
   joinTagNotes(state,tag){
+
      state.tagNoteBookName = tag;
      // 先清空上一个标签的笔记列表
-     state.tagAllList = state.joinNoteList = [];
+     state.tagAllList = [];
+     state.joinNoteList = [];
+
      state.allList.forEach(item => {
        if(item.label.length >= 1){
           let bl = item.label.some(el => el === tag);
@@ -604,6 +613,7 @@ export default {
  * */
   deleteNoteState(state,s){
     state.deleteNotesState = s;
+    console.log(state.deleteNotesState)
   },
 
   //分享组件加载..

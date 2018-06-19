@@ -51,7 +51,7 @@
            */
           let deleteState = this.$store.state.deleteNotesState;  //删除笔记本时状态,确定删除哪方面的笔记
 
-          if(deleteState === 'allList'){
+          if(deleteState === 'alllist' || deleteState === 'findlist'){
               if(this.routeId){
                 this.$router.push({
                   path:'/home/'+ this.routeId,
@@ -75,18 +75,18 @@
 
 
           // 删除标签笔记
-          // else if(deleteState === 'taglist'){
-          //     console.log('标签中删除笔记');
-          //     if(this.routeId !== this.$store.state.delNoteInfo.id){
-          //       this.$router.push({
-          //         path:'/home/'+ this.routeId,
-          //       });
-          //     }
-          //     //笔记本列表删除完了
-          //     if(this.$store.state.tagAllList.length <= 0){
-          //       this.$store.commit('deleteAll');
-          //     }
-          // }
+          else if(deleteState === 'taglist'){
+              console.log('标签中删除笔记');
+              if(this.routeId !== this.$store.state.delNoteInfo.id){
+                this.$router.push({
+                  path:'/home/'+ this.routeId,
+                });
+              }
+              //笔记本列表删除完了
+              if(this.$store.state.tagAllList.length <= 0){
+                this.$store.commit('deleteAll');
+              }
+          }
 
              // 确定删除的时候,将删除的对象同步到vuex,供successInfo组件显示
              // 每次删除的时候,先再mutations中隐藏掉这个组件显示的数据,再延迟提交mutations显示,再隐藏

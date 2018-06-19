@@ -436,10 +436,11 @@
          /*
          * @ vxDeleteInfo, 进入不同的场景,同步vuex当前场景的标识,为删除笔记的时候,根据这个标识进行操作
          * @ name 标识  type:string
+         * @ name === deleteNoteState 避免两次提交的问题
          * */
          vxDeleteInfo(name){
            let deleteNoteState = this.$store.state.deleteNotesState;
-           if(deleteNoteState === name) return;
+           if(name === deleteNoteState)  return;
 
            if(typeof name !== 'string'){
                throw new Error(name + ' typeof should string');
@@ -453,7 +454,6 @@
          * 路由对象发生变化,就执行 inteContent 函数, 自动更新组件需要的数据
          * */
           inteContent(){
-
               /*
               * 对笔记列表滚动条,以及笔记信息textarea 滚动条的整理
               * */
@@ -520,7 +520,7 @@
               let findNotesList = this.$store.state.findNotesList;
               let joinNoteList = this.$store.state.joinNoteList;
               let tagAllList = this.$store.state.tagAllList;
-              // let tagNoteBookName = this.$store.state.tagNoteBookName;
+              let tagNoteBookName = this.$store.state.tagNoteBookName;
 
 
               if(findNotesList.length > 0){
@@ -533,14 +533,14 @@
                    this.vxDeleteInfo('joinlist')
               }
               // 进入标签笔记列表,判断vuex状态中的标签列表是否存在
-              else if(tagAllList.length > 0 ){
-                   this.allNoteList = this.$store.state.tagAllList;
-                   this.vxDeleteInfo('taglist');
+              else if(tagAllList.length > 0 || tagNoteBookName.length > 0){
+                   this.allNoteList = tagAllList;
+                   this.vxDeleteInfo('taglist')
               }
               else {
                    //全部的笔记 路由跳转实时同步vuex中的笔记列表
                    this.allNoteList = this.$store.state.allList;
-                   this.vxDeleteInfo('allList')
+                   this.vxDeleteInfo('alllist')
               }
 
               //选项列表数据
