@@ -599,7 +599,9 @@ export default {
      state.tagAllList = tags;
   },
 
-  /*********deleteNoteState 删除笔记本时状态************/
+ /*
+ * 当前渲染的笔记本列表的所在的状态
+ * */
   deleteNoteState(state,s){
     state.deleteNotesState = s;
   },

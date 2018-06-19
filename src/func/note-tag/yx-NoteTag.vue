@@ -83,7 +83,10 @@
          this.$router.push({
            path:'/home/1111111',
          });
-        // 如果当搜索框显示的时候,再提交commit关闭
+
+         /*
+         * @ hideSearchShow 预防进入标签笔记时,处于搜索笔记的状态
+         * */
         if(this.$store.state.searchBox){
           this.$store.commit('hideSearchShow')
         }

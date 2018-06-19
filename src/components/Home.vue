@@ -386,7 +386,10 @@
            }
         },
        methods:{
-         // 同步textarea实时修改,左侧笔记列表实时更新
+         /*
+          @ synchronous
+         * 同步textarea实时修改,左侧笔记列表实时更新
+         * */
          synchronous(){
 
              //切换路由对象的时候 提交更新后的title和textarea内容
@@ -410,7 +413,10 @@
              }
          },
 
-          // 当本地数据为null,请求
+          /*
+          * @ getList
+          * 对mock数据的异步请求
+          * */
           getList(){
             this.https.getList().then(({data}) => {
               this.$store.dispatch('success',data);
@@ -427,14 +433,30 @@
             })
           },
 
-           // 同步笔记时间数据
+         /*
+         * @ vxDeleteInfo, 进入不同的场景,同步vuex当前场景的标识,为删除笔记的时候,根据这个标识进行操作
+         * @ name 标识  type:string
+         * */
+         vxDeleteInfo(name){
+           let deleteNoteState = this.$store.state.deleteNotesState;
+           if(deleteNoteState === name) return;
 
+           if(typeof name !== 'string'){
+               throw new Error(name + ' typeof should string');
+           }
+           this.$store.commit('deleteNoteState',name);
+         },
 
-          // 初始化noteContent
+         /*
+         * @ inteContent init
+         * @ 初始化操作, change router is down inteContent;
+         * 路由对象发生变化,就执行 inteContent 函数, 自动更新组件需要的数据
+         * */
           inteContent(){
-              // 只需要修改路由对象,会自动更新全部这个组件需要的所有数据
-              // 默认滚动条高度0  当可以获取到这个元素的时候再进行重置0
 
+              /*
+              * 对笔记列表滚动条,以及笔记信息textarea 滚动条的整理
+              * */
               let editSroll = this.$refs.editScroll;
               let homeScroll = this.$refs.homeScroll; //笔记列表滚动条
               if(editSroll){
@@ -481,30 +503,44 @@
                 }
               }
 
+              /*
+              * 路由发生变化的时候,window.title 标题更新为当前展示的笔记的标题,
+              * 同步标签 this.count
+              * */
               window.document.title = this.noteContent.title;
-
-              // 同步标签 此时this.count和this.noteContent引用的是同一个对象label
               this.count = this.noteContent.label;
-              // vuex的数据同步到Home组件
 
-              if(this.$store.state.findNotesList.length > 0){
-                   this.allNoteList = this.$store.state.findNotesList;
-                   this.$store.commit('deleteNoteState','findlist');
+              /*
+              * 根据不同的场景,从vuex中同步不同的笔记数据
+              * @ findNotesList : 当搜索的时候
+              * @ joinNoteList : 从笔记本进入的时候
+              * @ tagAllList : 从标签中进入笔记列表
+              * @ tagNoteBookName : 当前进入标签的名字
+              * */
+              let findNotesList = this.$store.state.findNotesList;
+              let joinNoteList = this.$store.state.joinNoteList;
+              let tagAllList = this.$store.state.tagAllList;
+              // let tagNoteBookName = this.$store.state.tagNoteBookName;
+
+
+              if(findNotesList.length > 0){
+                   this.allNoteList = findNotesList;
+                   this.vxDeleteInfo('findlist')
               }
               // 判断vuex状态管理中的 笔记本列表是否有
-              else if(this.$store.state.joinNoteList.length > 0){
-                   this.allNoteList = this.$store.state.joinNoteList;
-                   this.$store.commit('deleteNoteState','joinlist');
+              else if(joinNoteList.length > 0){
+                   this.allNoteList = joinNoteList;
+                   this.vxDeleteInfo('joinlist')
               }
               // 进入标签笔记列表,判断vuex状态中的标签列表是否存在
-              else if(this.$store.state.tagAllList.length > 0 || this.$store.state.tagNoteBookName.length > 0){
+              else if(tagAllList.length > 0 ){
                    this.allNoteList = this.$store.state.tagAllList;
-                   this.$store.commit('deleteNoteState','taglist');
+                   this.vxDeleteInfo('taglist');
               }
               else {
                    //全部的笔记 路由跳转实时同步vuex中的笔记列表
                    this.allNoteList = this.$store.state.allList;
-                   this.$store.commit('deleteNoteState','alllist')
+                   this.vxDeleteInfo('allList')
               }
 
               //选项列表数据
@@ -517,10 +553,9 @@
               // 在笔记本列表中过滤出与Pid一样的数据,就是当前显示数据的父亲
               let dJ = this.allNoteBook.filter(item => item.id == this.Pid)[0];
               this.noteBookTitle = dJ;
-              // this.findDateList; //搜索笔记列表
-
-              //每次路由更新就调用这个方法,同步textarea和笔记列表数据
-              // 这两个待优化
+              /*
+              * 路由更新,调用synchronous 同步数据
+              * */
               this.synchronous();
           },
 
@@ -624,7 +659,10 @@
             })
          },
 
-         // 删除笔记点击事件
+         /*
+         * @ delNoteHandel 删除笔记处理事件
+         * @ obj  type:object , 删除笔记的对象
+         * */
          delNoteHandel(obj){
            if(obj.id === 123456) return;
             //保存当前删除对象的下一个兄弟对象id
