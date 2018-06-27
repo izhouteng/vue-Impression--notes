@@ -12,7 +12,7 @@
 #### 相关链接
 
 - [微信小程序开发爱奇艺电影](https://github.com/qiqingfu/wx-program-film)
-- [基于Vue开发的拉钩app](https://github.com/qiqingfu/lagou-app)
+- [基于Vue开发的移动端项目"拉钩网"](https://github.com/qiqingfu/lagou-app)
 
 
 **此项目纯属个人业余时间倒腾的,如果体验过程中出现BUG,清空本地localstorage,再重新请求数据。多多指教。**
